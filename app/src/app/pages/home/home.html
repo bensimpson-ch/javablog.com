@@ -1,0 +1,47 @@
+<article>
+  <header>
+    <h1>{{ post.title }}</h1>
+    <time [attr.datetime]="post.date">December 22, 2025</time>
+  </header>
+
+  <section>
+    <p>
+      Coding with Claude has become so fun and interesting that I've decided to share these adventures
+      on my javablog.com. I've been "vibe" coding on a weekly basis for the past 6-months on personal projects. At
+      work I use github co-pilot selectively to generate tests, translate from English to German or for technical
+      documentation like Plant UML: sequence and class diagrams. I've tried Gemini's CLI - it did well but
+      Claude is better so far.
+    </p>
+    <p>
+      I generally avoid letting claude run my maven build, npm or ng tools. I've seen that my token allocation would dry
+      up without much to show for it. I set the clear boundary that Claude codes, I test and build. By coding, the
+      coding
+      agent is not writing without me specifying what I want. The specification is generally a series of short questions
+      about trade-offs, best practices and then I have a minimal specification for the next step.</p>
+    <p>So, in this project I've gone out of my comfort zone and let the coding agent just build it with a minimum amount
+      of inputs. I will share my prompts at the end - and the github repository should be publicly visible:
+      <a href="https://github.com/bensimpson-ch/javablog.com">Github - Javablog.com</a></p>
+    <h2>The Stack</h2>
+    <p>
+      JavaBlog.com runs on the following stack:
+    </p>
+    <ul>
+      <li><strong>Angular 20</strong> with static site generation (SSG)</li>
+      <li><strong>Azure Static Web Apps</strong> for hosting</li>
+      <li><strong>Cloudflare</strong> for DNS and CDN</li>
+      <li><strong>GitHub Actions</strong> for CI/CD</li>
+    </ul>
+    <h3>My Prompts</h3>
+    <ul>
+      <li>"you now should have access to javablog.com... I want to use it to make posts. I think given your talents - we will not use a blogging tool, instead we will just create content. create a claude.md for you to follow"</li>
+      <li>"You took it too far. I want an angular application app to live in an app directory. when the github action triggers, it should build the app and deploy it to azure."</li>
+      <li>"I want it built from day one to be SEO and AI friendly."</li>
+      <li>"use the latest version of angular - its already installed."</li>
+      <li>"create a standard gitignore for an angular and claude project. i've already created the file in javablog.com"</li>
+      <li>"we need to setup a protocol for you preparing a post for me. It will use my name so I have the final say on content, etc. The first post will be about the blog itself, its structure and our collaboration. first things first, the layout. I want a simple layout. JavaBlog.com is the title of the blog top right. There will only be blog entries which will be listed on the index.html."</li>
+      <li>"create a post to show how the first post will look. make it about setting up this blog together with you."</li>
+      <li>"This isn't what I specified. Do not abbreviate the first post. It should live at javablog.com/ as well as its seo path."</li>
+      <li>"Stick to just the prompts used to build the blogging website. list the prompts in the ul element of home.html including this one."</li>
+    </ul>
+  </section>
+</article>
