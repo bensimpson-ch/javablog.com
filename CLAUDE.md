@@ -1,6 +1,31 @@
 # Claude Instructions for javablog.com
 
-Angular 20 blog with SSG (Static Site Generation) hosted on Azure Static Web Apps.
+Angular v20 blog with SSG (Static Site Generation) hosted on Azure Static Web Apps.
+
+## Post Preparation Protocol
+
+All posts are authored by Ben.
+
+### Content Guidelines
+
+- Author: Ben (final say on all content)
+- Tone: Technical but accessible, conversational
+- Length: Concise, practical examples over theory
+- Code: Working snippets, not pseudocode
+
+### Post Frontmatter (in component)
+
+Each post component stores metadata:
+
+```typescript
+readonly
+post = {
+  title: 'Post Title',
+  slug: 'post-slug',
+  date: '2025-01-15',
+  description: 'Brief description for SEO and listings'
+};
+```
 
 ## Directory Structure
 
@@ -24,37 +49,46 @@ javablog.com/
 Every page component MUST include:
 
 ### Meta Tags (via Angular Meta service)
-```typescript
-import { Meta, Title } from '@angular/platform-browser';
 
-constructor(private meta: Meta, private title: Title) {
+```typescript
+import {Meta, Title} from '@angular/platform-browser';
+
+constructor(private
+meta: Meta, private
+title: Title
+)
+{
   this.title.setTitle('Post Title - javablog.com');
   this.meta.addTags([
-    { name: 'description', content: 'Post description for search results' },
-    { property: 'og:title', content: 'Post Title' },
-    { property: 'og:description', content: 'Post description' },
-    { property: 'og:type', content: 'article' },
-    { name: 'twitter:card', content: 'summary' }
+    {name: 'description', content: 'Post description for search results'},
+    {property: 'og:title', content: 'Post Title'},
+    {property: 'og:description', content: 'Post description'},
+    {property: 'og:type', content: 'article'},
+    {name: 'twitter:card', content: 'summary'}
   ]);
 }
 ```
 
 ### Semantic HTML
+
 - Use `<article>`, `<header>`, `<main>`, `<nav>`, `<footer>`
 - Proper heading hierarchy (h1 > h2 > h3)
 - `<time datetime="YYYY-MM-DD">` for dates
 
 ### Structured Data (JSON-LD)
+
 Include in page template for blog posts:
+
 ```html
+
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Post Title",
-  "datePublished": "2025-01-15",
-  "author": { "@type": "Person", "name": "Author Name" }
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Post Title",
+    "datePublished": "2025-01-15",
+    "author": { "@type": "Person", "name": "Author Name" }
+  }
 </script>
 ```
 
