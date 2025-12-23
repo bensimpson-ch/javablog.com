@@ -17,6 +17,67 @@
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile.openapi</groupId>
+            <artifactId>microprofile-openapi-api</artifactId>
+            <version>3.1.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.14.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/src/main/resources/META-INF/openapi-v1.yaml</inputSpec>
+                            <generatorName>jaxrs-spec</generatorName>
+                            <output>${project.build.directory}/generated-sources/openapi</output>
+                            <modelPackage>com.javablog.api.model</modelPackage>
+                            <apiPackage>com.javablog.api</apiPackage>
+                            <modelNameSuffix>Dto</modelNameSuffix>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <serializationLibrary>jackson</serializationLibrary>
+                                <useJakartaEe>true</useJakartaEe>
+                                <library>quarkus</library>
+                                <useTags>true</useTags>
+                                <useMicroProfileOpenAPIAnnotations>true</useMicroProfileOpenAPIAnnotations>
+                                <openApiNullable>false</openApiNullable>
+                                <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                                <generateModelDocumentation>false</generateModelDocumentation>
+                                <useSingleRequestParameter>true</useSingleRequestParameter>
+                                <sourceFolder>src/gen/java/main</sourceFolder>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
