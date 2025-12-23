@@ -33,3 +33,9 @@ coverage/
 
 # Claude Code
 .claude/
+
+# Maven
+target/
+*.class
+*.jar
+*.war
