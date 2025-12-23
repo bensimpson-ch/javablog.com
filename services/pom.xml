@@ -21,8 +21,9 @@
 
     <modules>
         <module>api</module>
-        <module>adapter-rest</module>
         <module>application</module>
+        <module>adapter-rest</module>
+        <module>quarkus</module>
     </modules>
 
     <dependencyManagement>
