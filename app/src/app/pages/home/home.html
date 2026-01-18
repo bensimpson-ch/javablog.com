@@ -1,7 +1,54 @@
 <article>
   <header>
-    <h1>{{ post.title }}</h1>
-    <time [attr.datetime]="post.date">December 22, 2025</time>
+    <h1>{{ posts[0].title }}</h1>
+    <time [attr.datetime]="posts[0].date">January 18, 2025</time>
+  </header>
+
+  <section>
+    <p>I write this post on a train somewhere between Winterthur and the Airport. It's a quiet Sunday afternoon train
+      without tourists or children - including my angels. Working on the train has the advantage that it's generally
+      a fixed block of time to get something done. It's literally a physical and mental "context switch" when you arrive
+      at your destination. Since I'm on my own, with an unlimited train ticket, there is no stress - except wanting to
+      reach my destination by sunset. So, about that JavaBlog.com post, let's get started.</p>
+    <p>I thought before I go too far developing this blog that it would be useful to develop an initial strategy for how
+      I'd approach SEO with JavaBlog.com. I've done this in the past, using the early rules of meta tags and page titles.
+      The rules have obviously changed, but the fundamentals haven't - content is king.</p>
+    <p>
+      I plan to promote my other endeavors using JavaBlog.com. I've been working on an application Polybit.ch that will
+      eventually become the focus of this blog once I iron out the basics of "vibing" my own blogging platform. I have
+      a few other projects queued, but one step at a time...</p>
+    <p>
+      This blog has value to me both on a personal and financial level. I purchased this domain name in 2002. I love
+      coffee and coding so I thought this was a perfect match. I was 29 years old when I purchased the domain. I entered
+      the software engineering profession late after studying foreign languages and math until I was 25. I realized
+      (with direct help from a fantastic Russian professor) that translating wasn't in my future. He encouraged me to
+      find something to talk about with people that speak my languages and I would have a great future. Now, we can fast
+      forward 24 years and roughly $500 spent on domain renewals. I'm ready, again, for the sixth time.
+    </p>
+    <p>
+      As I mentioned before, today's post is about setting up rudimentary SEO (Search Engine Optimization). I used
+      Claude to generate a sitemap.xml based upon my existing page structure. I configured it so that future pages, when
+      added, are automatically added to the sitemap.xml. At the end of this post I will submit my sitemap.xml to the
+      <a href="https://search.google.com/search-console">Google Search Console</a> and wait a few days until this content
+      is indexed. It's the long game with SEO. Content and "safe" best practices. Cheers.
+    </p>
+
+    <h2>Commands Used</h2>
+    <ul>
+      <li>"the next few prompts will be public, including this one. I want to improve the SEO of my blog so that others can find my posts and be inspired to also experiment with 'vibing' or 'LLM assisted coding'. The task today is to improve the SEO for the website https://javablog.com. The website has a single path that is currently visible - '/'. Create a sitemap.xml that I can submit to the google search console. Also suggest an approach to SEO that: 1. works with translated content. 2. works in a single PR. 3. Can be extended later when there is more content."</li>
+      <li>"lets define a favicon.ico file that shows a capital 'J' in a darker purple with a background color white."</li>
+      <li>"I have convert installed, you can run that command."</li>
+      <li>"Alright - start a blog post in the home component above the previous post. chronologically, the newest post will be at the top. Title: Setting Up SEO with Claude, first steps. In the body do not write anything just write 'body here'. After the body, leave an area for 'commands used'."</li>
+      <li>"I would like you to include my rule about adding new pages to sitemap.xml to my claude.md. In the future, when I make changes to the site structure, automatically update my sitemap.xml file."</li>
+      <li>"Great. Update my commands to include the history of this 'vibe' session. Good job. Commit it in our names. I will review the commits for any unexpected changes."</li>
+    </ul>
+  </section>
+</article>
+
+<article>
+  <header>
+    <h1>{{ posts[1].title }}</h1>
+    <time [attr.datetime]="posts[1].date">December 22, 2025</time>
   </header>
 
   <section>

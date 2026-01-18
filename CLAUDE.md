@@ -103,6 +103,26 @@ All blog post routes must be discoverable at build time.
 2. Create page component in `src/app/pages/`
 3. Add meta tags and structured data
 4. Ensure route is prerendered
+5. **Update `app/public/sitemap.xml`** with the new URL
+
+## Sitemap Maintenance
+
+**IMPORTANT:** When site structure changes (new pages, routes, or posts), automatically update `app/public/sitemap.xml`.
+
+Each URL entry follows this format:
+```xml
+<url>
+  <loc>https://javablog.com/path</loc>
+  <lastmod>YYYY-MM-DD</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+```
+
+Priority guidelines:
+- Homepage `/`: 1.0
+- Blog posts: 0.8
+- Static pages (about, etc.): 0.6
 
 ## Build & Deploy
 
