@@ -92,18 +92,16 @@ Include in page template for blog posts:
 </script>
 ```
 
-## Prerendering
+## Rendering
 
-Routes are configured in `app.routes.server.ts` with `RenderMode.Prerender`.
-All blog post routes must be discoverable at build time.
+Routes are configured in `app.routes.server.ts` with `RenderMode.Client` for client-side rendering.
 
 ## Creating Blog Posts
 
 1. Create route in `app.routes.ts`
 2. Create page component in `src/app/pages/`
 3. Add meta tags and structured data
-4. Ensure route is prerendered
-5. **Update `app/public/sitemap.xml`** with the new URL
+4. **Update `app/public/sitemap.xml`** with the new URL
 
 ## Sitemap Maintenance
 
@@ -127,20 +125,20 @@ Priority guidelines:
 ## Build & Deploy
 
 - Push to `main` triggers GitHub Actions
-- Angular builds with prerendering
-- Static HTML deployed to Azure Static Web Apps
+- Angular builds with client-side rendering
+- Deployed to Azure Static Web Apps
 
 ## Commands
 
 ```bash
 cd app
-npm run build      # Production build with prerendering
-npm run serve      # Dev server (SSR mode)
+npm run build      # Production build
+npm run serve      # Dev server
 ```
 
 ## Do NOT
 
 - Skip meta tags on any page
-- Use client-only rendering for content pages
 - Add tracking/analytics without explicit request
 - Over-complicate the component structure
+- State the obvious (e.g., "you'll need to rebuild and redeploy")
