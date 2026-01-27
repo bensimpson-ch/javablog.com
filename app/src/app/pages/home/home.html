@@ -1,7 +1,44 @@
 <article>
   <header>
     <h1>{{ posts[0].title }}</h1>
-    <time [attr.datetime]="posts[0].date">January 18, 2025</time>
+    <time [attr.datetime]="posts[0].date">January 27, 2025</time>
+  </header>
+
+  <section>
+    <p>Post Body 3</p>
+
+    <h2>API Demo</h2>
+    <p>Response from <code>https://api.javablog.com/hello</code>:</p>
+    <pre>{{ helloResponse() }}</pre>
+
+    <h2>Commands Used</h2>
+    <ul>
+      <li>"we are going to setup a rest services application to eventually permit comments and feedback for blog posts.   As this service will need a database and other services, lets assume it will run in a docker image running inside a docker-compose constructed network.  this project will require a sonar and nexus connection - both are already in my maven settings.  Use spring boot and rest, jpa, security.
+        version 4.0.2.  write a simple hello world "hello javablog"  and have the complete maven build test the hello world."</li>
+      <li>"this isn't what I asked for.  I specifically asked for rest, jpa and security.  You gave me web mvc, jdbc drivers and a load of comments"</li>
+      <li>"this is not what I asked for.  Have a look at the generated file I got by using the spring initialzr.  this is what i expected and asked for.  latest 4.0.2 parent starter, rest, jpa, security and NO MVC.  [Pasted text #2 +88 lines]"</li>
+      <li>"we are going to try again - I've deleted your first draft.  I want a spring boot REST, JPA, Security application in a single jar, using maven and spring boot 4.0.2.  The application should import from spring boot starter parent 4.0.2. there should be a hello "javablog" rest service with a functional unit test using junit jupiter 5+ and a spring boot specific integration test.  put this project in the
+        services directory. "</li>
+      <li>"alright - my blogs backend needs to be dockerized - the angular app is delivered via github action to MS Azure.  The backend needs to be dockerized not just locally, but the container must be built via a github action that builds the image and makes it available to a server that will use the docker image. For now we will ignore the database and security complexity of hello world.  The backend will be
+        served via a nginx proxy at api.javablog.com."</li>
+      <li>"I have podman running locally"</li>
+      <li>"Ok, I've reviewed the api-deploy.yml - its incomplete.  you do not know the server name where we will deploy the backend to yet.  why don't we store this as a variable with a public key so the action can communicate with the server - 161.97.175.172"</li>
+      <li>"your instructions are not correct - copy and save as GHCR_TOKEN secret - where? "</li>
+      <li>"aha, now you are giving accurate instructions."</li>
+      <li>"I want the SERVER_HOST and SERVER_USER to also be variables since the script is visible to the world."</li>
+      <li>"done, I added the correct non-root user and the host."</li>
+      <li>"while I did everything you asked, the script fails to deploy. [error log from GitHub Actions showing ssh: no key found]"</li>
+      <li>"there is no passphrase"</li>
+      <li>"the problem was the spaces in the key. When I put the key in the api-deploy.yml incorrect spacing was added. the hello world is visible on my server now."</li>
+      <li>"we are not done yet. I updated the dns and ssl settings and the hello javablog is available via https://api.javablog.com/hello using the 'full' ssl option and an nginx proxy with the certificates provided by Cloudflare. Lets hook the blog up to show hello - then response. For this we need to start a new post. As before, the post should be top most in the list. We are not concerned with anything other than following the previous patterns at this point. Create a post titled Post 3, with placeholder body Post Body 3, and the demo calling the hello world, then all of the prompts used to get to this point."</li>
+    </ul>
+  </section>
+</article>
+
+<article>
+  <header>
+    <h1>{{ posts[1].title }}</h1>
+    <time [attr.datetime]="posts[1].date">January 18, 2025</time>
   </header>
 
   <section>
@@ -52,8 +89,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[1].title }}</h1>
-    <time [attr.datetime]="posts[1].date">December 22, 2025</time>
+    <h1>{{ posts[2].title }}</h1>
+    <time [attr.datetime]="posts[2].date">December 22, 2025</time>
   </header>
 
   <section>

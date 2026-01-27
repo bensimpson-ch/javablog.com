@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {Meta, Title} from '@angular/platform-browser';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,16 @@ import {Meta, Title} from '@angular/platform-browser';
   styleUrl: './home.scss'
 })
 export class Home {
+  private http = inject(HttpClient);
+  helloResponse = signal<string>('Loading...');
+
   readonly posts = [
+    {
+      title: 'Post 3',
+      slug: 'post-3',
+      date: '2025-01-27',
+      description: 'Connecting the Angular frontend to the Java API backend.'
+    },
     {
       title: 'Setting Up SEO with Claude, first steps',
       slug: 'seo-with-claude',
@@ -24,6 +34,7 @@ export class Home {
   ];
 
   constructor(title: Title, meta: Meta) {
+    this.fetchHello();
     title.setTitle('JavaBlog.com - Coding Adventures with Claude AI');
     meta.addTags([
       {name: 'description', content: 'A blog about coding with Claude AI, Angular, and modern web development.'},
@@ -32,5 +43,12 @@ export class Home {
       {property: 'og:type', content: 'website'},
       {name: 'twitter:card', content: 'summary'}
     ]);
+  }
+
+  private fetchHello(): void {
+    this.http.get('https://api.javablog.com/hello', {responseType: 'text'}).subscribe({
+      next: (response) => this.helloResponse.set(response),
+      error: () => this.helloResponse.set('Error fetching from API')
+    });
   }
 }
