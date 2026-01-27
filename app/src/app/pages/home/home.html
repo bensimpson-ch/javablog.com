@@ -5,18 +5,18 @@
   </header>
 
   <section>
-    <p>This post will show the steps I took to generate a Springboot REST API for this javablog.  The API consists of a
-    "hello javablog" RESTful get.  That's enough to involve a lot of moving parts including (maven, springboot,
-    github actions and secrets, nginx reverse proxy, cloudflare ssl/dns, ssh keys).  To my knowledge (cutoff point now),
+    <p>This post will show the steps I took to generate a Spring Boot REST API for this javablog.  The API consists of a
+    "hello javablog" RESTful get.  That's enough to involve a lot of moving parts including (maven, Spring Boot,
+    GitHub Actions and secrets, nginx reverse proxy, Cloudflare ssl/dns, ssh keys).  To my knowledge (cutoff point now),
       there is no way that a coding agent can do all of this yet.  I assume that MCPs will come to take away some of this
-      pain in the future.  Perhaps instead of MCPs the coding agent will use its own DNS/SSL setup.  That will play out in the near future - watchout Cloudflare!</p>
+      pain in the future.  Perhaps instead of MCPs the coding agent will use its own DNS/SSL setup.  That will play out in the near future - watch out Cloudflare!</p>
     <p>
       As you can see in this example, the first draft from Claude was a bust.  I had to delete it and then use the Spring
-      Website: Spring Initialzr to create an example of what I wanted.  I pasted the generated pom.xml into the claude
+      Website: Spring Initializr to create an example of what I wanted.  I pasted the generated pom.xml into the Claude
       window to show exactly what I wanted (another MCP opportunity).  This worked fine and my "hello javablog" was born.
     </p>
     <p>
-      The failed first attempt delivered  the wrong major version of Spring Boot despite explicitly asking for it.
+      The failed first attempt delivered the wrong major version of Spring Boot despite explicitly asking for it.
       It wasn't until I deleted the generated code and asked for it with an example that I got what I wanted.  Of course
       this is far from done but insisting upon two kinds of tests (unit test and integration test) means that the desired
       behavior is repeatable.
@@ -28,18 +28,16 @@
     </p>
     <p><b>Activities and Assumptions:</b></p>
     <ul>
-      <li>you have root access to a ubuntu server with more than 4GB RAM, 1 CPU and 20GB Disk.</li>
-      <li>your ubuntu server has docker and nginx installed</li>
-      <li>your DNS and SSL is managed by Cloudflare or Developer Oriented Provider</li>
+      <li>you have root access to an Ubuntu server with more than 4GB RAM, 1 CPU and 20GB Disk.</li>
+      <li>your Ubuntu server has docker and nginx installed</li>
+      <li>your DNS and SSL are managed by Cloudflare or a developer-oriented provider</li>
       <li>follow this nginx example on your server:
         <a href="https://blackist.medium.com/fast-setup-nginx-https-reverse-proxy-for-springboot-api-32f9ca70f97">
           Leon Dong - Medium - Fast-Setup: Nginx Https Reverse Proxy for Springboot API</a></li>
-      <li>configure an 'A' recording pointing api.yourdomain.com to your ipaddress.</li>
+      <li>configure an 'A' record pointing api.yourdomain.com to your IP address.</li>
       <li>configure "full" SSL between the client, cloudflare, and your nginx server.  This means you will need to
         generate a private key and certificate here: <br/> Cloudflare -> Select Domain -> SSL/TLS ->Client Certificates</li>
     </ul>
-    <p><b></b></p>
-
     <h2>API Demo</h2>
     <p>Response from <code>https://api.javablog.com/hello</code>:</p>
     <pre>{{ helloResponse() }}</pre>
@@ -47,7 +45,7 @@
     <h2>Prompts Used</h2>
     <ul>
       <li>"we are going to setup a rest services application to eventually permit comments and feedback for blog posts.
-        As this service will need a database and other services, lets assume it will run in a docker image running
+        As this service will need a database and other services, let's assume it will run in a docker image running
         inside a docker-compose constructed network.  this project will require a sonar and nexus connection -
         both are already in my maven settings.  Use spring boot and rest, jpa, security.
         version 4.0.2.  write a simple hello world "hello javablog"  and have the complete maven build test the hello
@@ -68,7 +66,7 @@
         database and security complexity of hello world.  The backend will be
         served via a nginx proxy at api.javablog.com."</li>
       <li>"I have podman running locally"</li>
-      <li>"Ok, I've reviewed the api-deploy.yml - its incomplete.  you do not know the server name where we will deploy
+      <li>"Ok, I've reviewed the api-deploy.yml - it's incomplete.  you do not know the server name where we will deploy
         the backend to yet.  why don't we store this as a variable with a public key so the action can communicate with
         the server - 161.97.175.172"</li>
       <li>"your instructions are not correct - copy and save as GHCR_TOKEN secret - where? "</li>
@@ -100,7 +98,7 @@
     <p>I write this post on a train somewhere between Winterthur and the Airport. It's a quiet Sunday afternoon train
       without tourists or children - including my little angels. Working on the train has an advantage that it's generally
       a fixed block of time to get something done. It's literally a physical and mental "context switch" when you arrive
-      at your destination. This switch is the pressure complete the task.  So, about that JavaBlog.com post, let's get started.</p>
+      at your destination. This switch is the pressure to complete the task.  So, about that JavaBlog.com post, let's get started.</p>
 
     <p>I thought before I go too far developing this blog that it would be useful to develop an initial strategy for how
       I'd approach SEO with JavaBlog.com. I've done this in the past, using the early rules of meta tags and page titles.
@@ -151,7 +149,7 @@
   <section>
     <p>
       Coding with Claude has become so fun and interesting that I've decided to share these adventures
-      on my javablog.com. I've been "vibe" coding on a weekly basis for the past 6-months on personal projects. At
+      on my javablog.com. I've been "vibe" coding on a weekly basis for the past 6 months on personal projects. At
       work I use github co-pilot selectively to generate tests, translate from English to German or for technical
       documentation like Plant UML: sequence and class diagrams. I've tried Gemini's CLI - it did well but
       Claude is better so far.
