@@ -5,32 +5,87 @@
   </header>
 
   <section>
-    <p>Post Body 3</p>
+    <p>This post will show the steps I took to generate a Springboot REST API for this javablog.  The API consists of a
+    "hello javablog" RESTful get.  That's enough to involve a lot of moving parts including (maven, springboot,
+    github actions and secrets, nginx reverse proxy, cloudflare ssl/dns, ssh keys).  To my knowledge (cutoff point now),
+      there is no way that a coding agent can do all of this yet.  I assume that MCPs will come to take away some of this
+      pain in the future.  Perhaps instead of MCPs the coding agent will use its own DNS/SSL setup.  That will play out in the near future - watchout Cloudflare!</p>
+    <p>
+      As you can see in this example, the first draft from Claude was a bust.  I had to delete it and then use the Spring
+      Website: Spring Initialzr to create an example of what I wanted.  I pasted the generated pom.xml into the claude
+      window to show exactly what I wanted (another MCP opportunity).  This worked fine and my "hello javablog" was born.
+    </p>
+    <p>
+      The failed first attempt delivered  the wrong major version of Spring Boot despite explicitly asking for it.
+      It wasn't until I deleted the generated code and asked for it with an example that I got what I wanted.  Of course
+      this is far from done but insisting upon two kinds of tests (unit test and integration test) means that the desired
+      behavior is repeatable.
+    </p>
+    <p>
+      The non-Claude activities in this example focus on my Cloudflare account and my Ubuntu API Server.  I have
+      firewalled Claude out of these areas because a mistake could cause significant time loss and/or security breaches.
+      I've listed the activities below in case you want to try to follow along.
+    </p>
+    <p><b>Activities and Assumptions:</b></p>
+    <ul>
+      <li>you have root access to a ubuntu server with more than 4GB RAM, 1 CPU and 20GB Disk.</li>
+      <li>your ubuntu server has docker and nginx installed</li>
+      <li>your DNS and SSL is managed by Cloudflare or Developer Oriented Provider</li>
+      <li>follow this nginx example on your server:
+        <a href="https://blackist.medium.com/fast-setup-nginx-https-reverse-proxy-for-springboot-api-32f9ca70f97">
+          Leon Dong - Medium - Fast-Setup: Nginx Https Reverse Proxy for Springboot API</a></li>
+      <li>configure an 'A' recording pointing api.yourdomain.com to your ipaddress.</li>
+      <li>configure "full" SSL between the client, cloudflare, and your nginx server.  This means you will need to
+        generate a private key and certificate here: <br/> Cloudflare -> Select Domain -> SSL/TLS ->Client Certificates</li>
+    </ul>
+    <p><b></b></p>
 
     <h2>API Demo</h2>
     <p>Response from <code>https://api.javablog.com/hello</code>:</p>
     <pre>{{ helloResponse() }}</pre>
 
-    <h2>Commands Used</h2>
+    <h2>Prompts Used</h2>
     <ul>
-      <li>"we are going to setup a rest services application to eventually permit comments and feedback for blog posts.   As this service will need a database and other services, lets assume it will run in a docker image running inside a docker-compose constructed network.  this project will require a sonar and nexus connection - both are already in my maven settings.  Use spring boot and rest, jpa, security.
-        version 4.0.2.  write a simple hello world "hello javablog"  and have the complete maven build test the hello world."</li>
-      <li>"this isn't what I asked for.  I specifically asked for rest, jpa and security.  You gave me web mvc, jdbc drivers and a load of comments"</li>
-      <li>"this is not what I asked for.  Have a look at the generated file I got by using the spring initialzr.  this is what i expected and asked for.  latest 4.0.2 parent starter, rest, jpa, security and NO MVC.  [Pasted text #2 +88 lines]"</li>
-      <li>"we are going to try again - I've deleted your first draft.  I want a spring boot REST, JPA, Security application in a single jar, using maven and spring boot 4.0.2.  The application should import from spring boot starter parent 4.0.2. there should be a hello "javablog" rest service with a functional unit test using junit jupiter 5+ and a spring boot specific integration test.  put this project in the
+      <li>"we are going to setup a rest services application to eventually permit comments and feedback for blog posts.
+        As this service will need a database and other services, lets assume it will run in a docker image running
+        inside a docker-compose constructed network.  this project will require a sonar and nexus connection -
+        both are already in my maven settings.  Use spring boot and rest, jpa, security.
+        version 4.0.2.  write a simple hello world "hello javablog"  and have the complete maven build test the hello
+        world."</li>
+      <li>"this isn't what I asked for.  I specifically asked for rest, jpa and security.  You gave me web mvc, jdbc
+        drivers and a load of comments"</li>
+      <li>"this is not what I asked for.  Have a look at the generated file I got by using the spring initialzr.
+        this is what i expected and asked for.  latest 4.0.2 parent starter, rest, jpa, security and NO MVC.
+        [Pasted text #2 +88 lines]"</li>
+      <li>"we are going to try again - I've deleted your first draft.  I want a spring boot REST, JPA, Security
+        application in a single jar, using maven and spring boot 4.0.2.  The application should import from spring
+        boot starter parent 4.0.2. there should be a hello "javablog" rest service with a functional unit test using
+        junit jupiter 5+ and a spring boot specific integration test.  put this project in the
         services directory. "</li>
-      <li>"alright - my blogs backend needs to be dockerized - the angular app is delivered via github action to MS Azure.  The backend needs to be dockerized not just locally, but the container must be built via a github action that builds the image and makes it available to a server that will use the docker image. For now we will ignore the database and security complexity of hello world.  The backend will be
+      <li>"alright - my blogs backend needs to be dockerized - the angular app is delivered via github action to MS Azure.
+        The backend needs to be dockerized not just locally, but the container must be built via a github action that
+        builds the image and makes it available to a server that will use the docker image. For now we will ignore the
+        database and security complexity of hello world.  The backend will be
         served via a nginx proxy at api.javablog.com."</li>
       <li>"I have podman running locally"</li>
-      <li>"Ok, I've reviewed the api-deploy.yml - its incomplete.  you do not know the server name where we will deploy the backend to yet.  why don't we store this as a variable with a public key so the action can communicate with the server - 161.97.175.172"</li>
+      <li>"Ok, I've reviewed the api-deploy.yml - its incomplete.  you do not know the server name where we will deploy
+        the backend to yet.  why don't we store this as a variable with a public key so the action can communicate with
+        the server - 161.97.175.172"</li>
       <li>"your instructions are not correct - copy and save as GHCR_TOKEN secret - where? "</li>
       <li>"aha, now you are giving accurate instructions."</li>
       <li>"I want the SERVER_HOST and SERVER_USER to also be variables since the script is visible to the world."</li>
       <li>"done, I added the correct non-root user and the host."</li>
-      <li>"while I did everything you asked, the script fails to deploy. [error log from GitHub Actions showing ssh: no key found]"</li>
+      <li>"while I did everything you asked, the script fails to deploy. [error log from GitHub Actions showing ssh:
+        no key found]"</li>
       <li>"there is no passphrase"</li>
-      <li>"the problem was the spaces in the key. When I put the key in the api-deploy.yml incorrect spacing was added. the hello world is visible on my server now."</li>
-      <li>"we are not done yet. I updated the dns and ssl settings and the hello javablog is available via https://api.javablog.com/hello using the 'full' ssl option and an nginx proxy with the certificates provided by Cloudflare. Lets hook the blog up to show hello - then response. For this we need to start a new post. As before, the post should be top most in the list. We are not concerned with anything other than following the previous patterns at this point. Create a post titled Post 3, with placeholder body Post Body 3, and the demo calling the hello world, then all of the prompts used to get to this point."</li>
+      <li>"the problem was the spaces in the key. When I put the key in the api-deploy.yml incorrect spacing was added.
+        the hello world is visible on my server now."</li>
+      <li>"we are not done yet. I updated the dns and ssl settings and the hello javablog is available via
+        https://api.javablog.com/hello using the 'full' ssl option and an nginx proxy with the certificates provided by
+        Cloudflare. Lets hook the blog up to show hello - then response. For this we need to start a new post. As before,
+        the post should be top most in the list. We are not concerned with anything other than following the previous
+        patterns at this point. Create a post titled Post 3, with placeholder body Post Body 3, and the demo calling the
+        hello world, then all of the prompts used to get to this point."</li>
     </ul>
   </section>
 </article>
@@ -75,14 +130,14 @@
       <a href="https://search.google.com/search-console">Google Search Console</a> and will wait a few days until
       this content is indexed. It's the long game with SEO - content and "safe" best practices. Cheers.</p>
 
-    <h2>Commands Used</h2>
+    <h2>Prompts Used</h2>
     <ul>
       <li>"the next few prompts will be public, including this one. I want to improve the SEO of my blog so that others can find my posts and be inspired to also experiment with 'vibing' or 'LLM assisted coding'. The task today is to improve the SEO for the website https://javablog.com. The website has a single path that is currently visible - '/'. Create a sitemap.xml that I can submit to the google search console. Also suggest an approach to SEO that: 1. works with translated content. 2. works in a single PR. 3. Can be extended later when there is more content."</li>
       <li>"lets define a favicon.ico file that shows a capital 'J' in a darker purple with a background color white."</li>
       <li>"I have convert installed, you can run that command."</li>
-      <li>"Alright - start a blog post in the home component above the previous post. chronologically, the newest post will be at the top. Title: Setting Up SEO with Claude, first steps. In the body do not write anything just write 'body here'. After the body, leave an area for 'commands used'."</li>
+      <li>"Alright - start a blog post in the home component above the previous post. chronologically, the newest post will be at the top. Title: Setting Up SEO with Claude, first steps. In the body do not write anything just write 'body here'. After the body, leave an area for 'Prompts used'."</li>
       <li>"I would like you to include my rule about adding new pages to sitemap.xml to my claude.md. In the future, when I make changes to the site structure, automatically update my sitemap.xml file."</li>
-      <li>"Great. Update my commands to include the history of this 'vibe' session. Good job. Commit it in our names. I will review the commits for any unexpected changes."</li>
+      <li>"Great. Update my prompts to include the history of this 'vibe' session. Good job. Commit it in our names. I will review the commits for any unexpected changes."</li>
     </ul>
   </section>
 </article>
