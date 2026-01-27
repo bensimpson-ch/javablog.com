@@ -1,6 +1,6 @@
 # Claude Instructions for javablog.com
 
-Angular v20 blog with SSG (Static Site Generation) hosted on Azure Static Web Apps.
+Angular v20 blog hosted on Azure Static Web Apps.
 
 ## Post Preparation Protocol
 
@@ -92,10 +92,6 @@ Include in page template for blog posts:
 </script>
 ```
 
-## Rendering
-
-Routes are configured in `app.routes.server.ts` with `RenderMode.Client` for client-side rendering.
-
 ## Creating Blog Posts
 
 1. Create route in `app.routes.ts`
@@ -125,8 +121,7 @@ Priority guidelines:
 ## Build & Deploy
 
 - Push to `main` triggers GitHub Actions
-- Angular builds with client-side rendering
-- Deployed to Azure Static Web Apps
+- Angular builds and deploys to Azure Static Web Apps
 
 ## Commands
 
