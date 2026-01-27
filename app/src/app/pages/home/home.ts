@@ -14,7 +14,7 @@ export class Home {
 
   readonly posts = [
     {
-      title: 'Claude Commands to create and deploy Dockerized Springboot Backend',
+      title: 'Claude Prompts to create and deploy Dockerized Springboot Backend',
       slug: 'springboot-docker-with-claude',
       date: '2025-01-27',
       description: 'Connecting the Angular frontend to the Java API backend.  Deployed via Github Action to create Dockerized container and then use SSH to copy container and deploy to api.javablog.com'
