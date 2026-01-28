@@ -11,6 +11,15 @@ import {HttpClient} from '@angular/common/http';
 export class Home {
   private http = inject(HttpClient);
   helloResponse = signal<string>('Loading...');
+  lightboxImage = signal<string | null>(null);
+
+  openLightbox(src: string): void {
+    this.lightboxImage.set(src);
+  }
+
+  closeLightbox(): void {
+    this.lightboxImage.set(null);
+  }
 
   readonly posts = [
     {

@@ -5,12 +5,26 @@
   </header>
 
   <section>
-    <p>Post 4</p>
+    <p>There is an addictiveness and joy that comes with visibly getting something done. Our work as software engineers
+      is sometimes not visible to the end user for a long time. Delayed gratification. We press on anyway, trusting the
+      architectural and design principles that enable us to adapt to changing requirements, whether a new feature or a
+      non-functional requirement like a database change.</p>
+    <p>AI-assisted coding shifts this paradigm. The reward comes faster. Its tempting to ignore everything you've
+      learned to get the rush found in a completed feature. Building "shiny" new features feels great, but if they are
+      built without a solid architecture, changing or extending them becomes difficult. A disciplined engineer needs to
+      recognize this temptation and stick to the plan of developing quality software using a repeatable methodology. If
+      working with a coding assistant, it's still your job to tell Claude to use a specific architecture or pattern.</p>
+    <p>This post shows how to restructure the basic starter Spring Boot application into a hexagonal architecture.
+      We want an architecture that makes it easier to be flexible later. For example, this helps when changing databases
+      from Postgres to MySQL or swapping Spring Boot for Quarkus.</p>
+    <p>I've shared the prompts below along with two screenshots of how I work with IntelliJ and Maven. Questions or
+    feedback? You'll have to wait a few posts until my database is ready to save your comment.</p>
 
     <h2>Screenshots</h2>
-    <figure>
-      <img src="assets/images/post4-sample.png" alt="Sample screenshot">
-      <figcaption>Sample Image</figcaption>
+    <figure class="thumbnails">
+      <img src="assets/images/intellij-wide-view.png" alt="IntelliJ Wide View" (click)="openLightbox('assets/images/intellij-wide-view.png')">
+      <img src="assets/images/claude-code-terminal-view.png" alt="Claude Code Terminal View" (click)="openLightbox('assets/images/claude-code-terminal-view.png')">
+      <figcaption>Click to enlarge</figcaption>
     </figure>
 
     <h2>Prompts Used</h2>
@@ -216,3 +230,9 @@
     </ul>
   </section>
 </article>
+
+@if (lightboxImage()) {
+  <div class="lightbox" (click)="closeLightbox()">
+    <img [src]="lightboxImage()" alt="Enlarged view">
+  </div>
+}
