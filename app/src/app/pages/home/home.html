@@ -1,7 +1,35 @@
 <article>
   <header>
     <h1>{{ posts[0].title }}</h1>
-    <time [attr.datetime]="posts[0].date">January 27, 2025</time>
+    <time [attr.datetime]="posts[0].date">January 28, 2025</time>
+  </header>
+
+  <section>
+    <p>Post 4</p>
+
+    <h2>Screenshots</h2>
+    <figure>
+      <img src="assets/images/post4-sample.png" alt="Sample screenshot">
+      <figcaption>Sample Image</figcaption>
+    </figure>
+
+    <h2>Prompts Used</h2>
+    <ul>
+      <li>"we are starting on post 4. this post will take our services application to the next level. Convert this project to a multi-module hexagonal architecture with five modules: domain, application, adapter-rest, adapter-persistence, and bootstrap. Domain should have zero Spring dependencies. Application depends on domain with minimal Spring for Service annotation. Adapter-rest depends on application and domain. Adapter-persistence depends on application and domain. Bootstrap depends on all four, contains the SpringBootApplication class, application.properties, and spring-boot-maven-plugin. Add spring-boot-devtools as runtime optional in bootstrap for hot reload. Configure spring-boot-maven-plugin in bootstrap with jvmArguments for JDWP debug on port 5005. The application must start successfully with mvn clean install && mvn -pl bootstrap spring-boot:run."</li>
+      <li>"these changes should break the github action to deploy the services application. review the Dockerfile and api-deploy.yml to verify that the application will deploy given its new architecture."</li>
+      <li>"commit this and push this to test the github action again."</li>
+      <li>"Configure dual database support. Keep H2 for integration tests using a test profile. Add a local profile for PostgreSQL that reads JAVABLOG_DB_USER, JAVABLOG_DB_PASS, and JAVABLOG_DB_NAME from environment variables, defaulting host to localhost:5432. Add the PostgreSQL driver dependency. Add a docker-compose.yml that spins up PostgreSQL with those environment variables. Update the README with instructions for running locally using either an existing PostgreSQL instance, docker-compose, or a podman run command."</li>
+      <li>"There appears to be a missing configuration for production - it appears its your intention to start with a 'local' profile in production - this means the api-deploy.yml has to receive this configurative step as well. I don't like this. the application.properties should contain the production settings, the api-deploy.yml should not be modified."</li>
+      <li>"final step, we are going to introduce jpa and flyaway in our adapter-persistence. Do not add entities yet. Create an adapter-persistence/claude.md to use the following persistence guidelines: My preference is to never use vendor specific annotations or query languages - whatever we use to implement the JPA spec. Follow these database naming standards: Use snake_case for all table and column names. Table names should be plural. Primary key columns should be spelled out as tablename_id not just id. Foreign key columns should match the primary key column name they reference. Avoid ambiguous column names. Apply these conventions to all JPA entities and any database migrations."</li>
+      <li>"ok, that is enough for this post. create another blog post. This one will include a screenshot or two. The post should be structured Title: Post 4, Body: Post: 4 Screenshots: Sample Image I will delete Prompts: everything from this session including this one. I will commit and push after I test locally and update the content."</li>
+    </ul>
+  </section>
+</article>
+
+<article>
+  <header>
+    <h1>{{ posts[1].title }}</h1>
+    <time [attr.datetime]="posts[1].date">January 27, 2025</time>
   </header>
 
   <section>
@@ -91,8 +119,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[1].title }}</h1>
-    <time [attr.datetime]="posts[1].date">January 18, 2025</time>
+    <h1>{{ posts[2].title }}</h1>
+    <time [attr.datetime]="posts[2].date">January 18, 2025</time>
   </header>
 
   <section>
@@ -143,8 +171,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[2].title }}</h1>
-    <time [attr.datetime]="posts[2].date">December 22, 2025</time>
+    <h1>{{ posts[3].title }}</h1>
+    <time [attr.datetime]="posts[3].date">December 22, 2025</time>
   </header>
 
   <section>

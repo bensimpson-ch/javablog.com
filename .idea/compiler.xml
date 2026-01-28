@@ -6,13 +6,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="javablog-services" />
+        <module name="bootstrap" />
+        <module name="application" />
+        <module name="adapter-rest" />
+        <module name="adapter-persistence" />
+        <module name="domain" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="javablog-services" options="-parameters" />
+      <module name="adapter-persistence" options="-parameters" />
+      <module name="adapter-rest" options="-parameters" />
+      <module name="application" options="-parameters" />
+      <module name="bootstrap" options="-parameters" />
+      <module name="domain" options="-parameters" />
+      <module name="javablog-services" options="" />
     </option>
   </component>
 </project>

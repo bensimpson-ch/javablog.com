@@ -1,7 +1,26 @@
 services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${JAVABLOG_DB_USER:-javablog}
+      POSTGRES_PASSWORD: ${JAVABLOG_DB_PASS:-javablog}
+      POSTGRES_DB: ${JAVABLOG_DB_NAME:-javablog}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   api:
     build: .
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      JAVABLOG_DB_HOST: postgres
+      JAVABLOG_DB_USER: ${JAVABLOG_DB_USER:-javablog}
+      JAVABLOG_DB_PASS: ${JAVABLOG_DB_PASS:-javablog}
+      JAVABLOG_DB_NAME: ${JAVABLOG_DB_NAME:-javablog}
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

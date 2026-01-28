@@ -14,6 +14,12 @@ export class Home {
 
   readonly posts = [
     {
+      title: 'Hexagonal Architecture with Spring Boot, Flyway, and Dual Database Support',
+      slug: 'hexagonal-architecture-springboot',
+      date: '2025-01-28',
+      description: 'Converting a monolithic Spring Boot application to multi-module hexagonal architecture with domain, application, adapter-rest, adapter-persistence, and bootstrap modules. Adding Flyway migrations and PostgreSQL for production with H2 for tests.'
+    },
+    {
       title: 'Claude Prompts to create and deploy Dockerized Springboot Backend',
       slug: 'springboot-docker-with-claude',
       date: '2025-01-27',
