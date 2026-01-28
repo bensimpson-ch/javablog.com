@@ -46,7 +46,7 @@ podman run -d \
   -e POSTGRES_PASSWORD=javablog \
   -e POSTGRES_DB=javablog \
   -p 5432:5432 \
-  postgres:17-alpine
+  postgres:18-alpine
 ```
 
 Then run the application:

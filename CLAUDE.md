@@ -9,11 +9,13 @@ All posts are authored by Ben.
 ### Content Guidelines
 
 - Author: Ben (final say on all content)
+- Do NOT write post body content - Ben writes all content himself
+- Only create the post structure: title, slug, date, description in the posts array, and a placeholder article section
 - Tone: Technical but accessible, conversational
 - Length: Concise, practical examples over theory
 - Code: Working snippets, not pseudocode
 
-### Post Frontmatter (in component)
+### Post Front matter (in component)
 
 Each post component stores metadata:
 
@@ -131,9 +133,15 @@ npm run build      # Production build
 npm run serve      # Dev server
 ```
 
+## Working Agreement (Java/Maven Services)
+
+Claude writes code; Ben executes Maven commands. Do not run `mvn` commands directly. When verification is needed, ask Ben to run a specific command (e.g., "Please run `mvn compile` in the services directory").
+
 ## Do NOT
 
 - Skip meta tags on any page
 - Add tracking/analytics without explicit request
 - Over-complicate the component structure
-- State the obvious (e.g., "you'll need to rebuild and redeploy")
+- State the obvious (e.g., "you'll need to rebuild and redeploy", "you need PostgreSQL running to test locally")
+- Execute Maven commands (`mvn compile`, `mvn test`, etc.) - ask Ben to run them instead
+- Waste tokens on obvious setup/run instructions - Ben knows his own dev environment

@@ -23,6 +23,12 @@ export class Home {
 
   readonly posts = [
     {
+      title: 'Flyway in Spring Boot 4: What Changed and Why Your Migrations Won\'t Run',
+      slug: 'flyway-spring-boot-4-changes',
+      date: '2025-01-28',
+      description: 'Spring Boot 4 changed how Flyway auto-configuration works. If your migrations silently fail to run, here\'s why and how to fix it.'
+    },
+    {
       title: 'Hexagonal Architecture with Spring Boot, Flyway, and Dual Database Support',
       slug: 'hexagonal-architecture-springboot',
       date: '2025-01-28',

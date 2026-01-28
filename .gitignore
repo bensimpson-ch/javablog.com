@@ -33,9 +33,14 @@ coverage/
 
 # Claude Code
 .claude/
+**/mvnout.log
+
+scratchpad/*
 
 # Maven
 target/
 *.class
 *.jar
 *.war
+.idea/
+*.iml

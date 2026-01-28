@@ -5,6 +5,71 @@
   </header>
 
   <section>
+    <p>I spent hours watching Claude add dependencies and configuration for Flyway, yet migrations never ran.
+      Zero Flyway log output. Hibernate would start, fail schema validation, and that was it. Claude kept
+      guessing—adding <code>flyway-core</code>, tweaking properties, creating custom configuration beans.
+      None of it worked because the underlying assumptions were wrong.</p>
+
+    <p>The fix took two minutes once I read the documentation.</p>
+
+    <h2>What Changed in Spring Boot 4+</h2>
+
+    <p><strong>1. Dependencies:</strong> You no longer need <code>flyway-core</code> explicitly. The database-specific
+      module (e.g., <code>flyway-database-postgresql</code>) pulls in everything required. Adding both can cause
+      auto-configuration conflicts.</p>
+
+    <pre><code>&lt;!-- Wrong (old way) --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
+  &lt;artifactId&gt;flyway-core&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
+  &lt;artifactId&gt;flyway-database-postgresql&lt;/artifactId&gt;
+&lt;/dependency&gt;
+
+&lt;!-- Correct (Spring Boot 4+) --&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;org.flywaydb&lt;/groupId&gt;
+  &lt;artifactId&gt;flyway-database-postgresql&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+
+    <p><strong>2. Classpath Location:</strong> The migration location requires an absolute classpath reference
+      with a leading slash:</p>
+
+    <pre><code># Wrong
+spring.flyway.locations=classpath:db/migration
+
+# Correct
+spring.flyway.locations=classpath:/db/migration</code></pre>
+
+    <h2>The Lesson</h2>
+
+    <p>AI coding assistants are trained on historical patterns. When frameworks make breaking changes,
+      the assistant's confident suggestions become confidently wrong. The debugging session that followed
+      was a masterclass in futility—each "fix" built on the same flawed assumptions.</p>
+
+    <p>When something fundamental isn't working and the assistant keeps circling, stop. Read the docs.
+      The answer was in the Spring Boot 4.0 migration guide the whole time.</p>
+
+    <h2>Prompts Used</h2>
+    <ul>
+      <li>"we are going to start living the hexagonal architecture as well as domain driven design. The domain should contain the objects that follow the principles of domain driven design. In the package com.javablog.domain.blog create the following records: Post(), Comment(). Create a BlogRepository to listPosts() and listComments(Post). Implement the repository in the adapter-persistence in the package com.javablog.adapter.persistence.blog. Note, use named queries that are anchored in the Entity object that lives in the adapter-persistence. Create a PostEntity and CommentEntity in the same package as the BlogRepository. Each entity will have UUID as its identifier. Each entity will have a content member that contains text or varchar with the maximum allowed. Do not use Clobs, Blobs - we will get to that later."</li>
+      <li>[Multiple iterations of Claude adding flyway-core, configuration beans, and property changes—none worked]</li>
+      <li>"no, you're hacking - admit you don't know what you are doing"</li>
+      <li>"delete your hack. wait for further instruction."</li>
+      <li>"well, I fixed it by reading the documentation. you see in spring 4+ the old paradigm on which you were trained was changed. note the changes and create blog post 5 based upon it."</li>
+    </ul>
+  </section>
+</article>
+
+<article>
+  <header>
+    <h1>{{ posts[1].title }}</h1>
+    <time [attr.datetime]="posts[1].date">January 28, 2025</time>
+  </header>
+
+  <section>
     <p>There is an addictiveness and joy that comes with visibly getting something done. Our work as software engineers
       is sometimes not visible to the end user for a long time. Delayed gratification. We press on anyway, trusting the
       architectural and design principles that enable us to adapt to changing requirements, whether a new feature or a
@@ -42,8 +107,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[1].title }}</h1>
-    <time [attr.datetime]="posts[1].date">January 27, 2025</time>
+    <h1>{{ posts[2].title }}</h1>
+    <time [attr.datetime]="posts[2].date">January 27, 2025</time>
   </header>
 
   <section>
@@ -133,8 +198,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[2].title }}</h1>
-    <time [attr.datetime]="posts[2].date">January 18, 2025</time>
+    <h1>{{ posts[3].title }}</h1>
+    <time [attr.datetime]="posts[3].date">January 18, 2025</time>
   </header>
 
   <section>
@@ -185,8 +250,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[3].title }}</h1>
-    <time [attr.datetime]="posts[3].date">December 22, 2025</time>
+    <h1>{{ posts[4].title }}</h1>
+    <time [attr.datetime]="posts[4].date">December 22, 2025</time>
   </header>
 
   <section>
