@@ -5,14 +5,15 @@
   </header>
 
   <section>
-    <p>AI Assisted Coding is sometimes two step forwards then one step back. This post is about how to recognize where
-      LLM cutoff dates and a new major version of Spring Boot intersect.  I insisted on using Spring Boot 4+ in an
-      earlier post - instead of the suggested version 3.4.2.  When asked, Claude answers its cutoff date is May 2025.
-
-      <a href="https://spring.io/blog/2025/11/20/spring-boot-4-0-0-available-now" target="_blank">Spring Boot 4.0.0 was
-        released in November 20, 2025</a>.    Version 4 had a some breaking changes to how earlier Spring Boot versions
-      worked.  A specific example, how to configure flyaway for database migrations.   This post shows the right way to
-      configure flyaway.  Only these three imports were required (from github: <a href="https://github.com/bensimpson-ch/javablog.com/blob/main/services/adapter-persistence/pom.xml#L27-L38" target="_blank">adapter-persistence/pom.xml</a>):
+    <p>AI-assisted coding is sometimes two steps forward, one step back. This post is about recognizing where LLM
+      knowledge cutoff dates and a new major version collide. In an earlier post, I insisted on using Spring Boot 4+
+      instead of the suggested version 3.4.2. Claude's knowledge cutoff is May 2025, but
+      <a href="https://spring.io/blog/2025/11/20/spring-boot-4-0-0-available-now" target="_blank">Spring Boot 4.0.0
+        wasn't released until November 20, 2025</a>—meaning the model had never seen it.
+    </p>
+    <p>Version 4 introduced several breaking changes from earlier Spring Boot versions. One specific example:
+      configuring Flyway for database migrations. This post shows the correct approach. Only these three imports are
+      required (from GitHub: <a href="https://github.com/bensimpson-ch/javablog.com/blob/main/services/adapter-persistence/pom.xml#L27-L38" target="_blank">adapter-persistence/pom.xml</a>):
     </p>
 
     <pre><code>
@@ -34,19 +35,19 @@
     <pre><code><a href="https://github.com/bensimpson-ch/javablog.com/tree/main/services/adapter-persistence/src/main/resources/db/migration"
     target="_blank">services/adapter-persistence/src/main/resources/db/migration</a></code></pre>
 
-
-    <p>No Additional configurations are needed in the application.properties. Flyway auto-configuration just manages it
+    <p>No additional configuration is needed in <a href="https://github.com/bensimpson-ch/javablog.com/blob/main/services/bootstrap/src/main/resources/application.properties"
+    target="_blank">application.properties</a>. Flyway auto-configuration handles it
       by default.</p>
 
     <h2>The Lesson</h2>
 
-    <p>AI coding assistants are trained on historical software patterns and content before a cutoff date. When frameworks make
-      breaking changes, the assistant's confident suggestions become confidently wrong. The "collaboration" session that
-      involved configuring persistence in my spring boot application was a frustrating waste of time and tokens. When
-      something this fundamental isn't working and the assistant keeps suggesting another "quick fix".
-      Stop. Read the manual "RTFM". The answer was in the
-      <a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide" target="_blank">
-        Spring Boot 4.0 migration</a> guide the ready for a human alive after May 2025 to read.</p>
+    <p>AI coding assistants are trained on content before a cutoff date. When a software framework like Spring Boot
+      introduces breaking changes, the coding assistant's applies old (pre-cutoff date) solutions that don't work.
+      The "collaboration" session configuring persistence in my Spring Boot application was a frustrating waste of time
+      and tokens. When something this fundamental isn't working and the assistant keeps suggesting another "quick fix"...
+      Stop. RTFM. The answer was in the
+      <a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-4.0-Migration-Guide"
+         target="_blank">Spring Boot 4.0 Migration Guide</a>, ready for any human alive after May 2025 to read.</p>
 
     <h2>Prompts Used (<a href="assets/transcripts/claude/january-28-2026.txt" target="_blank">full transcript</a>):</h2>
     <ul>
