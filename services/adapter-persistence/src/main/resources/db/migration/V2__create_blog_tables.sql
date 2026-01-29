@@ -13,7 +13,7 @@ CREATE TABLE comments (
     post_id UUID NOT NULL REFERENCES posts(post_id),
     author VARCHAR(100),
     content TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_comments_post_id ON comments(post_id);
