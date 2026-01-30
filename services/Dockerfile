@@ -5,6 +5,7 @@ COPY pom.xml .
 COPY domain ./domain
 COPY application ./application
 COPY adapter-rest ./adapter-rest
+COPY api ./api
 COPY adapter-persistence ./adapter-persistence
 COPY bootstrap ./bootstrap
 RUN apk add --no-cache maven && \
