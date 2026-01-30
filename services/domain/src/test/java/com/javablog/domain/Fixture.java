@@ -47,7 +47,19 @@ public final class Fixture {
         return new Post(postId(), slug(), title(), content(), createdAt());
     }
 
+    public static Post post(String slugValue, String titleValue) {
+        return new Post(postId(), new Slug(slugValue), new Title(titleValue), content(), createdAt());
+    }
+
     public static Comment comment() {
         return new Comment(commentId(), postId(), author(), content(), createdAt());
+    }
+
+    public static Comment comment(PostId postId) {
+        return new Comment(commentId(), postId, author(), content(), createdAt());
+    }
+
+    public static Comment comment(PostId postId, String authorName) {
+        return new Comment(commentId(), postId, new Author(authorName), content(), createdAt());
     }
 }

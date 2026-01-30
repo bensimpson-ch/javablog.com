@@ -22,6 +22,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.javablog</groupId>
+			<artifactId>api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.javablog</groupId>
 			<artifactId>adapter-rest</artifactId>
 		</dependency>
 		<dependency>
@@ -61,6 +65,22 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.javablog</groupId>
+			<artifactId>domain</artifactId>
+			<classifier>test-fixtures</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -84,6 +104,9 @@
 						<ignoredUsedUndeclaredDependency>org.springframework:spring-beans</ignoredUsedUndeclaredDependency>
 						<ignoredUsedUndeclaredDependency>org.springframework:spring-context</ignoredUsedUndeclaredDependency>
 						<ignoredUsedUndeclaredDependency>org.springframework:spring-test</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.security:spring-security-test</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.mockito:mockito-core</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.security:spring-security-oauth2-jose</ignoredUsedUndeclaredDependency>
 					</ignoredUsedUndeclaredDependencies>
 					<ignoredUnusedDeclaredDependencies>
 						<ignoredUnusedDeclaredDependency>com.javablog:domain</ignoredUnusedDeclaredDependency>

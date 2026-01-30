@@ -78,13 +78,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           envs: REGISTRY,IMAGE_NAME,GHCR_TOKEN,GITHUB_ACTOR
           script: |
-            echo $GHCR_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-            docker pull $REGISTRY/$IMAGE_NAME:latest
-            docker stop javablog-api || true
-            docker rm javablog-api || true
-            docker run -d \
-              --name javablog-api \
-              --restart unless-stopped \
-              -p 8080:8080 \
-              $REGISTRY/$IMAGE_NAME:latest
-            docker image prune -f
+            echo $GHCR_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin                                                                                                                                                                                                         
+            cd /home/ben                                                                                                                                                                                                                                                                      
+            docker compose pull javablog-api                                                                                                                                                                                                                                                  
+            docker compose up -d javablog-api                                                                                                                                                                                                                                                 
+            docker image prune -f 

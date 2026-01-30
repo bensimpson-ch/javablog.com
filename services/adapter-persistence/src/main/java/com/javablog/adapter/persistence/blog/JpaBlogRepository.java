@@ -15,14 +15,47 @@ import com.javablog.domain.blog.Title;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
+@Transactional
 public class JpaBlogRepository implements BlogRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@Override
+	public Post create(Post post) {
+		PostEntity entity = toEntity(post);
+		entityManager.persist(entity);
+		return post;
+	}
+
+	@Override
+	public Post update(Post post) {
+		PostEntity entity = entityManager.find(PostEntity.class, post.id().value());
+		entity.setSlug(post.slug().value());
+		entity.setTitle(post.title().value());
+		entity.setContent(post.content().value());
+		return post;
+	}
+
+	@Override
+	public Comment create(Comment comment) {
+		PostEntity postEntity = entityManager.find(PostEntity.class, comment.postId().value());
+		CommentEntity entity = toEntity(comment, postEntity);
+		entityManager.persist(entity);
+		return comment;
+	}
+
+	@Override
+	public Optional<Post> findPostById(PostId id) {
+		PostEntity entity = entityManager.find(PostEntity.class, id.value());
+		return Optional.ofNullable(entity).map(this::toDomain);
+	}
 
 	@Override
 	public Posts listPosts() {
@@ -60,6 +93,26 @@ public class JpaBlogRepository implements BlogRepository {
 				new Author(entity.getAuthor()),
 				new Content(entity.getContent()),
 				new CreatedAt(entity.getCreatedAt())
+		);
+	}
+
+	private PostEntity toEntity(Post post) {
+		return new PostEntity(
+				post.id().value(),
+				post.slug().value(),
+				post.title().value(),
+				post.content().value(),
+				post.createdAt().value()
+		);
+	}
+
+	private CommentEntity toEntity(Comment comment, PostEntity postEntity) {
+		return new CommentEntity(
+				comment.id().value(),
+				postEntity,
+				comment.author().value(),
+				comment.content().value(),
+				comment.createdAt().value()
 		);
 	}
 }

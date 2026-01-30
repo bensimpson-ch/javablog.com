@@ -1,0 +1,270 @@
+openapi: 3.0.3
+info:
+  title: JavaBlog API
+  description: REST API for javablog.com blog posts and comments
+  version: 1.0.0
+
+servers:
+  - url: /v1
+    description: API version 1
+
+tags:
+  - name: Posts
+    description: Blog post operations
+  - name: Comments
+    description: Comment operations
+
+paths:
+  /posts:
+    post:
+      tags:
+        - Posts
+      operationId: createPost
+      summary: Create a new blog post
+      security:
+        - oidc: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+      responses:
+        '201':
+          description: Post created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+        '401':
+          description: Unauthorized - valid JWT required
+    get:
+      tags:
+        - Posts
+      operationId: listPosts
+      summary: List all blog posts sorted by newest first
+      responses:
+        '200':
+          description: List of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostResponse'
+
+  /posts/{postId}:
+    get:
+      tags:
+        - Posts
+      operationId: getPost
+      summary: Get a blog post by ID
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Post found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+        '404':
+          description: Post not found
+    put:
+      tags:
+        - Posts
+      operationId: updatePost
+      summary: Update a blog post
+      security:
+        - oidc: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePostRequest'
+      responses:
+        '200':
+          description: Post updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostResponse'
+        '401':
+          description: Unauthorized - valid JWT required
+        '404':
+          description: Post not found
+
+  /posts/{postId}/comments:
+    post:
+      tags:
+        - Comments
+      operationId: createComment
+      summary: Create a comment on a blog post
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCommentRequest'
+      responses:
+        '201':
+          description: Comment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+        '404':
+          description: Post not found
+    get:
+      tags:
+        - Comments
+      operationId: listComments
+      summary: List comments for a blog post sorted by newest first
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentResponse'
+        '404':
+          description: Post not found
+
+components:
+  securitySchemes:
+    oidc:
+      type: openIdConnect
+      openIdConnectUrl: https://keycloak.javablog.com/realms/javablog/.well-known/openid-configuration
+      description: Keycloak OIDC authentication
+
+  schemas:
+    CreatePostRequest:
+      type: object
+      required:
+        - slug
+        - title
+        - content
+      properties:
+        slug:
+          type: string
+          description: URL-friendly identifier for the post
+        title:
+          type: string
+          description: Post title
+        content:
+          type: string
+          description: Post content
+
+    UpdatePostRequest:
+      type: object
+      required:
+        - slug
+        - title
+        - content
+      properties:
+        slug:
+          type: string
+          description: URL-friendly identifier for the post
+        title:
+          type: string
+          description: Post title
+        content:
+          type: string
+          description: Post content
+
+    CreateCommentRequest:
+      type: object
+      required:
+        - author
+        - content
+      properties:
+        author:
+          type: string
+          description: Comment author name
+        content:
+          type: string
+          description: Comment content
+
+    PostResponse:
+      type: object
+      required:
+        - id
+        - slug
+        - title
+        - content
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique post identifier
+        slug:
+          type: string
+          description: URL-friendly identifier
+        title:
+          type: string
+          description: Post title
+        content:
+          type: string
+          description: Post content
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+
+    CommentResponse:
+      type: object
+      required:
+        - id
+        - postId
+        - author
+        - content
+        - createdAt
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique comment identifier
+        postId:
+          type: string
+          format: uuid
+          description: Associated post identifier
+        author:
+          type: string
+          description: Comment author name
+        content:
+          type: string
+          description: Comment content
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp

@@ -62,4 +62,16 @@ public class PostEntity {
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

@@ -20,6 +20,10 @@
 			<groupId>com.javablog</groupId>
 			<artifactId>application</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.javablog</groupId>
+			<artifactId>api</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -28,6 +32,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
 
 		<dependency>
@@ -50,6 +58,17 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.javablog</groupId>
+			<artifactId>domain</artifactId>
+			<classifier>test-fixtures</classifier>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -68,6 +87,7 @@
 						<ignoredUnusedDeclaredDependency>com.javablog:application</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-web</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-security</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-oauth2-resource-server</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-test</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-webmvc-test</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.security:spring-security-test</ignoredUnusedDeclaredDependency>

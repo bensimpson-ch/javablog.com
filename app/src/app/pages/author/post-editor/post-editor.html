@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ isEditMode ? 'Edit Post' : 'Create New Post' }}</mat-card-title>
+    <mat-card-subtitle>Author: Ben Simpson &lt;ben&#64;javablog.com&gt;</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (loading()) {
+      <div class="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span>Loading post...</span>
+      </div>
+    } @else {
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" (blur)="generateSlug()">
+          @if (form.get('title')?.hasError('required')) {
+            <mat-error>Title is required</mat-error>
+          }
+          @if (form.get('title')?.hasError('maxlength')) {
+            <mat-error>Title must be 200 characters or less</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Slug</mat-label>
+          <input matInput formControlName="slug">
+          <mat-hint>URL-friendly identifier{{ isEditMode ? '' : ' (auto-generated from title)' }}</mat-hint>
+          @if (form.get('slug')?.hasError('required')) {
+            <mat-error>Slug is required</mat-error>
+          }
+          @if (form.get('slug')?.hasError('pattern')) {
+            <mat-error>Slug can only contain lowercase letters, numbers, and hyphens</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Content (HTML)</mat-label>
+          <textarea matInput formControlName="content" rows="20"></textarea>
+          @if (form.get('content')?.hasError('required')) {
+            <mat-error>Content is required</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="actions">
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || submitting()">
+            @if (submitting()) {
+              <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+              {{ isEditMode ? 'Update Post' : 'Create Post' }}
+            }
+          </button>
+        </div>
+      </form>
+    }
+  </mat-card-content>
+</mat-card>

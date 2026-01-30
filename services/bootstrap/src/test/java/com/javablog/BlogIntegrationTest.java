@@ -1,0 +1,127 @@
+package com.javablog;
+
+import com.javablog.api.v1.model.CommentResponse;
+import com.javablog.api.v1.model.PostResponse;
+import com.javablog.config.TestSecurityConfig;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
+@Import(TestSecurityConfig.class)
+class BlogIntegrationTest {
+
+	@Autowired
+	private MockMvc mockMvc;
+
+	private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+
+	@Test
+	void createAndReadPostsAndComments() throws Exception {
+		// Create first blog post (requires authentication)
+		String firstPostJson = """
+				{"slug": "first-post", "title": "First Post", "content": "Content of the first post"}
+				""";
+		MvcResult firstPostResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(firstPostJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse firstPost = objectMapper.readValue(
+				firstPostResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Add a comment to the first post (public endpoint)
+		String firstPostCommentJson = """
+				{"author": "Alice", "content": "Nice first post!"}
+				""";
+		mockMvc.perform(post("/v1/posts/" + firstPost.getId() + "/comments")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(firstPostCommentJson))
+				.andExpect(status().isCreated());
+
+		// Small delay to ensure different createdAt timestamps
+		Thread.sleep(10);
+
+		// Create second blog post (requires authentication)
+		String secondPostJson = """
+				{"slug": "second-post", "title": "Second Post", "content": "Content of the second post"}
+				""";
+		MvcResult secondPostResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(secondPostJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse secondPost = objectMapper.readValue(
+				secondPostResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Add first comment to the second post (public endpoint)
+		String secondPostComment1Json = """
+				{"author": "Bob", "content": "Great second post!"}
+				""";
+		mockMvc.perform(post("/v1/posts/" + secondPost.getId() + "/comments")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(secondPostComment1Json))
+				.andExpect(status().isCreated());
+
+		// Small delay to ensure different createdAt timestamps
+		Thread.sleep(10);
+
+		// Add second comment to the second post (public endpoint)
+		String secondPostComment2Json = """
+				{"author": "Charlie", "content": "I agree with Bob!"}
+				""";
+		mockMvc.perform(post("/v1/posts/" + secondPost.getId() + "/comments")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(secondPostComment2Json))
+				.andExpect(status().isCreated());
+
+		// Read all posts and verify they are sorted by newest first (public endpoint)
+		MvcResult postsResult = mockMvc.perform(get("/v1/posts"))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		PostResponse[] posts = objectMapper.readValue(
+				postsResult.getResponse().getContentAsString(),
+				PostResponse[].class);
+
+		assertThat(posts).hasSize(2);
+		assertThat(posts[0].getSlug()).isEqualTo("second-post"); // newest first
+		assertThat(posts[1].getSlug()).isEqualTo("first-post");
+
+		// Read comments from the second post and verify they are sorted by newest first (public endpoint)
+		MvcResult commentsResult = mockMvc.perform(get("/v1/posts/" + secondPost.getId() + "/comments"))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		CommentResponse[] comments = objectMapper.readValue(
+				commentsResult.getResponse().getContentAsString(),
+				CommentResponse[].class);
+
+		assertThat(comments).hasSize(2);
+		assertThat(comments[0].getAuthor()).isEqualTo("Charlie"); // newest first
+		assertThat(comments[1].getAuthor()).isEqualTo("Bob");
+	}
+}
