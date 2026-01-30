@@ -133,6 +133,34 @@ npm run build      # Production build
 npm run serve      # Dev server
 ```
 
+## Java Domain Objects
+
+Domain objects are pure Java records with Guard-based validation. See `services/domain/CLAUDE.md` for detailed conventions.
+
+### Guard Pattern
+
+Validation uses the `Guard` class which throws `ConstraintViolationException` on failure:
+
+```java
+public record Title(String value) {
+
+    public Title {
+        Guard.againstBlank(value, "Title.value");
+    }
+}
+```
+
+### Available Guards
+
+- `Guard.againstNull(Object, String)` - must not be null
+- `Guard.againstEmpty(String, String)` - must not be null or empty
+- `Guard.againstBlank(String, String)` - must not be null, empty, or whitespace
+- `Guard.againstInvalidMaxLength(String, String, int)` - must not exceed max length
+
+### Everything is an Object
+
+Each domain concept gets its own record (Title, Slug, Content, Author, PostId, etc.). Collections use plural wrapper records (Posts, Comments).
+
 ## Working Agreement (Java/Maven Services)
 
 Claude writes code; Ben executes Maven commands. Do not run `mvn` commands directly. When verification is needed, ask Ben to run a specific command (e.g., "Please run `mvn compile` in the services directory").

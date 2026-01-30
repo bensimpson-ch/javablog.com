@@ -37,6 +37,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -65,6 +70,35 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</jvmArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<ignoredUsedUndeclaredDependencies>
+						<ignoredUsedUndeclaredDependency>org.springframework.boot:spring-boot</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.boot:spring-boot-test</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.boot:spring-boot-autoconfigure</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.boot:spring-boot-webmvc-test</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework:spring-beans</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework:spring-context</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework:spring-test</ignoredUsedUndeclaredDependency>
+					</ignoredUsedUndeclaredDependencies>
+					<ignoredUnusedDeclaredDependencies>
+						<ignoredUnusedDeclaredDependency>com.javablog:domain</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>com.javablog:application</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>com.javablog:adapter-rest</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>com.javablog:adapter-persistence</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-devtools</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-test</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-webmvc-test</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.security:spring-security-test</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>com.h2database:h2</ignoredUnusedDeclaredDependency>
+					</ignoredUnusedDeclaredDependencies>
+					<ignoredNonTestScopedDependencies>
+						<ignoredNonTestScopedDependency>org.springframework:spring-beans</ignoredNonTestScopedDependency>
+					</ignoredNonTestScopedDependencies>
 				</configuration>
 			</plugin>
 		</plugins>

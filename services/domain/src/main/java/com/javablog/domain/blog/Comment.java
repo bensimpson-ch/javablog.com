@@ -1,6 +1,20 @@
 package com.javablog.domain.blog;
 
-import java.util.UUID;
+import com.javablog.domain.Guard;
 
-public record Comment(UUID id, UUID postId, String content) {
+public record Comment(
+        CommentId id,
+        PostId postId,
+        Author author,
+        Content content,
+        CreatedAt createdAt
+) {
+
+    public Comment {
+        Guard.againstNull(id, "Comment.id");
+        Guard.againstNull(postId, "Comment.postId");
+        Guard.againstNull(author, "Comment.author");
+        Guard.againstNull(content, "Comment.content");
+        Guard.againstNull(createdAt, "Comment.createdAt");
+    }
 }

@@ -23,6 +23,13 @@ export class Home {
 
   readonly posts = [
     {
+      title: 'Domain Object Validation - Jakarta Validation Annotations in the domain vs. Clean Architecture',
+      slug: 'domain-object-validation',
+      date: '2025-01-30',
+      description: 'Internal debate about the role of Jakarta Validation Annotations in the domain. ' +
+        'Using the "everything is an object" philosophy where Title, Slug, Content, and Author each have their own record.'
+    },
+    {
       title: 'Implementing the hexagonal architecture, first pain point, Claude\'s cutoff date',
       slug: 'flyway-spring-boot-4-cutoff',
       date: '2025-01-29',

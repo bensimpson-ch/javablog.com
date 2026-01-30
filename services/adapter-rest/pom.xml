@@ -31,6 +31,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -46,5 +51,30 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<ignoredUsedUndeclaredDependencies>
+						<ignoredUsedUndeclaredDependency>org.springframework:spring-web</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework:spring-context</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.security:spring-security-config</ignoredUsedUndeclaredDependency>
+						<ignoredUsedUndeclaredDependency>org.springframework.security:spring-security-web</ignoredUsedUndeclaredDependency>
+					</ignoredUsedUndeclaredDependencies>
+					<ignoredUnusedDeclaredDependencies>
+						<ignoredUnusedDeclaredDependency>com.javablog:application</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-web</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-security</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-test</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-webmvc-test</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>org.springframework.security:spring-security-test</ignoredUnusedDeclaredDependency>
+					</ignoredUnusedDeclaredDependencies>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

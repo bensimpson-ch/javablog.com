@@ -1,7 +1,58 @@
 <article>
   <header>
     <h1>{{ posts[0].title }}</h1>
-    <time [attr.datetime]="posts[0].date">January 29, 2025</time>
+    <time [attr.datetime]="posts[0].date">January 30, 2025</time>
+  </header>
+
+  <section>
+    <p>
+      As the list of prompts below shows, I made an initial decision to use Jakarta Validation annotations in the domain
+      and let the boundaries invoke the validations using an 'Valid' annotation.  It was a novel approach suggested by
+      Claude, I thought why not. I was curious how it would look and was ready to go with it.
+    </p>
+    <p>It helps to talk to humans at lunch to get other opinions!  On the way home, I thought about Chpater 32 of the "Clean Architecture" book
+      from Robert Martin.  I had been kidding myself—thinking that writing a <a href="https://github.com/bensimpson-ch/javablog.com/blob/main/services/domain/src/main/java/com/javablog/domain/Guard.java" target="_blank">Guard.against(...)</a>
+      class to enforce my validations was too much effort, and that it would be more efficient to just use Jakarta
+      annotations to validate my domain records.
+    </p>
+    <p>
+      So, in one big commit, you can see that the domain is now independent of external frameworks. As this post involved a lot
+      of prompting, I will end it here. No new shiny features, but a step forward.
+    </p>
+
+    <h2>Prompts Used (<a href="assets/transcripts/claude/january-30-2026.txt" target="_blank">full transcript</a>):</h2>
+    <ul class="prompts">
+      <li>"we are going to work on a blog post and the most important part of the application - our domain. Before we get started, lets define in the claude.md how our domain objects. these records require validation annotations like &#64;NotNull of &#64;NotEmpty depending upon the business rules. For instance a BlogPost must have content so the BlogPost must have a &#64;NotEmpty String content element. where would this validation take place that the parameter provided is not null or empty?"</li>
+      <li>[Selected: Application service layer - Services use &#64;Validated class annotation. Validation happens regardless of which adapter calls the service.]</li>
+      <li>"great - this is a new approach for me - typically I validate in the domain using a contraintsValidator.validate(this) in the domain record itself. I'm excited to validating at the application/domain service level will play out. write the blog post and comment domain objects using annotations that align with the already provided database limitations. for instance, title is not empty and maximum size 255 characters. Use the philosophy that everything is an object - Title has its own record that is used in the Post. all live in the blog package. Any questions? Perhaps its best to just git it a try and we tweak it afterwards. Each domain object requires a UnitTest. We do not use Mockito in our domain. The unit test for a domain object should always have a validateConstraints() test. If there are multiple parameters in a record constructor, then validateConstraints should be ParameterizedTest and the arguments should be fed from a static validateConstraints function in the same test."</li>
+      <li>"pretty good - under no circumstances should the primary validateConstraints test have a method source that isn't validateConstraints..."</li>
+      <li>"null and empty values should not be added to the arguments tested in validateConstraints(). Better to use org.junit.jupiter.params.provider.NullAndEmptySource"</li>
+      <li>"In the test code: com.javablog.domain define a class Fixture.java..."</li>
+      <li>"ok, that worked. next topic - we want to no longer inherit from the spring-boot-starter-parent..."</li>
+      <li>"great that worked fine. now lets introduce the maven-dependency-plugin:3.9.0..."</li>
+      <li>"actually - make failOnWarning false and run a maven build to capture all of the warnings..."</li>
+      <li>"remove warnings.txt and build-output.txt. update the tests to use the Fixture instead of constructing the records individually."</li>
+      <li>"I've changed my mind after talking to a colleague today and do not want to try a variant of the same solution I've been using. lets keep the unit tests, but change the ways the validation is performed. Remove all annotations from the domain records."</li>
+      <li>"I did not say to delete the validation tests - just the annotations. leave the tests. stop the procedure now."</li>
+      <li>"alright - the domain is going to use an Uncle Bob classic 'Guard' class in the com.javablog.domain package. This guard class has a static function: Guard.againstNull(Object value, String fieldName); Instead of using an &#64;NotNull annotation the compact constructor should be defined without parameters and refer the value, for instance in Title, to the Guard.againstNull(value, 'Title.value') implementation. If the object in againstNull is null - it should throw a ConstraintViolationException, a domain defined class that extends RuntimeException and prints a pretty message based upon the 'Title.value' helper and the context of the throwing function. write the Guard, apply it to Title, update the test to use assertj to assert the exception is thrown with the appropriate exception instance and message."</li>
+      <li>"its too early to execute the maven, the other tests need to be cleaned out first. change the other domain objects to use the Guard where appropriate. Add an additional Guard.againstEmpty. And Guard.againstInvalidLength. that should encompass all of the validations we were using. Update the domain classes to use these guards where we were using Annotations before. Remove the static of() and other static constructors I didn't ask for."</li>
+      <li>"remove the rest of the static of methods from the rest of the codebase."</li>
+      <li>"haha - have a look at JpaBlogRepository"</li>
+      <li>"Instead Of the BlogRepository.listPosts() returning a list of posts it should return a Posts object which takes a Set&lt;Post&gt; values in its constructor. The set may be empty, but not null."</li>
+      <li>"apply the same pattern to Comments. use a 'plural' domain object and its not allowed to have null values."</li>
+      <li>"write unit tests following our conventions for Comment, Comments, Author, Post, Posts"</li>
+      <li>"In Guard.java - there should be no value value != null - reuse the againstNull. Introduce a simplified againstMaxLength(String value, String fieldName, int maxLength)"</li>
+      <li>"remove it. also change the name to match the convention instead of againstMaxLength use againstInvalidMaxLength"</li>
+      <li>"ok, update the list of prompts we used in this session in home.html. I know it will be long, but we have a plan. Also update the domain claude.md to reflect the validation rules and how tests are written."</li>
+      <li>"one last prompt.  in the home.html create a css class for the prompts - light grey.  Create a horizontal divider in between the posts - like an hr but it could be a border bottom."</li>
+    </ul>
+  </section>
+</article>
+
+<article>
+  <header>
+    <h1>{{ posts[1].title }}</h1>
+    <time [attr.datetime]="posts[1].date">January 29, 2025</time>
   </header>
 
   <section>
@@ -50,7 +101,7 @@
          target="_blank">Spring Boot 4.0 Migration Guide</a>, ready for any human alive after May 2025 to read.</p>
 
     <h2>Prompts Used (<a href="assets/transcripts/claude/january-28-2026.txt" target="_blank">full transcript</a>):</h2>
-    <ul>
+    <ul class="prompts">
       <li>"we are going to start living the hexagonal architecture as well as domain driven design. The domain should contain the objects that follow the principles of domain driven design. In the package com.javablog.domain.blog create the following records: Post(), Comment(). Create a BlogRepository to listPosts() and listComments(Post). Implement the repository in the adapter-persistence in the package com.javablog.adapter.persistence.blog. Note, use named queries that are anchored in the Entity object that lives in the adapter-persistence. Create a PostEntity and CommentEntity in the same package as the BlogRepository. Each entity will have UUID as its identifier. Each entity will have a content member that contains text or varchar with the maximum allowed. Do not use Clobs, Blobs - we will get to that later."</li>
       <li>[Multiple iterations of Claude adding flyway-core, configuration beans, and property changes—none worked]</li>
       <li>"no, you're hacking - admit you don't know what you are doing"</li>
@@ -65,8 +116,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[1].title }}</h1>
-    <time [attr.datetime]="posts[1].date">January 28, 2025</time>
+    <h1>{{ posts[2].title }}</h1>
+    <time [attr.datetime]="posts[2].date">January 28, 2025</time>
   </header>
 
   <section>
@@ -93,7 +144,7 @@
     </figure>
 
     <h2>Prompts Used</h2>
-    <ul>
+    <ul class="prompts">
       <li>"we are starting on post 4. this post will take our services application to the next level. Convert this project to a multi-module hexagonal architecture with five modules: domain, application, adapter-rest, adapter-persistence, and bootstrap. Domain should have zero Spring dependencies. Application depends on domain with minimal Spring for Service annotation. Adapter-rest depends on application and domain. Adapter-persistence depends on application and domain. Bootstrap depends on all four, contains the SpringBootApplication class, application.properties, and spring-boot-maven-plugin. Add spring-boot-devtools as runtime optional in bootstrap for hot reload. Configure spring-boot-maven-plugin in bootstrap with jvmArguments for JDWP debug on port 5005. The application must start successfully with mvn clean install && mvn -pl bootstrap spring-boot:run."</li>
       <li>"these changes should break the github action to deploy the services application. review the Dockerfile and api-deploy.yml to verify that the application will deploy given its new architecture."</li>
       <li>"commit this and push this to test the github action again."</li>
@@ -107,8 +158,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[2].title }}</h1>
-    <time [attr.datetime]="posts[2].date">January 27, 2025</time>
+    <h1>{{ posts[3].title }}</h1>
+    <time [attr.datetime]="posts[3].date">January 27, 2025</time>
   </header>
 
   <section>
@@ -151,7 +202,7 @@
     <pre>{{ helloResponse() }}</pre>
 
     <h2>Prompts Used</h2>
-    <ul>
+    <ul class="prompts">
       <li>"we are going to setup a rest services application to eventually permit comments and feedback for blog posts.
         As this service will need a database and other services, let's assume it will run in a docker image running
         inside a docker-compose constructed network.  this project will require a sonar and nexus connection -
@@ -198,8 +249,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[3].title }}</h1>
-    <time [attr.datetime]="posts[3].date">January 18, 2025</time>
+    <h1>{{ posts[4].title }}</h1>
+    <time [attr.datetime]="posts[4].date">January 18, 2025</time>
   </header>
 
   <section>
@@ -237,7 +288,7 @@
       this content is indexed. It's the long game with SEO - content and "safe" best practices. Cheers.</p>
 
     <h2>Prompts Used</h2>
-    <ul>
+    <ul class="prompts">
       <li>"the next few prompts will be public, including this one. I want to improve the SEO of my blog so that others can find my posts and be inspired to also experiment with 'vibing' or 'LLM assisted coding'. The task today is to improve the SEO for the website https://javablog.com. The website has a single path that is currently visible - '/'. Create a sitemap.xml that I can submit to the google search console. Also suggest an approach to SEO that: 1. works with translated content. 2. works in a single PR. 3. Can be extended later when there is more content."</li>
       <li>"lets define a favicon.ico file that shows a capital 'J' in a darker purple with a background color white."</li>
       <li>"I have convert installed, you can run that command."</li>
@@ -250,8 +301,8 @@
 
 <article>
   <header>
-    <h1>{{ posts[4].title }}</h1>
-    <time [attr.datetime]="posts[4].date">December 22, 2025</time>
+    <h1>{{ posts[5].title }}</h1>
+    <time [attr.datetime]="posts[5].date">December 22, 2025</time>
   </header>
 
   <section>
@@ -282,7 +333,7 @@
       <li><strong>GitHub Actions</strong> for CI/CD</li>
     </ul>
     <h3>My Prompts</h3>
-    <ul>
+    <ul class="prompts">
       <li>"you now should have access to javablog.com... I want to use it to make posts. I think given your talents - we will not use a blogging tool, instead we will just create content. create a claude.md for you to follow"</li>
       <li>"You took it too far. I want an angular application app to live in an app directory. when the github action triggers, it should build the app and deploy it to azure."</li>
       <li>"I want it built from day one to be SEO and AI friendly."</li>
