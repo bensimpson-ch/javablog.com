@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
         working-directory: app
+      - name: Generate API client
+        run: npm run generate-client
+        working-directory: app
       - name: Build Angular app
         run: npm run build
         working-directory: app
