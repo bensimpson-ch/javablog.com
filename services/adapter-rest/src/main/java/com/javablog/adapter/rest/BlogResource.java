@@ -14,9 +14,11 @@ import com.javablog.domain.blog.CreatedAt;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Slug;
+import com.javablog.domain.blog.Summary;
 import com.javablog.domain.blog.Title;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +48,7 @@ public class BlogResource {
 				PostId.generate(),
 				new Slug(request.getSlug()),
 				new Title(request.getTitle()),
+				new Summary(request.getSummary()),
 				new Content(request.getContent()),
 				CreatedAt.now()
 		);
@@ -67,6 +70,13 @@ public class BlogResource {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
+	@GetMapping("/by-slug/{slug}")
+	public ResponseEntity<PostResponse> getPostBySlug(@PathVariable("slug") String slug) {
+		return blogApplicationService.findPostBySlug(new Slug(slug))
+				.map(post -> ResponseEntity.ok(toResponse(post)))
+				.orElse(ResponseEntity.notFound().build());
+	}
+
 	@PutMapping("/{postId}")
 	public ResponseEntity<PostResponse> updatePost(
 			@PathVariable("postId") UUID postId,
@@ -77,11 +87,22 @@ public class BlogResource {
 							existing.id(),
 							new Slug(request.getSlug()),
 							new Title(request.getTitle()),
+							new Summary(request.getSummary()),
 							new Content(request.getContent()),
 							existing.createdAt()
 					);
 					Post saved = blogApplicationService.updatePost(updated);
 					return ResponseEntity.ok(toResponse(saved));
+				})
+				.orElse(ResponseEntity.notFound().build());
+	}
+
+	@DeleteMapping("/{postId}")
+	public ResponseEntity<Void> deletePost(@PathVariable("postId") UUID postId) {
+		return blogApplicationService.findPostById(new PostId(postId))
+				.map(post -> {
+					blogApplicationService.deletePost(post.id());
+					return ResponseEntity.noContent().<Void>build();
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -123,6 +144,7 @@ public class BlogResource {
 				.id(post.id().value())
 				.slug(post.slug().value())
 				.title(post.title().value())
+				.summary(post.summary().value())
 				.content(post.content().value())
 				.createdAt(post.createdAt().value().atOffset(ZoneOffset.UTC));
 	}

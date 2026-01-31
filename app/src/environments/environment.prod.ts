@@ -3,6 +3,6 @@ export const environment = {
   apiBasePath: 'https://api.javablog.com/v1',
   keycloak: {
     issuer: 'https://keycloak.javablog.com/realms/javablog',
-    clientId: 'javablog-app'
+    clientId: 'javablog-client'
   }
 };

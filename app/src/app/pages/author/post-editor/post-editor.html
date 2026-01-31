@@ -36,6 +36,18 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+          <mat-label>Summary</mat-label>
+          <textarea matInput formControlName="summary" rows="3"></textarea>
+          <mat-hint>Short description shown on the home page (max 500 characters)</mat-hint>
+          @if (form.get('summary')?.hasError('required')) {
+            <mat-error>Summary is required</mat-error>
+          }
+          @if (form.get('summary')?.hasError('maxlength')) {
+            <mat-error>Summary must be 500 characters or less</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>Content (HTML)</mat-label>
           <textarea matInput formControlName="content" rows="20"></textarea>
           @if (form.get('content')?.hasError('required')) {
@@ -51,6 +63,9 @@
               {{ isEditMode ? 'Update Post' : 'Create Post' }}
             }
           </button>
+          @if (!isEditMode && hasDraft()) {
+            <button mat-button type="button" (click)="clearDraft()">Clear Draft</button>
+          }
         </div>
       </form>
     }

@@ -6,6 +6,7 @@ public record Post(
         PostId id,
         Slug slug,
         Title title,
+        Summary summary,
         Content content,
         CreatedAt createdAt
 ) {
@@ -14,6 +15,7 @@ public record Post(
         Guard.againstNull(id, "Post.id");
         Guard.againstNull(slug, "Post.slug");
         Guard.againstNull(title, "Post.title");
+        Guard.againstNull(summary, "Post.summary");
         Guard.againstNull(content, "Post.content");
         Guard.againstNull(createdAt, "Post.createdAt");
     }

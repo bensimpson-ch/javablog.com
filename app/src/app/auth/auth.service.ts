@@ -10,7 +10,11 @@ export class AuthService {
 
   constructor() {
     this.oauthService.configure(authConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+
+  async tryLogin(): Promise<boolean> {
+    await this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    return this.oauthService.hasValidAccessToken();
   }
 
   login(): void {

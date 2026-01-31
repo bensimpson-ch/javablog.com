@@ -39,6 +39,7 @@ class BlogResourceTest {
 		var request = new CreatePostRequest()
 				.slug("test-slug")
 				.title("Test Title")
+				.summary("Test summary")
 				.content("Test content");
 
 		var response = resource.createPost(request);
@@ -110,6 +111,27 @@ class BlogResourceTest {
 		when(blogApplicationService.findPostById(postId)).thenReturn(Optional.empty());
 
 		var response = resource.listComments(postId.value());
+
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+	}
+
+	@Test
+	void deletePostReturnsNoContentWhenPostExists() {
+		Post post = Fixture.post();
+		when(blogApplicationService.findPostById(post.id())).thenReturn(Optional.of(post));
+
+		var response = resource.deletePost(post.id().value());
+
+		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+		verify(blogApplicationService).deletePost(post.id());
+	}
+
+	@Test
+	void deletePostReturnsNotFoundWhenPostDoesNotExist() {
+		var postId = Fixture.postId();
+		when(blogApplicationService.findPostById(postId)).thenReturn(Optional.empty());
+
+		var response = resource.deletePost(postId.value());
 
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 	}

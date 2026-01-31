@@ -8,9 +8,13 @@ public interface BlogRepository {
 
 	Post update(Post post);
 
+	void delete(PostId id);
+
 	Comment create(Comment comment);
 
 	Optional<Post> findPostById(PostId id);
+
+	Optional<Post> findPostBySlug(Slug slug);
 
 	Posts listPosts();
 

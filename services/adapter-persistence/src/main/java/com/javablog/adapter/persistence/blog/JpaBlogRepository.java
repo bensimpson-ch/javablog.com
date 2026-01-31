@@ -11,6 +11,7 @@ import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Posts;
 import com.javablog.domain.blog.Slug;
+import com.javablog.domain.blog.Summary;
 import com.javablog.domain.blog.Title;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -39,8 +40,27 @@ public class JpaBlogRepository implements BlogRepository {
 		PostEntity entity = entityManager.find(PostEntity.class, post.id().value());
 		entity.setSlug(post.slug().value());
 		entity.setTitle(post.title().value());
+		entity.setSummary(post.summary().value());
 		entity.setContent(post.content().value());
 		return post;
+	}
+
+	@Override
+	public Optional<Post> findPostBySlug(Slug slug) {
+		return entityManager.createNamedQuery(PostEntity.FIND_BY_SLUG, PostEntity.class)
+				.setParameter("slug", slug.value())
+				.getResultList()
+				.stream()
+				.findFirst()
+				.map(this::toDomain);
+	}
+
+	@Override
+	public void delete(PostId id) {
+		PostEntity entity = entityManager.find(PostEntity.class, id.value());
+		if (entity != null) {
+			entityManager.remove(entity);
+		}
 	}
 
 	@Override
@@ -81,6 +101,7 @@ public class JpaBlogRepository implements BlogRepository {
 				new PostId(entity.getPostId()),
 				new Slug(entity.getSlug()),
 				new Title(entity.getTitle()),
+				new Summary(entity.getSummary()),
 				new Content(entity.getContent()),
 				new CreatedAt(entity.getCreatedAt())
 		);
@@ -101,6 +122,7 @@ public class JpaBlogRepository implements BlogRepository {
 				post.id().value(),
 				post.slug().value(),
 				post.title().value(),
+				post.summary().value(),
 				post.content().value(),
 				post.createdAt().value()
 		);

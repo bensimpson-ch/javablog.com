@@ -23,7 +23,7 @@ public class SecurityConfig {
 			.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers("/hello").permitAll()
-				.requestMatchers(HttpMethod.GET, "/v1/posts", "/v1/posts/*").permitAll()
+				.requestMatchers(HttpMethod.GET, "/v1/posts", "/v1/posts/*", "/v1/posts/by-slug/*").permitAll()
 				.requestMatchers("/v1/posts/*/comments").permitAll()
 				.anyRequest().authenticated()
 			)

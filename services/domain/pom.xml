@@ -40,12 +40,6 @@
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
-						<configuration>
-							<classifier>test-fixtures</classifier>
-							<includes>
-								<include>**/Fixture.class</include>
-							</includes>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>

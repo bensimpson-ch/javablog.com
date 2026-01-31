@@ -24,6 +24,9 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-boot.version>4.0.2</spring-boot.version>
+		<jacoco.version>0.8.12</jacoco.version>
+		<sonar.version>4.0.0.4121</sonar.version>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../bootstrap/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 	<dependencyManagement>
@@ -44,7 +47,7 @@
 				<groupId>com.javablog</groupId>
 				<artifactId>domain</artifactId>
 				<version>${project.version}</version>
-				<classifier>test-fixtures</classifier>
+				<type>test-jar</type>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -78,6 +81,16 @@
 					<artifactId>spring-boot-maven-plugin</artifactId>
 					<version>${spring-boot.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${sonar.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -93,6 +106,25 @@
 						<configuration>
 							<failOnWarning>true</failOnWarning>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

@@ -1,19 +1,24 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 import { PostsService, PostResponse } from '../../api';
+import { AuthService } from '../../auth';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class Home {
   private postsService = inject(PostsService);
+  protected authService = inject(AuthService);
+
   posts = signal<PostResponse[]>([]);
   lightboxImage = signal<string | null>(null);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
+  deleting = signal<string | null>(null);
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -56,6 +61,27 @@ export class Home {
         this.error.set('Error loading posts');
         this.loading.set(false);
         console.error('Failed to fetch posts:', err);
+      }
+    });
+  }
+
+  confirmDelete(post: PostResponse): void {
+    if (confirm(`Delete "${post.title}"? This cannot be undone.`)) {
+      this.deletePost(post.id);
+    }
+  }
+
+  private deletePost(postId: string): void {
+    this.deleting.set(postId);
+    this.postsService.deletePost(postId).subscribe({
+      next: () => {
+        this.posts.update(posts => posts.filter(p => p.id !== postId));
+        this.deleting.set(null);
+      },
+      error: (err) => {
+        this.deleting.set(null);
+        alert('Failed to delete post');
+        console.error('Failed to delete post:', err);
       }
     });
   }

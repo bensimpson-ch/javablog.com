@@ -1,6 +1,21 @@
 <header>
   <nav>
     <a routerLink="/" class="site-title">JavaBlog.com</a>
+    <div class="nav-actions">
+      <button
+        class="icon-btn"
+        (click)="themeService.toggle()"
+        [attr.aria-label]="themeService.theme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
+        [attr.title]="themeService.theme() === 'light' ? 'Dark mode' : 'Light mode'"
+      >
+        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+      </button>
+      @if (authService.isAuthenticated) {
+        <a routerLink="/logout" class="icon-btn" title="Logout" aria-label="Logout">
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+        </a>
+      }
+    </div>
   </nav>
 </header>
 

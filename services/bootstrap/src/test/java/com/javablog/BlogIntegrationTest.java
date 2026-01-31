@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Import(TestSecurityConfig.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class BlogIntegrationTest {
 
 	@Autowired
@@ -37,7 +40,7 @@ class BlogIntegrationTest {
 	void createAndReadPostsAndComments() throws Exception {
 		// Create first blog post (requires authentication)
 		String firstPostJson = """
-				{"slug": "first-post", "title": "First Post", "content": "Content of the first post"}
+				{"slug": "first-post", "title": "First Post", "summary": "Summary of first post", "content": "Content of the first post"}
 				""";
 		MvcResult firstPostResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -64,7 +67,7 @@ class BlogIntegrationTest {
 
 		// Create second blog post (requires authentication)
 		String secondPostJson = """
-				{"slug": "second-post", "title": "Second Post", "content": "Content of the second post"}
+				{"slug": "second-post", "title": "Second Post", "summary": "Summary of second post", "content": "Content of the second post"}
 				""";
 		MvcResult secondPostResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -123,5 +126,65 @@ class BlogIntegrationTest {
 		assertThat(comments).hasSize(2);
 		assertThat(comments[0].getAuthor()).isEqualTo("Charlie"); // newest first
 		assertThat(comments[1].getAuthor()).isEqualTo("Bob");
+	}
+
+	@Test
+	void deletePost() throws Exception {
+		// Create a blog post (requires authentication)
+		String postJson = """
+				{"slug": "post-to-delete", "title": "Post To Delete", "summary": "Summary of post to delete", "content": "This post will be deleted"}
+				""";
+		MvcResult createResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(postJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse createdPost = objectMapper.readValue(
+				createResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Verify post exists
+		mockMvc.perform(get("/v1/posts/" + createdPost.getId()))
+				.andExpect(status().isOk());
+
+		// Delete the post (requires authentication)
+		mockMvc.perform(delete("/v1/posts/" + createdPost.getId())
+						.with(jwt()))
+				.andExpect(status().isNoContent());
+
+		// Verify post no longer exists
+		mockMvc.perform(get("/v1/posts/" + createdPost.getId()))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	void deletePostRequiresAuthentication() throws Exception {
+		// Create a blog post first
+		String postJson = """
+				{"slug": "auth-test-post", "title": "Auth Test Post", "summary": "Summary for auth test", "content": "Testing auth"}
+				""";
+		MvcResult createResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(postJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse createdPost = objectMapper.readValue(
+				createResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Attempt to delete without authentication
+		mockMvc.perform(delete("/v1/posts/" + createdPost.getId()))
+				.andExpect(status().isUnauthorized());
+	}
+
+	@Test
+	void deleteNonExistentPostReturnsNotFound() throws Exception {
+		mockMvc.perform(delete("/v1/posts/00000000-0000-0000-0000-000000000000")
+						.with(jwt()))
+				.andExpect(status().isNotFound());
 	}
 }

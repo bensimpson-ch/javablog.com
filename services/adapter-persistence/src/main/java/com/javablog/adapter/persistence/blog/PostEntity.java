@@ -12,9 +12,11 @@ import java.util.UUID;
 @Entity
 @Table(name = "posts")
 @NamedQuery(name = PostEntity.FIND_ALL, query = "SELECT p FROM PostEntity p")
+@NamedQuery(name = PostEntity.FIND_BY_SLUG, query = "SELECT p FROM PostEntity p WHERE p.slug = :slug")
 public class PostEntity {
 
 	public static final String FIND_ALL = "PostEntity.findAll";
+	public static final String FIND_BY_SLUG = "PostEntity.findBySlug";
 
 	@Id
 	@Column(name = "post_id")
@@ -26,6 +28,9 @@ public class PostEntity {
 	@Column(name = "title", length = 255)
 	private String title;
 
+	@Column(name = "summary", length = 500, nullable = false)
+	private String summary;
+
 	@Column(name = "content", columnDefinition = "TEXT")
 	private String content;
 
@@ -35,10 +40,11 @@ public class PostEntity {
 	protected PostEntity() {
 	}
 
-	public PostEntity(UUID postId, String slug, String title, String content, LocalDateTime createdAt) {
+	public PostEntity(UUID postId, String slug, String title, String summary, String content, LocalDateTime createdAt) {
 		this.postId = postId;
 		this.slug = slug;
 		this.title = title;
+		this.summary = summary;
 		this.content = content;
 		this.createdAt = createdAt;
 	}
@@ -55,6 +61,10 @@ public class PostEntity {
 		return title;
 	}
 
+	public String getSummary() {
+		return summary;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -69,6 +79,10 @@ public class PostEntity {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
 	public void setContent(String content) {

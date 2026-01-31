@@ -76,4 +76,13 @@ class BlogApplicationServiceTest {
 
 		verify(blogRepository).listComments(post);
 	}
+
+	@Test
+	void deletePostInvokesRepository() {
+		PostId postId = Fixture.postId();
+
+		service.deletePost(postId);
+
+		verify(blogRepository).delete(postId);
+	}
 }

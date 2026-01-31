@@ -8,6 +8,7 @@ import com.javablog.domain.blog.CreatedAt;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Slug;
+import com.javablog.domain.blog.Summary;
 import com.javablog.domain.blog.Title;
 
 public final class Fixture {
@@ -31,6 +32,10 @@ public final class Fixture {
         return new Slug("test-slug");
     }
 
+    public static Summary summary() {
+        return new Summary("Test summary for the post");
+    }
+
     public static Content content() {
         return new Content("Test content");
     }
@@ -44,11 +49,11 @@ public final class Fixture {
     }
 
     public static Post post() {
-        return new Post(postId(), slug(), title(), content(), createdAt());
+        return new Post(postId(), slug(), title(), summary(), content(), createdAt());
     }
 
     public static Post post(String slugValue, String titleValue) {
-        return new Post(postId(), new Slug(slugValue), new Title(titleValue), content(), createdAt());
+        return new Post(postId(), new Slug(slugValue), new Title(titleValue), summary(), content(), createdAt());
     }
 
     public static Comment comment() {

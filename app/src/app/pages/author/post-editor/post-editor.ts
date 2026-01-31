@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostsService, CreatePostRequest, UpdatePostRequest } from '../../../api';
+import { debounceTime, Subscription } from 'rxjs';
+
+const DRAFT_STORAGE_KEY = 'javablog-post-draft';
 
 @Component({
   selector: 'app-post-editor',
@@ -23,20 +26,23 @@ import { PostsService, CreatePostRequest, UpdatePostRequest } from '../../../api
   templateUrl: './post-editor.html',
   styleUrl: './post-editor.scss'
 })
-export class PostEditor implements OnInit {
+export class PostEditor implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private postsService = inject(PostsService);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private formSubscription?: Subscription;
 
   postId = signal<string | null>(null);
   loading = signal(false);
   submitting = signal(false);
+  hasDraft = signal(false);
 
   form = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(200)]],
     slug: ['', [Validators.required, Validators.pattern(/^[a-z0-9-]+$/)]],
+    summary: ['', [Validators.required, Validators.maxLength(500)]],
     content: ['', Validators.required]
   });
 
@@ -49,7 +55,46 @@ export class PostEditor implements OnInit {
     if (id) {
       this.postId.set(id);
       this.loadPost(id);
+    } else {
+      this.restoreDraft();
+      this.setupAutoSave();
     }
+  }
+
+  ngOnDestroy(): void {
+    this.formSubscription?.unsubscribe();
+  }
+
+  private restoreDraft(): void {
+    const draft = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (draft) {
+      try {
+        const parsed = JSON.parse(draft);
+        this.form.patchValue(parsed);
+        this.hasDraft.set(true);
+        this.snackBar.open('Draft restored', 'Dismiss', { duration: 3000 });
+      } catch {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+      }
+    }
+  }
+
+  private setupAutoSave(): void {
+    this.formSubscription = this.form.valueChanges
+      .pipe(debounceTime(1000))
+      .subscribe(value => {
+        if (value.title || value.slug || value.summary || value.content) {
+          localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(value));
+          this.hasDraft.set(true);
+        }
+      });
+  }
+
+  clearDraft(): void {
+    localStorage.removeItem(DRAFT_STORAGE_KEY);
+    this.form.reset();
+    this.hasDraft.set(false);
+    this.snackBar.open('Draft cleared', 'Dismiss', { duration: 2000 });
   }
 
   private loadPost(id: string): void {
@@ -59,6 +104,7 @@ export class PostEditor implements OnInit {
         this.form.patchValue({
           title: post.title,
           slug: post.slug,
+          summary: post.summary,
           content: post.content
         });
         this.loading.set(false);
@@ -102,11 +148,13 @@ export class PostEditor implements OnInit {
     const request: CreatePostRequest = {
       title: this.form.value.title!,
       slug: this.form.value.slug!,
+      summary: this.form.value.summary!,
       content: this.form.value.content!
     };
 
     this.postsService.createPost(request).subscribe({
       next: () => {
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
         this.snackBar.open('Post created successfully', 'Dismiss', { duration: 3000 });
         this.router.navigate(['/']);
       },
@@ -124,6 +172,7 @@ export class PostEditor implements OnInit {
     const request: UpdatePostRequest = {
       title: this.form.value.title!,
       slug: this.form.value.slug!,
+      summary: this.form.value.summary!,
       content: this.form.value.content!
     };
 

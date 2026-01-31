@@ -6,6 +6,7 @@ import com.javablog.domain.blog.Comments;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Posts;
+import com.javablog.domain.blog.Slug;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -27,12 +28,20 @@ public class BlogApplicationService {
 		return blogRepository.update(post);
 	}
 
+	public void deletePost(PostId id) {
+		blogRepository.delete(id);
+	}
+
 	public Comment createComment(Comment comment) {
 		return blogRepository.create(comment);
 	}
 
 	public Optional<Post> findPostById(PostId id) {
 		return blogRepository.findPostById(id);
+	}
+
+	public Optional<Post> findPostBySlug(Slug slug) {
+		return blogRepository.findPostBySlug(slug);
 	}
 
 	public Posts listPosts() {
