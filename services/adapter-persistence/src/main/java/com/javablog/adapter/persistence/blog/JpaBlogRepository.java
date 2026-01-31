@@ -72,6 +72,14 @@ public class JpaBlogRepository implements BlogRepository {
 	}
 
 	@Override
+	public void delete(CommentId id) {
+		CommentEntity entity = entityManager.find(CommentEntity.class, id.value());
+		if (entity != null) {
+			entityManager.remove(entity);
+		}
+	}
+
+	@Override
 	public Optional<Post> findPostById(PostId id) {
 		PostEntity entity = entityManager.find(PostEntity.class, id.value());
 		return Optional.ofNullable(entity).map(this::toDomain);

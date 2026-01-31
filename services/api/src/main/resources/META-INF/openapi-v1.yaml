@@ -202,6 +202,35 @@ paths:
         '404':
           description: Post not found
 
+  /posts/{postId}/comments/{commentId}:
+    delete:
+      tags:
+        - Comments
+      operationId: deleteComment
+      summary: Delete a comment
+      security:
+        - oidc: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Comment deleted successfully
+        '401':
+          description: Unauthorized - valid JWT required
+        '404':
+          description: Comment not found
+
 components:
   securitySchemes:
     oidc:

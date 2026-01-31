@@ -187,4 +187,97 @@ class BlogIntegrationTest {
 						.with(jwt()))
 				.andExpect(status().isNotFound());
 	}
+
+	@Test
+	void deleteComment() throws Exception {
+		// Create a blog post
+		String postJson = """
+				{"slug": "post-with-comment", "title": "Post With Comment", "summary": "Summary", "content": "Content"}
+				""";
+		MvcResult postResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(postJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse createdPost = objectMapper.readValue(
+				postResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Add a comment
+		String commentJson = """
+				{"author": "Test Author", "content": "Test comment to delete"}
+				""";
+		MvcResult commentResult = mockMvc.perform(post("/v1/posts/" + createdPost.getId() + "/comments")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(commentJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		CommentResponse createdComment = objectMapper.readValue(
+				commentResult.getResponse().getContentAsString(),
+				CommentResponse.class);
+
+		// Verify comment exists
+		MvcResult commentsBeforeDelete = mockMvc.perform(get("/v1/posts/" + createdPost.getId() + "/comments"))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		CommentResponse[] commentsBefore = objectMapper.readValue(
+				commentsBeforeDelete.getResponse().getContentAsString(),
+				CommentResponse[].class);
+		assertThat(commentsBefore).hasSize(1);
+
+		// Delete the comment (requires authentication)
+		mockMvc.perform(delete("/v1/posts/" + createdPost.getId() + "/comments/" + createdComment.getId())
+						.with(jwt()))
+				.andExpect(status().isNoContent());
+
+		// Verify comment no longer exists
+		MvcResult commentsAfterDelete = mockMvc.perform(get("/v1/posts/" + createdPost.getId() + "/comments"))
+				.andExpect(status().isOk())
+				.andReturn();
+
+		CommentResponse[] commentsAfter = objectMapper.readValue(
+				commentsAfterDelete.getResponse().getContentAsString(),
+				CommentResponse[].class);
+		assertThat(commentsAfter).isEmpty();
+	}
+
+	@Test
+	void deleteCommentRequiresAuthentication() throws Exception {
+		// Create a blog post
+		String postJson = """
+				{"slug": "post-for-auth-comment", "title": "Post For Auth Comment", "summary": "Summary", "content": "Content"}
+				""";
+		MvcResult postResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(postJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse createdPost = objectMapper.readValue(
+				postResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Add a comment
+		String commentJson = """
+				{"author": "Test Author", "content": "Test comment"}
+				""";
+		MvcResult commentResult = mockMvc.perform(post("/v1/posts/" + createdPost.getId() + "/comments")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(commentJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		CommentResponse createdComment = objectMapper.readValue(
+				commentResult.getResponse().getContentAsString(),
+				CommentResponse.class);
+
+		// Attempt to delete without authentication
+		mockMvc.perform(delete("/v1/posts/" + createdPost.getId() + "/comments/" + createdComment.getId()))
+				.andExpect(status().isUnauthorized());
+	}
 }

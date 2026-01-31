@@ -5,6 +5,7 @@ import com.javablog.api.v1.model.CreatePostRequest;
 import com.javablog.application.service.BlogApplicationService;
 import com.javablog.domain.Fixture;
 import com.javablog.domain.blog.Comment;
+import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.Posts;
@@ -134,5 +135,16 @@ class BlogResourceTest {
 		var response = resource.deletePost(postId.value());
 
 		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+	}
+
+	@Test
+	void deleteCommentReturnsNoContent() {
+		var postId = Fixture.postId();
+		var commentId = Fixture.commentId();
+
+		var response = resource.deleteComment(postId.value(), commentId.value());
+
+		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+		verify(blogApplicationService).deleteComment(commentId);
 	}
 }

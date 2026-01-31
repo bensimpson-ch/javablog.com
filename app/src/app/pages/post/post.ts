@@ -29,6 +29,7 @@ export class Post implements OnInit {
   commentAuthor = '';
   commentContent = '';
   submittingComment = signal<boolean>(false);
+  deletingComment = signal<string | null>(null);
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -146,6 +147,30 @@ export class Post implements OnInit {
         this.deleting.set(false);
         alert('Failed to delete post');
         console.error('Failed to delete post:', err);
+      }
+    });
+  }
+
+  confirmDeleteComment(comment: CommentResponse): void {
+    if (confirm(`Delete comment by "${comment.author}"?`)) {
+      this.deleteComment(comment);
+    }
+  }
+
+  private deleteComment(comment: CommentResponse): void {
+    const post = this.post();
+    if (!post) return;
+
+    this.deletingComment.set(comment.id);
+    this.commentsService.deleteComment(post.id, comment.id).subscribe({
+      next: () => {
+        this.comments.update(comments => comments.filter(c => c.id !== comment.id));
+        this.deletingComment.set(null);
+      },
+      error: (err) => {
+        this.deletingComment.set(null);
+        alert('Failed to delete comment');
+        console.error('Failed to delete comment:', err);
       }
     });
   }

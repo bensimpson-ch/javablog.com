@@ -2,6 +2,7 @@ package com.javablog.application.service;
 
 import com.javablog.domain.blog.BlogRepository;
 import com.javablog.domain.blog.Comment;
+import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
@@ -34,6 +35,10 @@ public class BlogApplicationService {
 
 	public Comment createComment(Comment comment) {
 		return blogRepository.create(comment);
+	}
+
+	public void deleteComment(CommentId id) {
+		blogRepository.delete(id);
 	}
 
 	public Optional<Post> findPostById(PostId id) {

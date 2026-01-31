@@ -12,6 +12,8 @@ public interface BlogRepository {
 
 	Comment create(Comment comment);
 
+	void delete(CommentId id);
+
 	Optional<Post> findPostById(PostId id);
 
 	Optional<Post> findPostBySlug(Slug slug);

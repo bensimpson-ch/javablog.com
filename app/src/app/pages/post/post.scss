@@ -219,6 +219,13 @@ article {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-sm);
+
+    .comment-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
 
     .comment-author {
       color: var(--color-accent);
@@ -227,6 +234,13 @@ article {
     time {
       font-size: 0.85rem;
       color: var(--color-text-muted);
+    }
+
+    .btn-sm {
+      width: 28px;
+      height: 28px;
+      font-size: 0.8rem;
+      flex-shrink: 0;
     }
   }
 

@@ -139,6 +139,14 @@ public class BlogResource {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
+	@DeleteMapping("/{postId}/comments/{commentId}")
+	public ResponseEntity<Void> deleteComment(
+			@PathVariable("postId") UUID postId,
+			@PathVariable("commentId") UUID commentId) {
+		blogApplicationService.deleteComment(new CommentId(commentId));
+		return ResponseEntity.noContent().build();
+	}
+
 	private PostResponse toResponse(Post post) {
 		return new PostResponse()
 				.id(post.id().value())

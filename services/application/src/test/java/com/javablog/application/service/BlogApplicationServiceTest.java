@@ -3,6 +3,7 @@ package com.javablog.application.service;
 import com.javablog.domain.Fixture;
 import com.javablog.domain.blog.BlogRepository;
 import com.javablog.domain.blog.Comment;
+import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
@@ -84,5 +85,14 @@ class BlogApplicationServiceTest {
 		service.deletePost(postId);
 
 		verify(blogRepository).delete(postId);
+	}
+
+	@Test
+	void deleteCommentInvokesRepository() {
+		CommentId commentId = Fixture.commentId();
+
+		service.deleteComment(commentId);
+
+		verify(blogRepository).delete(commentId);
 	}
 }
