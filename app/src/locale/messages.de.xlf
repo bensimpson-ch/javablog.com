@@ -25,11 +25,19 @@
         <source>Light mode</source>
         <target>Hellmodus</target>
       </trans-unit>
-      <trans-unit id="logout.title" datatype="html">
-        <source>Logout</source>
-        <target>Abmelden</target>
+      <trans-unit id="menu.ariaLabel" datatype="html">
+        <source>Menu</source>
+        <target>Men&#252;</target>
       </trans-unit>
-      <trans-unit id="logout.ariaLabel" datatype="html">
+      <trans-unit id="menu.language" datatype="html">
+        <source>Language</source>
+        <target>Sprache</target>
+      </trans-unit>
+      <trans-unit id="menu.login" datatype="html">
+        <source>Login</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="menu.logout" datatype="html">
         <source>Logout</source>
         <target>Abmelden</target>
       </trans-unit>

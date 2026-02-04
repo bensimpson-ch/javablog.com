@@ -3,17 +3,45 @@
     <a routerLink="/" class="site-title">JavaBlog.com</a>
     <div class="nav-actions">
       <button
-        class="icon-btn"
-        (click)="themeService.toggle()"
-        [attr.aria-label]="themeToggleAriaLabel()"
-        [attr.title]="themeToggleTitle()"
+        class="hamburger-btn"
+        (click)="toggleMenu($event)"
+        i18n-aria-label="@@menu.ariaLabel"
+        aria-label="Menu"
       >
-        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
-      @if (authService.isAuthenticated) {
-        <a routerLink="/logout" class="icon-btn" i18n-title="@@logout.title" title="Logout" i18n-aria-label="@@logout.ariaLabel" aria-label="Logout">
-          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
-        </a>
+
+      @if (menuOpen()) {
+        <div class="menu-dropdown">
+          <button class="menu-item" (click)="themeService.toggle(); closeMenu()">
+            <i class="fa-solid" [class.fa-moon]="themeService.theme() === 'light'" [class.fa-sun]="themeService.theme() === 'dark'" aria-hidden="true"></i>
+            <span>{{ themeToggleTitle() }}</span>
+          </button>
+
+          <button class="menu-item" (click)="toggleLang($event)">
+            <i class="fa-solid fa-globe" aria-hidden="true"></i>
+            <span i18n="@@menu.language">Language</span>
+            <i class="fa-solid fa-chevron-down chevron" [class.open]="langOpen()" aria-hidden="true"></i>
+          </button>
+          @if (langOpen()) {
+            <a class="menu-item sub" [href]="currentPath()" [class.active]="currentLocale === 'en'">English</a>
+            <a class="menu-item sub" [href]="'/de' + currentPath()" [class.active]="currentLocale === 'de'">Deutsch</a>
+          }
+
+          <div class="menu-divider"></div>
+
+          @if (authService.isAuthenticated) {
+            <a routerLink="/logout" class="menu-item" (click)="closeMenu()">
+              <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+              <span i18n="@@menu.logout">Logout</span>
+            </a>
+          } @else {
+            <button class="menu-item" (click)="login()">
+              <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+              <span i18n="@@menu.login">Login</span>
+            </button>
+          }
+        </div>
       }
     </div>
   </nav>

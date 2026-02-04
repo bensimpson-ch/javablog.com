@@ -1,5 +1,7 @@
 # Claude Instructions for javablog.com
 
+**When Ben asks a question, answer the question. Do not change code. Only change code when explicitly asked to make a change.**
+
 Angular v20 blog hosted on Azure Static Web Apps.
 
 ## Post Preparation Protocol

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, PLATFORM_ID, LOCALE_ID, signal } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, OnInit, PLATFORM_ID, LOCALE_ID, signal } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -17,21 +17,49 @@ export class App implements OnInit {
   private router = inject(Router);
   private platformId = inject(PLATFORM_ID);
   private document = inject(DOCUMENT);
+  private elementRef = inject(ElementRef);
 
   readonly currentLocale = inject(LOCALE_ID).split('-')[0];
   protected currentPath = signal('/');
-
-  protected themeToggleAriaLabel = computed(() =>
-    this.themeService.theme() === 'light'
-      ? $localize`:@@theme.switchToDark:Switch to dark mode`
-      : $localize`:@@theme.switchToLight:Switch to light mode`
-  );
+  protected menuOpen = signal(false);
+  protected langOpen = signal(false);
 
   protected themeToggleTitle = computed(() =>
     this.themeService.theme() === 'light'
       ? $localize`:@@theme.darkMode:Dark mode`
       : $localize`:@@theme.lightMode:Light mode`
   );
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.menuOpen()) return;
+    if (!this.elementRef.nativeElement.querySelector('.nav-actions')?.contains(event.target as Node)) {
+      this.closeMenu();
+    }
+  }
+
+  toggleMenu(event: MouseEvent): void {
+    event.stopPropagation();
+    this.menuOpen.update(v => !v);
+    if (!this.menuOpen()) {
+      this.langOpen.set(false);
+    }
+  }
+
+  toggleLang(event: MouseEvent): void {
+    event.stopPropagation();
+    this.langOpen.update(v => !v);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
+    this.langOpen.set(false);
+  }
+
+  login(): void {
+    this.closeMenu();
+    this.authService.login();
+  }
 
   async ngOnInit(): Promise<void> {
     this.injectHreflangTags();
@@ -55,7 +83,6 @@ export class App implements OnInit {
   }
 
   private updateCurrentPath(url: string): void {
-    // Strip locale prefix if present, keep the app-relative path
     this.currentPath.set(url.replace(/^\/(en|de)/, '') || '/');
   }
 
@@ -63,7 +90,7 @@ export class App implements OnInit {
     const path = this.router.url.replace(/^\/(en|de)/, '') || '/';
     const base = 'https://www.javablog.com';
 
-    this.setHreflang('en', `${base}/en${path}`);
+    this.setHreflang('en', `${base}${path}`);
     this.setHreflang('de', `${base}/de${path}`);
     this.setHreflang('x-default', `${base}${path}`);
   }
@@ -72,7 +99,7 @@ export class App implements OnInit {
     const path = this.currentPath();
     const base = 'https://www.javablog.com';
 
-    this.setHreflang('en', `${base}/en${path}`);
+    this.setHreflang('en', `${base}${path}`);
     this.setHreflang('de', `${base}/de${path}`);
     this.setHreflang('x-default', `${base}${path}`);
   }

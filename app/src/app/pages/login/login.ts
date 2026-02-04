@@ -4,8 +4,8 @@ import { AuthService } from '../../auth';
 
 @Component({
   selector: 'app-login',
-  template: `<p>Redirecting to login...</p>`,
-  styles: `:host { display: block; padding: var(--spacing-xl); color: var(--color-text-muted); }`
+  template: '',
+  styles: ''
 })
 export class Login implements OnInit {
   private authService = inject(AuthService);
