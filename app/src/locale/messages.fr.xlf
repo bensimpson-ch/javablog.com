@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="locale.code" datatype="html">
+        <source>en-US</source>
+        <target>fr-FR</target>
+      </trans-unit>
+      <trans-unit id="theme.switchToDark" datatype="html">
+        <source>Switch to dark mode</source>
+        <target>Passer au mode sombre</target>
+      </trans-unit>
+      <trans-unit id="theme.switchToLight" datatype="html">
+        <source>Switch to light mode</source>
+        <target>Passer au mode clair</target>
+      </trans-unit>
+      <trans-unit id="theme.darkMode" datatype="html">
+        <source>Dark mode</source>
+        <target>Mode sombre</target>
+      </trans-unit>
+      <trans-unit id="theme.lightMode" datatype="html">
+        <source>Light mode</source>
+        <target>Mode clair</target>
+      </trans-unit>
+      <trans-unit id="menu.ariaLabel" datatype="html">
+        <source>Menu</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="menu.language" datatype="html">
+        <source>Language</source>
+        <target>Langue</target>
+      </trans-unit>
+      <trans-unit id="menu.login" datatype="html">
+        <source>Login</source>
+        <target>Connexion</target>
+      </trans-unit>
+      <trans-unit id="menu.logout" datatype="html">
+        <source>Logout</source>
+        <target>D&#233;connexion</target>
+      </trans-unit>
+      <trans-unit id="footer.copyright" datatype="html">
+        <source>&#169; 2026 JavaBlog.com</source>
+        <target>&#169; 2026 JavaBlog.com</target>
+      </trans-unit>
+      <trans-unit id="home.newPost" datatype="html">
+        <source>New Post</source>
+        <target>Nouvel article</target>
+      </trans-unit>
+      <trans-unit id="home.loading" datatype="html">
+        <source>Loading posts...</source>
+        <target>Chargement des articles...</target>
+      </trans-unit>
+      <trans-unit id="home.edit" datatype="html">
+        <source>Edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="home.delete" datatype="html">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="home.readMore" datatype="html">
+        <source>Read more &#x2192;</source>
+        <target>Lire la suite &#x2192;</target>
+      </trans-unit>
+      <trans-unit id="home.pageTitle" datatype="html">
+        <source>JavaBlog.com - Coding Adventures with Claude AI</source>
+        <target>JavaBlog.com - Aventures de programmation avec Claude AI</target>
+      </trans-unit>
+      <trans-unit id="home.metaDescription" datatype="html">
+        <source>A blog about JAVA coding with Claude AI, Angular, and modern web development.</source>
+        <target>Un blog sur la programmation JAVA avec Claude AI, Angular et le d&#233;veloppement web moderne.</target>
+      </trans-unit>
+      <trans-unit id="post.loading" datatype="html">
+        <source>Loading post...</source>
+        <target>Chargement de l'article...</target>
+      </trans-unit>
+      <trans-unit id="post.edit" datatype="html">
+        <source>Edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="post.delete" datatype="html">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="post.commentsHeading" datatype="html">
+        <source>Comments</source>
+        <target>Commentaires</target>
+      </trans-unit>
+      <trans-unit id="post.commentGuidelines" datatype="html">
+        <source>Comments are for feedback on this specific post. For general questions, please use <x id="START_LINK" equiv-text="&lt;a&gt;"/>Stack Overflow<x id="CLOSE_LINK" equiv-text="&lt;/a&gt;"/>. Comments may be removed after one year.</source>
+        <target>Les commentaires servent &#224; donner votre avis sur cet article. Pour les questions g&#233;n&#233;rales, veuillez utiliser <x id="START_LINK" equiv-text="&lt;a&gt;"/>Stack Overflow<x id="CLOSE_LINK" equiv-text="&lt;/a&gt;"/>. Les commentaires peuvent &#234;tre supprim&#233;s apr&#232;s un an.</target>
+      </trans-unit>
+      <trans-unit id="post.yourName" datatype="html">
+        <source>Your Name</source>
+        <target>Votre nom</target>
+      </trans-unit>
+      <trans-unit id="post.namePlaceholder" datatype="html">
+        <source>Enter your name</source>
+        <target>Entrez votre nom</target>
+      </trans-unit>
+      <trans-unit id="post.commentLabel" datatype="html">
+        <source>Comment</source>
+        <target>Commentaire</target>
+      </trans-unit>
+      <trans-unit id="post.commentPlaceholder" datatype="html">
+        <source>Share your thoughts or feedback...</source>
+        <target>Partagez vos pens&#233;es ou commentaires...</target>
+      </trans-unit>
+      <trans-unit id="post.submitting" datatype="html">
+        <source>Submitting...</source>
+        <target>Envoi en cours...</target>
+      </trans-unit>
+      <trans-unit id="post.submitComment" datatype="html">
+        <source>Submit Comment</source>
+        <target>Envoyer le commentaire</target>
+      </trans-unit>
+      <trans-unit id="post.deleteComment" datatype="html">
+        <source>Delete comment</source>
+        <target>Supprimer le commentaire</target>
+      </trans-unit>
+      <trans-unit id="post.noComments" datatype="html">
+        <source>No comments yet. Be the first to share your thoughts!</source>
+        <target>Pas encore de commentaires. Soyez le premier &#224; partager vos pens&#233;es !</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

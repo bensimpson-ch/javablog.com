@@ -1,7 +1,7 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, LOCALE_ID, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
-import { PostsService, PostResponse } from '../../api';
+import { LanguageCode, PostsService, PostResponse } from '../../api';
 import { AuthService } from '../../auth';
 
 @Component({
@@ -13,6 +13,7 @@ import { AuthService } from '../../auth';
 export class Home {
   private postsService = inject(PostsService);
   protected authService = inject(AuthService);
+  private locale = inject(LOCALE_ID).split('-')[0] as LanguageCode;
 
   posts = signal<PostResponse[]>([]);
   lightboxImage = signal<string | null>(null);
@@ -54,7 +55,8 @@ export class Home {
   }
 
   private fetchPosts(): void {
-    this.postsService.listPosts().subscribe({
+    const lang = Object.values(LanguageCode).includes(this.locale) ? this.locale : LanguageCode.En;
+    this.postsService.listPosts(lang).subscribe({
       next: (posts) => {
         this.posts.set(posts);
         this.loading.set(false);

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" target-language="ar" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="locale.code" datatype="html">
+        <source>en-US</source>
+        <target>ar-SA</target>
+      </trans-unit>
+      <trans-unit id="theme.switchToDark" datatype="html">
+        <source>Switch to dark mode</source>
+        <target>&#1575;&#1604;&#1578;&#1576;&#1583;&#1610;&#1604; &#1573;&#1604;&#1609; &#1575;&#1604;&#1608;&#1590;&#1593; &#1575;&#1604;&#1583;&#1575;&#1603;&#1606;</target>
+      </trans-unit>
+      <trans-unit id="theme.switchToLight" datatype="html">
+        <source>Switch to light mode</source>
+        <target>&#1575;&#1604;&#1578;&#1576;&#1583;&#1610;&#1604; &#1573;&#1604;&#1609; &#1575;&#1604;&#1608;&#1590;&#1593; &#1575;&#1604;&#1601;&#1575;&#1578;&#1581;</target>
+      </trans-unit>
+      <trans-unit id="theme.darkMode" datatype="html">
+        <source>Dark mode</source>
+        <target>&#1575;&#1604;&#1608;&#1590;&#1593; &#1575;&#1604;&#1583;&#1575;&#1603;&#1606;</target>
+      </trans-unit>
+      <trans-unit id="theme.lightMode" datatype="html">
+        <source>Light mode</source>
+        <target>&#1575;&#1604;&#1608;&#1590;&#1593; &#1575;&#1604;&#1601;&#1575;&#1578;&#1581;</target>
+      </trans-unit>
+      <trans-unit id="menu.ariaLabel" datatype="html">
+        <source>Menu</source>
+        <target>&#1575;&#1604;&#1602;&#1575;&#1574;&#1605;&#1577;</target>
+      </trans-unit>
+      <trans-unit id="menu.language" datatype="html">
+        <source>Language</source>
+        <target>&#1575;&#1604;&#1604;&#1594;&#1577;</target>
+      </trans-unit>
+      <trans-unit id="menu.login" datatype="html">
+        <source>Login</source>
+        <target>&#1578;&#1587;&#1580;&#1610;&#1604; &#1575;&#1604;&#1583;&#1582;&#1608;&#1604;</target>
+      </trans-unit>
+      <trans-unit id="menu.logout" datatype="html">
+        <source>Logout</source>
+        <target>&#1578;&#1587;&#1580;&#1610;&#1604; &#1575;&#1604;&#1582;&#1585;&#1608;&#1580;</target>
+      </trans-unit>
+      <trans-unit id="footer.copyright" datatype="html">
+        <source>&#169; 2026 JavaBlog.com</source>
+        <target>&#169; 2026 JavaBlog.com</target>
+      </trans-unit>
+      <trans-unit id="home.newPost" datatype="html">
+        <source>New Post</source>
+        <target>&#1605;&#1602;&#1575;&#1604; &#1580;&#1583;&#1610;&#1583;</target>
+      </trans-unit>
+      <trans-unit id="home.loading" datatype="html">
+        <source>Loading posts...</source>
+        <target>&#1580;&#1575;&#1585;&#1610; &#1578;&#1581;&#1605;&#1610;&#1604; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578;...</target>
+      </trans-unit>
+      <trans-unit id="home.edit" datatype="html">
+        <source>Edit</source>
+        <target>&#1578;&#1593;&#1583;&#1610;&#1604;</target>
+      </trans-unit>
+      <trans-unit id="home.delete" datatype="html">
+        <source>Delete</source>
+        <target>&#1581;&#1584;&#1601;</target>
+      </trans-unit>
+      <trans-unit id="home.readMore" datatype="html">
+        <source>Read more &#x2192;</source>
+        <target>&#1575;&#1602;&#1585;&#1571; &#1575;&#1604;&#1605;&#1586;&#1610;&#1583; &#x2192;</target>
+      </trans-unit>
+      <trans-unit id="home.pageTitle" datatype="html">
+        <source>JavaBlog.com - Coding Adventures with Claude AI</source>
+        <target>JavaBlog.com - &#1605;&#1594;&#1575;&#1605;&#1585;&#1575;&#1578; &#1575;&#1604;&#1576;&#1585;&#1605;&#1580;&#1577; &#1605;&#1593; Claude AI</target>
+      </trans-unit>
+      <trans-unit id="home.metaDescription" datatype="html">
+        <source>A blog about JAVA coding with Claude AI, Angular, and modern web development.</source>
+        <target>&#1605;&#1583;&#1608;&#1606;&#1577; &#1581;&#1608;&#1604; &#1576;&#1585;&#1605;&#1580;&#1577; JAVA &#1605;&#1593; Claude AI &#1608;Angular &#1608;&#1578;&#1591;&#1608;&#1610;&#1585; &#1575;&#1604;&#1608;&#1610;&#1576; &#1575;&#1604;&#1581;&#1583;&#1610;&#1579;.</target>
+      </trans-unit>
+      <trans-unit id="post.loading" datatype="html">
+        <source>Loading post...</source>
+        <target>&#1580;&#1575;&#1585;&#1610; &#1578;&#1581;&#1605;&#1610;&#1604; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;...</target>
+      </trans-unit>
+      <trans-unit id="post.edit" datatype="html">
+        <source>Edit</source>
+        <target>&#1578;&#1593;&#1583;&#1610;&#1604;</target>
+      </trans-unit>
+      <trans-unit id="post.delete" datatype="html">
+        <source>Delete</source>
+        <target>&#1581;&#1584;&#1601;</target>
+      </trans-unit>
+      <trans-unit id="post.commentsHeading" datatype="html">
+        <source>Comments</source>
+        <target>&#1575;&#1604;&#1578;&#1593;&#1604;&#1610;&#1602;&#1575;&#1578;</target>
+      </trans-unit>
+      <trans-unit id="post.commentGuidelines" datatype="html">
+        <source>Comments are for feedback on this specific post. For general questions, please use <x id="START_LINK" equiv-text="&lt;a&gt;"/>Stack Overflow<x id="CLOSE_LINK" equiv-text="&lt;/a&gt;"/>. Comments may be removed after one year.</source>
+        <target>&#1575;&#1604;&#1578;&#1593;&#1604;&#1610;&#1602;&#1575;&#1578; &#1605;&#1582;&#1589;&#1589;&#1577; &#1604;&#1604;&#1605;&#1604;&#1575;&#1581;&#1592;&#1575;&#1578; &#1593;&#1604;&#1609; &#1607;&#1584;&#1575; &#1575;&#1604;&#1605;&#1602;&#1575;&#1604;. &#1604;&#1604;&#1571;&#1587;&#1574;&#1604;&#1577; &#1575;&#1604;&#1593;&#1575;&#1605;&#1577;&#1548; &#1610;&#1585;&#1580;&#1609; &#1575;&#1587;&#1578;&#1582;&#1583;&#1575;&#1605; <x id="START_LINK" equiv-text="&lt;a&gt;"/>Stack Overflow<x id="CLOSE_LINK" equiv-text="&lt;/a&gt;"/>. &#1602;&#1583; &#1578;&#1578;&#1605; &#1573;&#1586;&#1575;&#1604;&#1577; &#1575;&#1604;&#1578;&#1593;&#1604;&#1610;&#1602;&#1575;&#1578; &#1576;&#1593;&#1583; &#1593;&#1575;&#1605;.</target>
+      </trans-unit>
+      <trans-unit id="post.yourName" datatype="html">
+        <source>Your Name</source>
+        <target>&#1575;&#1587;&#1605;&#1603;</target>
+      </trans-unit>
+      <trans-unit id="post.namePlaceholder" datatype="html">
+        <source>Enter your name</source>
+        <target>&#1571;&#1583;&#1582;&#1604; &#1575;&#1587;&#1605;&#1603;</target>
+      </trans-unit>
+      <trans-unit id="post.commentLabel" datatype="html">
+        <source>Comment</source>
+        <target>&#1578;&#1593;&#1604;&#1610;&#1602;</target>
+      </trans-unit>
+      <trans-unit id="post.commentPlaceholder" datatype="html">
+        <source>Share your thoughts or feedback...</source>
+        <target>&#1588;&#1575;&#1585;&#1603; &#1571;&#1601;&#1603;&#1575;&#1585;&#1603; &#1571;&#1608; &#1605;&#1604;&#1575;&#1581;&#1592;&#1575;&#1578;&#1603;...</target>
+      </trans-unit>
+      <trans-unit id="post.submitting" datatype="html">
+        <source>Submitting...</source>
+        <target>&#1580;&#1575;&#1585;&#1610; &#1575;&#1604;&#1573;&#1585;&#1587;&#1575;&#1604;...</target>
+      </trans-unit>
+      <trans-unit id="post.submitComment" datatype="html">
+        <source>Submit Comment</source>
+        <target>&#1573;&#1585;&#1587;&#1575;&#1604; &#1575;&#1604;&#1578;&#1593;&#1604;&#1610;&#1602;</target>
+      </trans-unit>
+      <trans-unit id="post.deleteComment" datatype="html">
+        <source>Delete comment</source>
+        <target>&#1581;&#1584;&#1601; &#1575;&#1604;&#1578;&#1593;&#1604;&#1610;&#1602;</target>
+      </trans-unit>
+      <trans-unit id="post.noComments" datatype="html">
+        <source>No comments yet. Be the first to share your thoughts!</source>
+        <target>&#1604;&#1575; &#1578;&#1608;&#1580;&#1583; &#1578;&#1593;&#1604;&#1610;&#1602;&#1575;&#1578; &#1576;&#1593;&#1583;. &#1603;&#1606; &#1571;&#1608;&#1604; &#1605;&#1606; &#1610;&#1588;&#1575;&#1585;&#1603; &#1571;&#1601;&#1603;&#1575;&#1585;&#1607;!</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

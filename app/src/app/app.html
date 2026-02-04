@@ -24,8 +24,13 @@
             <i class="fa-solid fa-chevron-down chevron" [class.open]="langOpen()" aria-hidden="true"></i>
           </button>
           @if (langOpen()) {
-            <a class="menu-item sub" [href]="currentPath()" [class.active]="currentLocale === 'en'">English</a>
-            <a class="menu-item sub" [href]="'/de' + currentPath()" [class.active]="currentLocale === 'de'">Deutsch</a>
+            @for (lang of pinnedLanguages(); track lang.code) {
+              <a class="menu-item sub" [href]="langHref(lang.code)" [class.active]="currentLocale === lang.code">{{ lang.label }}</a>
+            }
+            <div class="menu-divider"></div>
+            @for (lang of allLanguages; track lang.code) {
+              <a class="menu-item sub" [href]="langHref(lang.code)" [class.active]="currentLocale === lang.code">{{ lang.label }}</a>
+            }
           }
 
           <div class="menu-divider"></div>

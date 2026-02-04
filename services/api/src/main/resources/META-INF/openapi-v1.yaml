@@ -41,6 +41,12 @@ paths:
     get:
       tags:
         - Posts
+      parameters:
+        - name: language
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/LanguageCode'
       operationId: listPosts
       summary: List all blog posts sorted by newest first
       responses:
@@ -237,8 +243,56 @@ components:
       type: openIdConnect
       openIdConnectUrl: https://keycloak.javablog.com/realms/javablog/.well-known/openid-configuration
       description: Keycloak OIDC authentication
-
   schemas:
+    LanguageCode:
+      type: string
+      description: ISO 639-1 two-letter code (lowercase) for supported languages.
+      enum:
+        - bg   # Български
+        - hr   # Hrvatski
+        - cs   # Čeština
+        - da   # Dansk
+        - nl   # Nederlands
+        - en   # English
+        - et   # Eesti
+        - fi   # Suomi
+        - fr   # Français
+        - de   # Deutsch
+        - el   # Ελληνικά
+        - hu   # Magyar
+        - ga   # Gaeilge
+        - it   # Italiano
+        - lv   # Latviešu
+        - lt   # Lietuvių
+        - mt   # Malti
+        - pl   # Polski
+        - pt   # Português
+        - ro   # Română
+        - sk   # Slovenčina
+        - sl   # Slovenščina
+        - es   # Español
+        - sv   # Svenska
+        - ru   # Русский
+        - uk   # Українська
+        - be   # Беларуская
+        - sq   # Shqip
+        - "no" # Norsk
+        - is   # Íslenska
+        - ca   # Català
+        - eu   # Euskara
+        - gd   # Gàidhlig
+        - cy   # Cymraeg
+        - zh   # 简体中文
+        - tw   # 臺灣華語
+        - hi   # हिन्दी
+        - ar   # العربية
+        - id   # Bahasa Indonesia
+        - bn   # বাংলা
+        - ja   # 日本語
+        - ko   # 한국어
+        - tr   # Türkçe
+        - he   # עברית
+
     CreatePostRequest:
       type: object
       required:

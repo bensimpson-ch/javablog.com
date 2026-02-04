@@ -22,6 +22,74 @@
           "de": {
             "translation": "src/locale/messages.de.xlf",
             "subPath": "de"
+          },
+          "es": {
+            "translation": "src/locale/messages.es.xlf",
+            "subPath": "es"
+          },
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf",
+            "subPath": "fr"
+          },
+          "id": {
+            "translation": "src/locale/messages.id.xlf",
+            "subPath": "id"
+          },
+          "it": {
+            "translation": "src/locale/messages.it.xlf",
+            "subPath": "it"
+          },
+          "nl": {
+            "translation": "src/locale/messages.nl.xlf",
+            "subPath": "nl"
+          },
+          "pt": {
+            "translation": "src/locale/messages.pt.xlf",
+            "subPath": "pt"
+          },
+          "ro": {
+            "translation": "src/locale/messages.ro.xlf",
+            "subPath": "ro"
+          },
+          "sv": {
+            "translation": "src/locale/messages.sv.xlf",
+            "subPath": "sv"
+          },
+          "ru": {
+            "translation": "src/locale/messages.ru.xlf",
+            "subPath": "ru"
+          },
+          "el": {
+            "translation": "src/locale/messages.el.xlf",
+            "subPath": "el"
+          },
+          "ar": {
+            "translation": "src/locale/messages.ar.xlf",
+            "subPath": "ar"
+          },
+          "ja": {
+            "translation": "src/locale/messages.ja.xlf",
+            "subPath": "ja"
+          },
+          "ko": {
+            "translation": "src/locale/messages.ko.xlf",
+            "subPath": "ko"
+          },
+          "zh": {
+            "translation": "src/locale/messages.zh.xlf",
+            "subPath": "zh"
+          },
+          "tw": {
+            "translation": "src/locale/messages.tw.xlf",
+            "subPath": "tw"
+          },
+          "tr": {
+            "translation": "src/locale/messages.tr.xlf",
+            "subPath": "tr"
+          },
+          "he": {
+            "translation": "src/locale/messages.he.xlf",
+            "subPath": "he"
           }
         }
       },

@@ -77,6 +77,8 @@ header {
     top: calc(100% + var(--spacing-xs));
     right: 0;
     min-width: 200px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
     background: var(--color-bg-elevated);
     border: 1px solid var(--color-border);
     border-radius: 8px;
@@ -146,6 +148,7 @@ header {
     background: var(--color-border);
     margin: var(--spacing-xs) 0;
   }
+
 }
 
 main {
