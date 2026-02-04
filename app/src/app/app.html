@@ -5,13 +5,13 @@
       <button
         class="icon-btn"
         (click)="themeService.toggle()"
-        [attr.aria-label]="themeService.theme() === 'light' ? 'Switch to dark mode' : 'Switch to light mode'"
-        [attr.title]="themeService.theme() === 'light' ? 'Dark mode' : 'Light mode'"
+        [attr.aria-label]="themeToggleAriaLabel()"
+        [attr.title]="themeToggleTitle()"
       >
         <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
       </button>
       @if (authService.isAuthenticated) {
-        <a routerLink="/logout" class="icon-btn" title="Logout" aria-label="Logout">
+        <a routerLink="/logout" class="icon-btn" i18n-title="@@logout.title" title="Logout" i18n-aria-label="@@logout.ariaLabel" aria-label="Logout">
           <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
         </a>
       }
@@ -24,5 +24,5 @@
 </main>
 
 <footer>
-  <p>&copy; 2026 JavaBlog.com</p>
+  <p i18n="@@footer.copyright">&copy; 2026 JavaBlog.com</p>
 </footer>

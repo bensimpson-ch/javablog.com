@@ -2,9 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://javablog.com/</loc>
+    <loc>https://www.javablog.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
     <lastmod>2025-01-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/de/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

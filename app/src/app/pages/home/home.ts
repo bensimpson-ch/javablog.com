@@ -41,11 +41,13 @@ export class Home {
 
   constructor(title: Title, meta: Meta) {
     this.fetchPosts();
-    title.setTitle('JavaBlog.com - Coding Adventures with Claude AI');
+    const pageTitle = $localize`:@@home.pageTitle:JavaBlog.com - Coding Adventures with Claude AI`;
+    const description = $localize`:@@home.metaDescription:A blog about coding with Claude AI, Angular, and modern web development.`;
+    title.setTitle(pageTitle);
     meta.addTags([
-      { name: 'description', content: 'A blog about coding with Claude AI, Angular, and modern web development.' },
+      { name: 'description', content: description },
       { property: 'og:title', content: 'JavaBlog.com' },
-      { property: 'og:description', content: 'A blog about coding with Claude AI, Angular, and modern web development.' },
+      { property: 'og:description', content: description },
       { property: 'og:type', content: 'website' },
       { name: 'twitter:card', content: 'summary' }
     ]);
@@ -88,7 +90,8 @@ export class Home {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    const locale = $localize`:@@locale.code:en-US`;
+    return date.toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric'

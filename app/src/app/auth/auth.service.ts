@@ -1,18 +1,23 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { authConfig } from './auth.config';
+import { getAuthConfig } from './auth.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private oauthService = inject(OAuthService);
+  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   constructor() {
-    this.oauthService.configure(authConfig);
+    if (this.isBrowser) {
+      this.oauthService.configure(getAuthConfig());
+    }
   }
 
   async tryLogin(): Promise<boolean> {
+    if (!this.isBrowser) return false;
     await this.oauthService.loadDiscoveryDocumentAndTryLogin();
     return this.oauthService.hasValidAccessToken();
   }
@@ -26,6 +31,7 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
+    if (!this.isBrowser) return false;
     return this.oauthService.hasValidAccessToken();
   }
 

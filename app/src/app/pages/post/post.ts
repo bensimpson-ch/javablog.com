@@ -1,4 +1,5 @@
-import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,11 +12,12 @@ import { AuthService } from '../../auth';
   templateUrl: './post.html',
   styleUrl: './post.scss'
 })
-export class Post implements OnInit {
+export class Post implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private postsService = inject(PostsService);
   private commentsService = inject(CommentsService);
+  private document = inject(DOCUMENT);
   protected authService = inject(AuthService);
 
   post = signal<PostResponse | null>(null);
@@ -30,6 +32,8 @@ export class Post implements OnInit {
   commentContent = '';
   submittingComment = signal<boolean>(false);
   deletingComment = signal<string | null>(null);
+
+  private jsonLdScript: HTMLScriptElement | null = null;
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -62,12 +66,20 @@ export class Post implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.jsonLdScript) {
+      this.jsonLdScript.remove();
+      this.jsonLdScript = null;
+    }
+  }
+
   private fetchPost(slug: string): void {
     this.postsService.getPostBySlug(slug).subscribe({
       next: (post) => {
         this.post.set(post);
         this.loading.set(false);
         this.setMetaTags(post);
+        this.injectJsonLd(post);
         this.fetchComments(post.id);
       },
       error: (err) => {
@@ -96,6 +108,22 @@ export class Post implements OnInit {
     this.meta.updateTag({ property: 'og:description', content: post.summary });
     this.meta.updateTag({ property: 'og:type', content: 'article' });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+  }
+
+  private injectJsonLd(post: PostResponse): void {
+    const language = $localize`:@@locale.code:en-US`;
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      'headline': post.title,
+      'datePublished': this.getDateOnly(post.createdAt),
+      'inLanguage': language,
+      'author': { '@type': 'Person', 'name': 'Ben Simpson' }
+    };
+    this.jsonLdScript = this.document.createElement('script');
+    this.jsonLdScript.type = 'application/ld+json';
+    this.jsonLdScript.textContent = JSON.stringify(jsonLd);
+    this.document.head.appendChild(this.jsonLdScript);
   }
 
   submitComment(): void {
@@ -177,7 +205,8 @@ export class Post implements OnInit {
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    const locale = $localize`:@@locale.code:en-US`;
+    return date.toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric'

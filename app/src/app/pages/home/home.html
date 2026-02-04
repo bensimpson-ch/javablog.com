@@ -2,13 +2,13 @@
   <div class="author-actions">
     <a routerLink="/author/posts/new" class="btn btn-primary">
       <i class="fa-solid fa-plus" aria-hidden="true"></i>
-      New Post
+      <span i18n="@@home.newPost">New Post</span>
     </a>
   </div>
 }
 
 @if (loading()) {
-  <div class="loading">Loading posts...</div>
+  <div class="loading" i18n="@@home.loading">Loading posts...</div>
 }
 
 @if (error()) {
@@ -22,13 +22,14 @@
         <h2><a [routerLink]="['/posts', post.slug]">{{ post.title }}</a></h2>
         @if (authService.isAuthenticated) {
           <div class="post-controls">
-            <a [routerLink]="['/author/posts', post.id, 'edit']" class="btn-icon" title="Edit">
+            <a [routerLink]="['/author/posts', post.id, 'edit']" class="btn-icon" i18n-title="@@home.edit" title="Edit">
               <i class="fa-solid fa-pen" aria-hidden="true"></i>
             </a>
             <button
               (click)="confirmDelete(post)"
               class="btn-icon btn-danger"
               [disabled]="deleting() === post.id"
+              i18n-title="@@home.delete"
               title="Delete"
             >
               <i class="fa-solid fa-trash" aria-hidden="true"></i>
@@ -40,7 +41,7 @@
     </header>
 
     <p class="post-summary">{{ post.summary }}</p>
-    <a [routerLink]="['/posts', post.slug]" class="read-more">Read more &rarr;</a>
+    <a [routerLink]="['/posts', post.slug]" class="read-more" i18n="@@home.readMore">Read more &rarr;</a>
   </article>
 }
 
