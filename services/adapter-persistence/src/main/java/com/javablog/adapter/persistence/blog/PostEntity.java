@@ -37,16 +37,20 @@ public class PostEntity {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 
+	@Column(name = "language_code", length = 2, nullable = false)
+	private String languageCode;
+
 	protected PostEntity() {
 	}
 
-	public PostEntity(UUID postId, String slug, String title, String summary, String content, LocalDateTime createdAt) {
+	public PostEntity(UUID postId, String slug, String title, String summary, String content, LocalDateTime createdAt, String languageCode) {
 		this.postId = postId;
 		this.slug = slug;
 		this.title = title;
 		this.summary = summary;
 		this.content = content;
 		this.createdAt = createdAt;
+		this.languageCode = languageCode;
 	}
 
 	public UUID getPostId() {
@@ -71,6 +75,10 @@ public class PostEntity {
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
 	}
 
 	public void setSlug(String slug) {

@@ -67,6 +67,10 @@
         <source>Read more &#x2192;</source>
         <target>Leer m&#225;s &#x2192;</target>
       </trans-unit>
+      <trans-unit id="home.noPosts" datatype="html">
+        <source>There are no posts in your selected language.</source>
+        <target>No hay publicaciones en el idioma seleccionado.</target>
+      </trans-unit>
       <trans-unit id="home.pageTitle" datatype="html">
         <source>JavaBlog.com - Coding Adventures with Claude AI</source>
         <target>JavaBlog.com - Aventuras de programaci&#243;n con Claude AI</target>

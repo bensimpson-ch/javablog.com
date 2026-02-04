@@ -62,6 +62,10 @@
         <source>Read more &#x2192;</source>
         <target>&#38405;&#35835;&#26356;&#22810; &#x2192;</target>
       </trans-unit>
+      <trans-unit id="home.noPosts" datatype="html">
+        <source>There are no posts in your selected language.</source>
+        <target>所选语言没有文章。</target>
+      </trans-unit>
       <trans-unit id="home.pageTitle" datatype="html">
         <source>JavaBlog.com - Coding Adventures with Claude AI</source>
         <target>JavaBlog.com - &#19982;Claude AI&#30340;&#32534;&#31243;&#20882;&#38505;</target>

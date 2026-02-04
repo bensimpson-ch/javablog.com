@@ -4,6 +4,7 @@ import com.javablog.domain.blog.BlogRepository;
 import com.javablog.domain.blog.Comment;
 import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
+import com.javablog.domain.blog.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Posts;
@@ -49,8 +50,8 @@ public class BlogApplicationService {
 		return blogRepository.findPostBySlug(slug);
 	}
 
-	public Posts listPosts() {
-		return blogRepository.listPosts();
+	public Posts listPosts(Language language) {
+		return blogRepository.listPosts(language);
 	}
 
 	public Comments listComments(Post post) {

@@ -2,22 +2,24 @@ package com.javablog.adapter.rest;
 
 import com.javablog.api.v1.model.CreateCommentRequest;
 import com.javablog.api.v1.model.CreatePostRequest;
+import com.javablog.api.v1.model.LanguageCode;
 import com.javablog.application.service.BlogApplicationService;
 import com.javablog.domain.Fixture;
 import com.javablog.domain.blog.Comment;
-import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
+import com.javablog.domain.blog.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.Posts;
+import org.springframework.web.server.ResponseStatusException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -43,27 +45,24 @@ class BlogResourceTest {
 				.summary("Test summary")
 				.content("Test content");
 
-		var response = resource.createPost(request);
+		resource.createPost(request);
 
-		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertNotNull(response.getBody());
-		assertEquals("test-slug", response.getBody().getSlug());
 		verify(blogApplicationService).createPost(any(Post.class));
 	}
 
 	@Test
 	void listPostsReturnsPostsSortedByNewest() {
 		Post post = Fixture.post();
-		when(blogApplicationService.listPosts()).thenReturn(new Posts(Set.of(post)));
+		when(blogApplicationService.listPosts(Language.EN)).thenReturn(new Posts(Set.of(post)));
 
-		var result = resource.listPosts();
+		var result = resource.listPosts(LanguageCode.EN);
 
 		assertEquals(1, result.size());
-		verify(blogApplicationService).listPosts();
+		verify(blogApplicationService).listPosts(Language.EN);
 	}
 
 	@Test
-	void createCommentReturnsCreatedStatusWhenPostExists() {
+	void createCommentReturnsResponseWhenPostExists() {
 		Post post = Fixture.post();
 		when(blogApplicationService.findPostById(post.id())).thenReturn(Optional.of(post));
 		when(blogApplicationService.createComment(any(Comment.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -73,23 +72,20 @@ class BlogResourceTest {
 
 		var response = resource.createComment(post.id().value(), request);
 
-		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertNotNull(response.getBody());
-		assertEquals("Ben", response.getBody().getAuthor());
+		assertNotNull(response);
+		assertEquals("Ben", response.getAuthor());
 		verify(blogApplicationService).createComment(any(Comment.class));
 	}
 
 	@Test
-	void createCommentReturnsNotFoundWhenPostDoesNotExist() {
+	void createCommentThrowsNotFoundWhenPostDoesNotExist() {
 		var postId = Fixture.postId();
 		when(blogApplicationService.findPostById(postId)).thenReturn(Optional.empty());
 		var request = new CreateCommentRequest()
 				.author("Ben")
 				.content("Great post!");
 
-		var response = resource.createComment(postId.value(), request);
-
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertThrows(ResponseStatusException.class, () -> resource.createComment(postId.value(), request));
 	}
 
 	@Test
@@ -99,52 +95,45 @@ class BlogResourceTest {
 		when(blogApplicationService.findPostById(post.id())).thenReturn(Optional.of(post));
 		when(blogApplicationService.listComments(post)).thenReturn(new Comments(Set.of(comment)));
 
-		var response = resource.listComments(post.id().value());
+		var result = resource.listComments(post.id().value());
 
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertNotNull(response.getBody());
-		assertEquals(1, response.getBody().size());
+		assertNotNull(result);
+		assertEquals(1, result.size());
 	}
 
 	@Test
-	void listCommentsReturnsNotFoundWhenPostDoesNotExist() {
+	void listCommentsThrowsNotFoundWhenPostDoesNotExist() {
 		var postId = Fixture.postId();
 		when(blogApplicationService.findPostById(postId)).thenReturn(Optional.empty());
 
-		var response = resource.listComments(postId.value());
-
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertThrows(ResponseStatusException.class, () -> resource.listComments(postId.value()));
 	}
 
 	@Test
-	void deletePostReturnsNoContentWhenPostExists() {
+	void deletePostSucceedsWhenPostExists() {
 		Post post = Fixture.post();
 		when(blogApplicationService.findPostById(post.id())).thenReturn(Optional.of(post));
 
-		var response = resource.deletePost(post.id().value());
+		resource.deletePost(post.id().value());
 
-		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 		verify(blogApplicationService).deletePost(post.id());
 	}
 
 	@Test
-	void deletePostReturnsNotFoundWhenPostDoesNotExist() {
+	void deletePostThrowsNotFoundWhenPostDoesNotExist() {
 		var postId = Fixture.postId();
 		when(blogApplicationService.findPostById(postId)).thenReturn(Optional.empty());
 
-		var response = resource.deletePost(postId.value());
-
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+		assertThrows(ResponseStatusException.class, () -> resource.deletePost(postId.value()));
 	}
 
 	@Test
-	void deleteCommentReturnsNoContent() {
+	void deleteCommentSucceeds() {
 		var postId = Fixture.postId();
 		var commentId = Fixture.commentId();
 
-		var response = resource.deleteComment(postId.value(), commentId.value());
+		resource.deleteComment(postId.value(), commentId.value());
 
-		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 		verify(blogApplicationService).deleteComment(commentId);
 	}
 }

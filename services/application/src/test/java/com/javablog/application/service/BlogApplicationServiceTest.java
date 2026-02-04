@@ -5,6 +5,7 @@ import com.javablog.domain.blog.BlogRepository;
 import com.javablog.domain.blog.Comment;
 import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
+import com.javablog.domain.blog.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Posts;
@@ -61,11 +62,11 @@ class BlogApplicationServiceTest {
 
 	@Test
 	void listPostsInvokesRepository() {
-		when(blogRepository.listPosts()).thenReturn(new Posts(Set.of()));
+		when(blogRepository.listPosts(Language.EN)).thenReturn(new Posts(Set.of()));
 
-		service.listPosts();
+		service.listPosts(Language.EN);
 
-		verify(blogRepository).listPosts();
+		verify(blogRepository).listPosts(Language.EN);
 	}
 
 	@Test

@@ -43,6 +43,10 @@
     <p class="post-summary">{{ post.summary }}</p>
     <a [routerLink]="['/posts', post.slug]" class="read-more" i18n="@@home.readMore">Read more &rarr;</a>
   </article>
+} @empty {
+  @if (!loading() && !error()) {
+    <p class="no-posts" i18n="@@home.noPosts">There are no posts in your selected language.</p>
+  }
 }
 
 @if (lightboxImage()) {

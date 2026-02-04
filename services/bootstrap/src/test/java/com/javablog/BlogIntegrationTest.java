@@ -102,7 +102,7 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated());
 
 		// Read all posts and verify they are sorted by newest first (public endpoint)
-		MvcResult postsResult = mockMvc.perform(get("/v1/posts"))
+		MvcResult postsResult = mockMvc.perform(get("/v1/posts").param("language", "en"))
 				.andExpect(status().isOk())
 				.andReturn();
 

@@ -62,6 +62,10 @@
         <source>Read more &#x2192;</source>
         <target>&#45908; &#51069;&#44592; &#x2192;</target>
       </trans-unit>
+      <trans-unit id="home.noPosts" datatype="html">
+        <source>There are no posts in your selected language.</source>
+        <target>선택한 언어의 게시글이 없습니다.</target>
+      </trans-unit>
       <trans-unit id="home.pageTitle" datatype="html">
         <source>JavaBlog.com - Coding Adventures with Claude AI</source>
         <target>JavaBlog.com - Claude AI&#50752; &#54632;&#44760;&#54616;&#45716; &#53076;&#46377; &#47784;&#54744;</target>

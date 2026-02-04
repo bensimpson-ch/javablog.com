@@ -79,7 +79,7 @@
             "translation": "src/locale/messages.zh.xlf",
             "subPath": "zh"
           },
-          "tw": {
+          "zh-TW": {
             "translation": "src/locale/messages.tw.xlf",
             "subPath": "tw"
           },

@@ -18,7 +18,7 @@ public interface BlogRepository {
 
 	Optional<Post> findPostBySlug(Slug slug);
 
-	Posts listPosts();
+	Posts listPosts(Language language);
 
 	Comments listComments(Post post);
 }

@@ -7,6 +7,7 @@ import com.javablog.domain.blog.CommentId;
 import com.javablog.domain.blog.Comments;
 import com.javablog.domain.blog.Content;
 import com.javablog.domain.blog.CreatedAt;
+import com.javablog.domain.blog.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Posts;
@@ -86,8 +87,16 @@ public class JpaBlogRepository implements BlogRepository {
 	}
 
 	@Override
-	public Posts listPosts() {
-		return new Posts(entityManager.createNamedQuery(PostEntity.FIND_ALL, PostEntity.class)
+	public Posts listPosts(Language language) {
+		if (language == Language.EN) {
+			return new Posts(entityManager.createNamedQuery(PostEntity.FIND_ALL, PostEntity.class)
+					.getResultList()
+					.stream()
+					.map(this::toDomain)
+					.collect(Collectors.toSet()));
+		}
+		return new Posts(entityManager.createNamedQuery(TranslatedPostEntity.FIND_BY_LANGUAGE, TranslatedPostEntity.class)
+				.setParameter("languageCode", language.code())
 				.getResultList()
 				.stream()
 				.map(this::toDomain)
@@ -115,6 +124,18 @@ public class JpaBlogRepository implements BlogRepository {
 		);
 	}
 
+	private Post toDomain(TranslatedPostEntity entity) {
+		PostEntity post = entity.getPost();
+		return new Post(
+				new PostId(post.getPostId()),
+				new Slug(post.getSlug()),
+				new Title(entity.getTitle()),
+				new Summary(entity.getSummary()),
+				new Content(entity.getContent()),
+				new CreatedAt(post.getCreatedAt())
+		);
+	}
+
 	private Comment toDomain(CommentEntity entity) {
 		return new Comment(
 				new CommentId(entity.getCommentId()),
@@ -132,7 +153,8 @@ public class JpaBlogRepository implements BlogRepository {
 				post.title().value(),
 				post.summary().value(),
 				post.content().value(),
-				post.createdAt().value()
+				post.createdAt().value(),
+				Language.EN.code()
 		);
 	}
 

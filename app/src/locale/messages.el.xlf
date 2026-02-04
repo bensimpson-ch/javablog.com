@@ -62,6 +62,10 @@
         <source>Read more &#x2192;</source>
         <target>&#916;&#953;&#945;&#946;&#940;&#963;&#964;&#949; &#960;&#949;&#961;&#953;&#963;&#963;&#972;&#964;&#949;&#961;&#945; &#x2192;</target>
       </trans-unit>
+      <trans-unit id="home.noPosts" datatype="html">
+        <source>There are no posts in your selected language.</source>
+        <target>Δεν υπάρχουν άρθρα στην επιλεγμένη γλώσσα.</target>
+      </trans-unit>
       <trans-unit id="home.pageTitle" datatype="html">
         <source>JavaBlog.com - Coding Adventures with Claude AI</source>
         <target>JavaBlog.com - &#928;&#949;&#961;&#953;&#960;&#941;&#964;&#949;&#953;&#949;&#962; &#960;&#961;&#959;&#947;&#961;&#945;&#956;&#956;&#945;&#964;&#953;&#963;&#956;&#959;&#973; &#956;&#949; Claude AI</target>
