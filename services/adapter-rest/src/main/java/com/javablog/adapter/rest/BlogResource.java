@@ -15,6 +15,8 @@ import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Slug;
 import com.javablog.domain.blog.Summary;
 import com.javablog.domain.blog.Title;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,7 @@ import java.util.UUID;
 @RequestMapping("/v1/posts")
 public class BlogResource implements PostsApi, CommentsApi {
 
+	private static final Logger LOGGER = LogManager.getLogger();
 	private final BlogApplicationService blogApplicationService;
 
 	public BlogResource(BlogApplicationService blogApplicationService) {
@@ -46,6 +49,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public PostResponse createPost(@RequestBody CreatePostRequest request) {
+		LOGGER.info("createPost slug={}", request::getSlug);
 		Post post = new Post(
 				PostId.generate(),
 				new Slug(request.getSlug()),
@@ -60,14 +64,18 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@Override
 	@GetMapping
 	public List<PostResponse> listPosts(@RequestParam("language") LanguageCode language) {
-		return blogApplicationService.listPosts(Language.fromCode(language.toString())).sorted().stream()
+
+		List<PostResponse> responses =  blogApplicationService.listPosts(Language.fromCode(language.toString())).sorted().stream()
 				.map(this::toResponse)
 				.toList();
+		LOGGER.info("list posts size {} language {}", responses::size, language::name);
+		return responses;
 	}
 
 	@Override
 	@GetMapping("/{postId}")
 	public PostResponse getPost(@PathVariable("postId") UUID postId) {
+		LOGGER.info("getPost postId={}", postId);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(this::toResponse)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -76,6 +84,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@Override
 	@GetMapping("/by-slug/{slug}")
 	public PostResponse getPostBySlug(@PathVariable("slug") String slug) {
+		LOGGER.info("getPostBySlug slug={}", slug);
 		return blogApplicationService.findPostBySlug(new Slug(slug))
 				.map(this::toResponse)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -86,6 +95,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	public PostResponse updatePost(
 			@PathVariable("postId") UUID postId,
 			@RequestBody UpdatePostRequest request) {
+		LOGGER.info("updatePost postId={}", postId);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(existing -> {
 					Post updated = new Post(
@@ -105,6 +115,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@DeleteMapping("/{postId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletePost(@PathVariable("postId") UUID postId) {
+		LOGGER.info("deletePost postId={}", postId);
 		blogApplicationService.findPostById(new PostId(postId))
 				.ifPresentOrElse(
 						post -> blogApplicationService.deletePost(post.id()),
@@ -118,6 +129,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	public CommentResponse createComment(
 			@PathVariable("postId") UUID postId,
 			@RequestBody CreateCommentRequest request) {
+		LOGGER.info("createComment postId={} author={}", postId::toString, request::getAuthor);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(post -> {
 					Comment comment = new Comment(
@@ -135,6 +147,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@Override
 	@GetMapping("/{postId}/comments")
 	public List<CommentResponse> listComments(@PathVariable("postId") UUID postId) {
+		LOGGER.info("listComments postId={}", postId);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(post -> blogApplicationService.listComments(post)
 						.sorted().stream()
@@ -149,6 +162,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	public void deleteComment(
 			@PathVariable("postId") UUID postId,
 			@PathVariable("commentId") UUID commentId) {
+		LOGGER.info("deleteComment postId={} commentId={}", postId, commentId);
 		blogApplicationService.deleteComment(new CommentId(commentId));
 	}
 
