@@ -7,9 +7,15 @@ import com.javablog.domain.blog.Content;
 import com.javablog.domain.blog.CreatedAt;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
+import com.javablog.domain.blog.Language;
+import com.javablog.domain.blog.Languages;
 import com.javablog.domain.blog.Slug;
+import com.javablog.domain.blog.TranslationJobId;
+import com.javablog.domain.blog.TranslationRequest;
 import com.javablog.domain.blog.Summary;
 import com.javablog.domain.blog.Title;
+
+import java.util.Set;
 
 public final class Fixture {
 
@@ -46,6 +52,26 @@ public final class Fixture {
 
     public static CreatedAt createdAt() {
         return CreatedAt.now();
+    }
+
+    public static Languages languages() {
+        return new Languages(Set.of(Language.EN));
+    }
+
+    public static TranslationJobId translationJobId() {
+        return TranslationJobId.generate();
+    }
+
+    public static TranslationRequest translationRequest() {
+        return new TranslationRequest(postId(), author(), languages());
+    }
+
+    public static TranslationRequest translationRequest(PostId postId) {
+        return new TranslationRequest(postId, author(), languages());
+    }
+
+    public static TranslationRequest translationRequest(PostId postId, Set<Language> languages) {
+        return new TranslationRequest(postId, author(), new Languages(languages));
     }
 
     public static Post post() {

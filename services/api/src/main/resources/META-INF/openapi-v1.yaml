@@ -11,6 +11,8 @@ servers:
 tags:
   - name: Posts
     description: Blog post operations
+  - name: Translations
+    description: Translation request operations
   - name: Comments
     description: Comment operations
 
@@ -156,6 +158,37 @@ paths:
         '404':
           description: Post not found
 
+  /posts/{postId}/translations:
+    post:
+      tags:
+        - Translations
+      operationId: requestTranslation
+      summary: Request translation of a post into one or more languages
+      security:
+        - oidc: []
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslationRequestBody'
+      responses:
+        '204':
+          description: Translation request accepted
+        '400':
+          description: Invalid request - requested languages contain the original post language
+        '401':
+          description: Unauthorized - valid JWT required
+        '404':
+          description: Post not found
+
   /posts/{postId}/comments:
     post:
       tags:
@@ -293,6 +326,18 @@ components:
         - tr   # Türkçe
         - he   # עברית
 
+    TranslationRequestBody:
+      type: object
+      required:
+        - languages
+      properties:
+        languages:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/LanguageCode'
+          description: Target languages for translation
+
     CreatePostRequest:
       type: object
       required:
@@ -300,6 +345,7 @@ components:
         - title
         - summary
         - content
+        - language
       properties:
         slug:
           type: string
@@ -314,6 +360,8 @@ components:
         content:
           type: string
           description: Post content
+        language:
+          $ref: '#/components/schemas/LanguageCode'
 
     UpdatePostRequest:
       type: object
@@ -322,6 +370,7 @@ components:
         - title
         - summary
         - content
+        - language
       properties:
         slug:
           type: string
@@ -336,6 +385,8 @@ components:
         content:
           type: string
           description: Post content
+        language:
+          $ref: '#/components/schemas/LanguageCode'
 
     CreateCommentRequest:
       type: object
@@ -358,6 +409,7 @@ components:
         - title
         - summary
         - content
+        - language
         - createdAt
       properties:
         id:
@@ -376,6 +428,8 @@ components:
         content:
           type: string
           description: Post content
+        language:
+          $ref: '#/components/schemas/LanguageCode'
         createdAt:
           type: string
           format: date-time

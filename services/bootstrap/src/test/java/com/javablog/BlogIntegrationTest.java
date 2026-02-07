@@ -40,7 +40,7 @@ class BlogIntegrationTest {
 	void createAndReadPostsAndComments() throws Exception {
 		// Create first blog post (requires authentication)
 		String firstPostJson = """
-				{"slug": "first-post", "title": "First Post", "summary": "Summary of first post", "content": "Content of the first post"}
+				{"slug": "first-post", "title": "First Post", "summary": "Summary of first post", "content": "Content of the first post", "language": "en"}
 				""";
 		MvcResult firstPostResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -67,7 +67,7 @@ class BlogIntegrationTest {
 
 		// Create second blog post (requires authentication)
 		String secondPostJson = """
-				{"slug": "second-post", "title": "Second Post", "summary": "Summary of second post", "content": "Content of the second post"}
+				{"slug": "second-post", "title": "Second Post", "summary": "Summary of second post", "content": "Content of the second post", "language": "en"}
 				""";
 		MvcResult secondPostResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -132,7 +132,7 @@ class BlogIntegrationTest {
 	void deletePost() throws Exception {
 		// Create a blog post (requires authentication)
 		String postJson = """
-				{"slug": "post-to-delete", "title": "Post To Delete", "summary": "Summary of post to delete", "content": "This post will be deleted"}
+				{"slug": "post-to-delete", "title": "Post To Delete", "summary": "Summary of post to delete", "content": "This post will be deleted", "language": "en"}
 				""";
 		MvcResult createResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -163,7 +163,7 @@ class BlogIntegrationTest {
 	void deletePostRequiresAuthentication() throws Exception {
 		// Create a blog post first
 		String postJson = """
-				{"slug": "auth-test-post", "title": "Auth Test Post", "summary": "Summary for auth test", "content": "Testing auth"}
+				{"slug": "auth-test-post", "title": "Auth Test Post", "summary": "Summary for auth test", "content": "Testing auth", "language": "en"}
 				""";
 		MvcResult createResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -192,7 +192,7 @@ class BlogIntegrationTest {
 	void deleteComment() throws Exception {
 		// Create a blog post
 		String postJson = """
-				{"slug": "post-with-comment", "title": "Post With Comment", "summary": "Summary", "content": "Content"}
+				{"slug": "post-with-comment", "title": "Post With Comment", "summary": "Summary", "content": "Content", "language": "en"}
 				""";
 		MvcResult postResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -249,7 +249,7 @@ class BlogIntegrationTest {
 	void deleteCommentRequiresAuthentication() throws Exception {
 		// Create a blog post
 		String postJson = """
-				{"slug": "post-for-auth-comment", "title": "Post For Auth Comment", "summary": "Summary", "content": "Content"}
+				{"slug": "post-for-auth-comment", "title": "Post For Auth Comment", "summary": "Summary", "content": "Content", "language": "en"}
 				""";
 		MvcResult postResult = mockMvc.perform(post("/v1/posts")
 						.with(jwt())
@@ -278,6 +278,54 @@ class BlogIntegrationTest {
 
 		// Attempt to delete without authentication
 		mockMvc.perform(delete("/v1/posts/" + createdPost.getId() + "/comments/" + createdComment.getId()))
+				.andExpect(status().isUnauthorized());
+	}
+
+	@Test
+	void requestTranslationReturns204WhenPostExists() throws Exception {
+		// Create a post first
+		String postJson = """
+				{"slug": "translate-me", "title": "Translate Me", "summary": "Summary", "content": "Content to translate", "language": "en"}
+				""";
+		MvcResult postResult = mockMvc.perform(post("/v1/posts")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(postJson))
+				.andExpect(status().isCreated())
+				.andReturn();
+
+		PostResponse createdPost = objectMapper.readValue(
+				postResult.getResponse().getContentAsString(),
+				PostResponse.class);
+
+		// Request translation
+		String translationJson = """
+				{"languages": ["de", "fr"]}
+				""";
+		mockMvc.perform(post("/v1/posts/" + createdPost.getId() + "/translations")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(translationJson))
+				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	void requestTranslationReturns404WhenPostDoesNotExist() throws Exception {
+		String translationJson = """
+				{"languages": ["de"]}
+				""";
+		mockMvc.perform(post("/v1/posts/00000000-0000-0000-0000-000000000000/translations")
+						.with(jwt())
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(translationJson))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	void requestTranslationRequiresAuthentication() throws Exception {
+		mockMvc.perform(post("/v1/posts/00000000-0000-0000-0000-000000000000/translations")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content("{\"languages\": [\"de\"]}"))
 				.andExpect(status().isUnauthorized());
 	}
 }

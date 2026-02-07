@@ -1,5 +1,7 @@
 package com.javablog.domain;
 
+import java.util.Collection;
+
 public final class Guard {
 
     private Guard() {
@@ -12,6 +14,13 @@ public final class Guard {
     }
 
     public static void againstEmpty(String value, String fieldName) {
+        againstNull(value, fieldName);
+        if (value.isEmpty()) {
+            throw new ConstraintViolationException(fieldName + " must not be empty");
+        }
+    }
+
+    public static void againstEmpty(Collection<?> value, String fieldName) {
         againstNull(value, fieldName);
         if (value.isEmpty()) {
             throw new ConstraintViolationException(fieldName + " must not be empty");

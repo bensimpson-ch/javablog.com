@@ -32,6 +32,10 @@
 			<groupId>com.javablog</groupId>
 			<artifactId>adapter-persistence</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.javablog</groupId>
+			<artifactId>adapter-kafka</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -133,6 +137,7 @@
 						<ignoredUnusedDeclaredDependency>com.javablog:application</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>com.javablog:adapter-rest</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>com.javablog:adapter-persistence</ignoredUnusedDeclaredDependency>
+						<ignoredUnusedDeclaredDependency>com.javablog:adapter-kafka</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-devtools</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-test</ignoredUnusedDeclaredDependency>
 						<ignoredUnusedDeclaredDependency>org.springframework.boot:spring-boot-starter-webmvc-test</ignoredUnusedDeclaredDependency>

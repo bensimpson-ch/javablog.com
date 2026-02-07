@@ -8,6 +8,13 @@
 mat-card {
   mat-card-header {
     margin-bottom: 1.5rem;
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+    }
   }
 
   mat-card-content {

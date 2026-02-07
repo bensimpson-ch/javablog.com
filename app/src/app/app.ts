@@ -12,7 +12,7 @@ interface Language {
   label: string;
 }
 
-const LANGUAGE_LABELS: Record<LanguageCode, string> = {
+export const LANGUAGE_LABELS: Record<LanguageCode, string> = {
   [LanguageCode.Bg]: 'Български',
   [LanguageCode.Hr]: 'Hrvatski',
   [LanguageCode.Cs]: 'Čeština',

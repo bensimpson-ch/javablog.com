@@ -1,5 +1,6 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, inject, LOCALE_ID, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -7,7 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { PostsService, CreatePostRequest, UpdatePostRequest } from '../../../api';
+import { MatSelectModule } from '@angular/material/select';
+import { PostsService, CreatePostRequest, UpdatePostRequest, LanguageCode } from '../../../api';
+import { LANGUAGE_LABELS } from '../../../app';
 import { debounceTime, Subscription } from 'rxjs';
 
 const DRAFT_STORAGE_KEY = 'javablog-post-draft';
@@ -21,7 +24,8 @@ const DRAFT_STORAGE_KEY = 'javablog-post-draft';
     MatButtonModule,
     MatCardModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   templateUrl: './post-editor.html',
   styleUrl: './post-editor.scss'
@@ -32,7 +36,12 @@ export class PostEditor implements OnInit, OnDestroy {
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private location = inject(Location);
+  private locale = inject(LOCALE_ID).split('-')[0] as LanguageCode;
   private formSubscription?: Subscription;
+
+  languageLabels = LANGUAGE_LABELS;
+  languages = Object.values(LanguageCode);
 
   postId = signal<string | null>(null);
   loading = signal(false);
@@ -43,11 +52,16 @@ export class PostEditor implements OnInit, OnDestroy {
     title: ['', [Validators.required, Validators.maxLength(200)]],
     slug: ['', [Validators.required, Validators.pattern(/^[a-z0-9-]+$/)]],
     summary: ['', [Validators.required, Validators.maxLength(500)]],
-    content: ['', Validators.required]
+    content: ['', Validators.required],
+    language: [this.defaultLanguage(), Validators.required]
   });
 
   get isEditMode(): boolean {
     return this.postId() !== null;
+  }
+
+  private defaultLanguage(): LanguageCode {
+    return Object.values(LanguageCode).includes(this.locale) ? this.locale : LanguageCode.En;
   }
 
   ngOnInit(): void {
@@ -90,6 +104,10 @@ export class PostEditor implements OnInit, OnDestroy {
       });
   }
 
+  cancel(): void {
+    this.location.back();
+  }
+
   clearDraft(): void {
     localStorage.removeItem(DRAFT_STORAGE_KEY);
     this.form.reset();
@@ -105,7 +123,8 @@ export class PostEditor implements OnInit, OnDestroy {
           title: post.title,
           slug: post.slug,
           summary: post.summary,
-          content: post.content
+          content: post.content,
+          language: post.language
         });
         this.loading.set(false);
       },
@@ -149,7 +168,8 @@ export class PostEditor implements OnInit, OnDestroy {
       title: this.form.value.title!,
       slug: this.form.value.slug!,
       summary: this.form.value.summary!,
-      content: this.form.value.content!
+      content: this.form.value.content!,
+      language: this.form.value.language!
     };
 
     this.postsService.createPost(request).subscribe({
@@ -173,7 +193,8 @@ export class PostEditor implements OnInit, OnDestroy {
       title: this.form.value.title!,
       slug: this.form.value.slug!,
       summary: this.form.value.summary!,
-      content: this.form.value.content!
+      content: this.form.value.content!,
+      language: this.form.value.language!
     };
 
     this.postsService.updatePost(this.postId()!, request).subscribe({
