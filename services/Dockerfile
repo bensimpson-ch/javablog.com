@@ -7,6 +7,7 @@ COPY application ./application
 COPY adapter-rest ./adapter-rest
 COPY api ./api
 COPY adapter-persistence ./adapter-persistence
+COPY adapter-kafka ./adapter-kafka
 COPY bootstrap ./bootstrap
 RUN apk add --no-cache maven && \
     mvn clean package -DskipTests
