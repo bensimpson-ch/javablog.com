@@ -100,7 +100,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</jvmArguments>
+					<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Dorg.apache.kafka.sasl.oauthbearer.allowed.urls=https://keycloak.simpson.services/realms/kafka/protocol/openid-connect/token</jvmArguments>
 				</configuration>
 			</plugin>
 			<plugin>

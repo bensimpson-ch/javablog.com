@@ -70,7 +70,8 @@
         </mat-form-field>
 
         <div class="actions">
-          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || submitting()">
+          <button mat-raised-button color="primary" type="submit"
+                  [disabled]="form.invalid || submitting() || (isEditMode && !form.dirty && !hasTranslationChanges())">
             @if (submitting()) {
               <mat-spinner diameter="20"></mat-spinner>
             } @else {
@@ -82,6 +83,33 @@
           }
         </div>
       </form>
+
+      @if (isEditMode) {
+        <section class="translation-section">
+          <h3>Request Translation</h3>
+          <mat-checkbox
+            [checked]="translateAll()"
+            (change)="toggleAllLanguages($event.checked)">
+            Translate all languages
+          </mat-checkbox>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>Select individual languages</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="language-grid">
+                @for (lang of translationLanguages(); track lang) {
+                  <mat-checkbox
+                    [checked]="translateAll() || selectedLanguages().has(lang)"
+                    (change)="toggleLanguage(lang)">
+                    {{ languageLabels[lang] }}
+                  </mat-checkbox>
+                }
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </section>
+      }
     }
   </mat-card-content>
 </mat-card>

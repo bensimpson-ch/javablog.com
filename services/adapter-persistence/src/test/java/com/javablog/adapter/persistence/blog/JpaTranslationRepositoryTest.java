@@ -44,7 +44,7 @@ class JpaTranslationRepositoryTest {
         TranslationJobEntity found = entityManager.find(TranslationJobEntity.class, jobId.value());
         assertThat(found).isNotNull();
         assertThat(found.getTranslationJobId()).isEqualTo(jobId.value());
-        assertThat(found.getPostId()).isEqualTo(existingPost.id().value());
+        assertThat(found.getOriginalPostId()).isEqualTo(existingPost.id().value());
         assertThat(found.getLanguageCode()).isEqualTo("de");
         assertThat(found.getCreatedAt()).isNotNull();
     }

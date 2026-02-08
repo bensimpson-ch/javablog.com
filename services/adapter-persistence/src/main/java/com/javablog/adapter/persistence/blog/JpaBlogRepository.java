@@ -120,6 +120,7 @@ public class JpaBlogRepository implements BlogRepository {
 				new Title(entity.getTitle()),
 				new Summary(entity.getSummary()),
 				new Content(entity.getContent()),
+				Language.fromCode(entity.getLanguageCode()),
 				new CreatedAt(entity.getCreatedAt())
 		);
 	}
@@ -132,6 +133,7 @@ public class JpaBlogRepository implements BlogRepository {
 				new Title(entity.getTitle()),
 				new Summary(entity.getSummary()),
 				new Content(entity.getContent()),
+				Language.fromCode(entity.getLanguageCode()),
 				new CreatedAt(post.getCreatedAt())
 		);
 	}
@@ -154,7 +156,7 @@ public class JpaBlogRepository implements BlogRepository {
 				post.summary().value(),
 				post.content().value(),
 				post.createdAt().value(),
-				Language.EN.code()
+				post.language().code()
 		);
 	}
 

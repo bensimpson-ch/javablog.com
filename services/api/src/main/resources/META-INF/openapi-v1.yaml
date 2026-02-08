@@ -159,6 +159,29 @@ paths:
           description: Post not found
 
   /posts/{postId}/translations:
+    get:
+      tags:
+        - Translations
+      operationId: listTranslations
+      summary: List translation state for a post
+      parameters:
+        - name: postId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: List of translated posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TranslatedPost'
+        '404':
+          description: Post not found
     post:
       tags:
         - Translations
@@ -325,6 +348,29 @@ components:
         - ko   # 한국어
         - tr   # Türkçe
         - he   # עברית
+
+    TranslatedPost:
+      type: object
+      required:
+        - orderedDatetime
+        - language
+      properties:
+        orderedDatetime:
+          type: string
+          format: date-time
+          description: When the translation was requested
+        language:
+          $ref: '#/components/schemas/LanguageCode'
+        completedDatetime:
+          type: string
+          format: date-time
+          description: When the translation was completed
+        title:
+          type: string
+          description: Translated post title
+        slug:
+          type: string
+          description: Translated post slug
 
     TranslationRequestBody:
       type: object

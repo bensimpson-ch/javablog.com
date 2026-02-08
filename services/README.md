@@ -78,6 +78,12 @@ mvn -pl bootstrap spring-boot:run
 | `JAVABLOG_DB_NAME` | `javablog` | Database name |
 | `JAVABLOG_DB_USER` | `javablog` | Database user |
 | `JAVABLOG_DB_PASS` | `javablog` | Database password |
+| `KEYCLOAK_ISSUER_URI` | `https://keycloak.javablog.com/realms/javablog` | Keycloak OIDC issuer URI |
+| `KAFKA_OAUTH_CLIENT_ID` | *(required)* | Keycloak client ID for Kafka SASL/OAUTHBEARER |
+| `KAFKA_OAUTH_CLIENT_SECRET` | *(required)* | Keycloak client secret for Kafka |
+| `KAFKA_TRUSTSTORE_LOCATION` | *(required)* | Path to JKS truststore containing the Kafka broker CA cert |
+| `KAFKA_TRUSTSTORE_PASSWORD` | *(required)* | Truststore password |
+| `KAFKA_BOOTSTRAP_SERVERS` | `translation.simpson.services:9093` | Kafka bootstrap servers |
 
 ## Debug
 

@@ -1,4 +1,4 @@
-import { Component, inject, LOCALE_ID, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, LOCALE_ID, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,10 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { PostsService, CreatePostRequest, UpdatePostRequest, LanguageCode } from '../../../api';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { PostsService, TranslationsService, TranslatedPost, CreatePostRequest, UpdatePostRequest, LanguageCode } from '../../../api';
 import { LANGUAGE_LABELS } from '../../../app';
 import { debounceTime, Subscription } from 'rxjs';
 
@@ -25,7 +27,9 @@ const DRAFT_STORAGE_KEY = 'javablog-post-draft';
     MatCardModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    MatExpansionModule
   ],
   templateUrl: './post-editor.html',
   styleUrl: './post-editor.scss'
@@ -33,6 +37,7 @@ const DRAFT_STORAGE_KEY = 'javablog-post-draft';
 export class PostEditor implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
   private postsService = inject(PostsService);
+  private translationsService = inject(TranslationsService);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
@@ -47,6 +52,27 @@ export class PostEditor implements OnInit, OnDestroy {
   loading = signal(false);
   submitting = signal(false);
   hasDraft = signal(false);
+  selectedLanguages = signal(new Set<LanguageCode>());
+  existingTranslations = signal<TranslatedPost[]>([]);
+
+  translateAll = signal(true);
+
+  translationLanguages = computed(() => {
+    const postLang = this.form.get('language')?.value;
+    return this.languages.filter(l => l !== postLang);
+  });
+
+  hasTranslationChanges = computed(() => {
+    const existingLangs = new Set(this.existingTranslations().map(t => t.language));
+    const currentLangs = this.translateAll()
+      ? new Set(this.translationLanguages())
+      : this.selectedLanguages();
+    if (currentLangs.size !== existingLangs.size) return true;
+    for (const lang of currentLangs) {
+      if (!existingLangs.has(lang)) return true;
+    }
+    return false;
+  });
 
   form = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(200)]],
@@ -127,6 +153,7 @@ export class PostEditor implements OnInit, OnDestroy {
           language: post.language
         });
         this.loading.set(false);
+        this.loadTranslations(id);
       },
       error: (err) => {
         this.loading.set(false);
@@ -134,6 +161,18 @@ export class PostEditor implements OnInit, OnDestroy {
         console.error('Failed to load post:', err);
         this.router.navigate(['/author/posts/new']);
       }
+    });
+  }
+
+  private loadTranslations(postId: string): void {
+    this.translationsService.listTranslations(postId).subscribe({
+      next: (translations) => {
+        this.existingTranslations.set(translations);
+        const translatedLangs = new Set(translations.map(t => t.language));
+        this.selectedLanguages.set(translatedLangs);
+        this.translateAll.set(translatedLangs.size === this.translationLanguages().length);
+      },
+      error: (err) => console.error('Failed to load translations:', err)
     });
   }
 
@@ -199,6 +238,7 @@ export class PostEditor implements OnInit, OnDestroy {
 
     this.postsService.updatePost(this.postId()!, request).subscribe({
       next: () => {
+        this.requestTranslations();
         this.snackBar.open('Post updated successfully', 'Dismiss', { duration: 3000 });
         this.router.navigate(['/']);
       },
@@ -211,4 +251,37 @@ export class PostEditor implements OnInit, OnDestroy {
       }
     });
   }
+
+  private requestTranslations(): void {
+    const languages = this.translateAll() ? [...this.translationLanguages()] : [...this.selectedLanguages()];
+    if (languages.length === 0) return;
+
+    this.translationsService.requestTranslation(this.postId()!, { languages }).subscribe({
+      error: (err) => console.error('Translation request failed:', err)
+    });
+  }
+
+  toggleAllLanguages(checked: boolean): void {
+    this.translateAll.set(checked);
+    if (checked) {
+      this.selectedLanguages.set(new Set(this.translationLanguages()));
+    } else {
+      this.selectedLanguages.set(new Set());
+    }
+  }
+
+  toggleLanguage(lang: LanguageCode): void {
+    const current = new Set(this.selectedLanguages());
+    if (current.has(lang)) {
+      current.delete(lang);
+      this.translateAll.set(false);
+    } else {
+      current.add(lang);
+      if (current.size === this.translationLanguages().length) {
+        this.translateAll.set(true);
+      }
+    }
+    this.selectedLanguages.set(current);
+  }
+
 }

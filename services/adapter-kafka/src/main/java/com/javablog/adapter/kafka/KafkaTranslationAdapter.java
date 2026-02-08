@@ -15,7 +15,6 @@ public class KafkaTranslationAdapter implements TranslationPort {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String TOPIC_TRANSLATION_REQUESTS = "translation.requests";
-    private static final String SOURCE_LANG = "en";
 
     private final KafkaTemplate<String, TranslationRequestMessage> kafkaTemplate;
 
@@ -30,7 +29,7 @@ public class KafkaTranslationAdapter implements TranslationPort {
         TranslationRequestMessage message = new TranslationRequestMessage(
                 jobId.value().toString(),
                 post.content().value(),
-                SOURCE_LANG,
+                post.language().code(),
                 targetLanguage.code(),
                 post.id().value().toString()
         );

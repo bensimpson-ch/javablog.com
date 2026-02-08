@@ -53,6 +53,7 @@ class JpaBlogRepositoryTest {
                 new Title("Updated Title"),
                 new Summary("Updated summary"),
                 new Content("Updated content"),
+                Language.DE,
                 post.createdAt()
         );
         repository.update(updated);

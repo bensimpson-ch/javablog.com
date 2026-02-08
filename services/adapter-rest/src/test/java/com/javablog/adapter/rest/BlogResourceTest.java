@@ -1,8 +1,8 @@
 package com.javablog.adapter.rest;
 
-import com.javablog.api.v1.model.CreateCommentRequest;
-import com.javablog.api.v1.model.CreatePostRequest;
-import com.javablog.api.v1.model.LanguageCode;
+import com.javablog.api.v1.model.CreateCommentRequestDto;
+import com.javablog.api.v1.model.CreatePostRequestDto;
+import com.javablog.api.v1.model.LanguageCodeDto;
 import com.javablog.application.service.BlogApplicationService;
 import com.javablog.domain.Fixture;
 import com.javablog.domain.blog.Comment;
@@ -39,11 +39,12 @@ class BlogResourceTest {
 	@Test
 	void createPostReturnsCreatedStatus() {
 		when(blogApplicationService.createPost(any(Post.class))).thenAnswer(invocation -> invocation.getArgument(0));
-		var request = new CreatePostRequest()
+		var request = new CreatePostRequestDto()
 				.slug("test-slug")
 				.title("Test Title")
 				.summary("Test summary")
-				.content("Test content");
+				.content("Test content")
+				.language(LanguageCodeDto.EN);
 
 		resource.createPost(request);
 
@@ -55,7 +56,7 @@ class BlogResourceTest {
 		Post post = Fixture.post();
 		when(blogApplicationService.listPosts(Language.EN)).thenReturn(new Posts(Set.of(post)));
 
-		var result = resource.listPosts(LanguageCode.EN);
+		var result = resource.listPosts(LanguageCodeDto.EN);
 
 		assertEquals(1, result.size());
 		verify(blogApplicationService).listPosts(Language.EN);
@@ -66,7 +67,7 @@ class BlogResourceTest {
 		Post post = Fixture.post();
 		when(blogApplicationService.findPostById(post.id())).thenReturn(Optional.of(post));
 		when(blogApplicationService.createComment(any(Comment.class))).thenAnswer(invocation -> invocation.getArgument(0));
-		var request = new CreateCommentRequest()
+		var request = new CreateCommentRequestDto()
 				.author("Ben")
 				.content("Great post!");
 
@@ -81,7 +82,7 @@ class BlogResourceTest {
 	void createCommentThrowsNotFoundWhenPostDoesNotExist() {
 		var postId = Fixture.postId();
 		when(blogApplicationService.findPostById(postId)).thenReturn(Optional.empty());
-		var request = new CreateCommentRequest()
+		var request = new CreateCommentRequestDto()
 				.author("Ben")
 				.content("Great post!");
 

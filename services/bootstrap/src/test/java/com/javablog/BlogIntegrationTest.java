@@ -1,7 +1,7 @@
 package com.javablog;
 
-import com.javablog.api.v1.model.CommentResponse;
-import com.javablog.api.v1.model.PostResponse;
+import com.javablog.api.v1.model.CommentResponseDto;
+import com.javablog.api.v1.model.PostResponseDto;
 import com.javablog.config.TestSecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +49,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse firstPost = objectMapper.readValue(
+		PostResponseDto firstPost = objectMapper.readValue(
 				firstPostResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Add a comment to the first post (public endpoint)
 		String firstPostCommentJson = """
@@ -76,9 +76,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse secondPost = objectMapper.readValue(
+		PostResponseDto secondPost = objectMapper.readValue(
 				secondPostResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Add first comment to the second post (public endpoint)
 		String secondPostComment1Json = """
@@ -106,9 +106,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isOk())
 				.andReturn();
 
-		PostResponse[] posts = objectMapper.readValue(
+		PostResponseDto[] posts = objectMapper.readValue(
 				postsResult.getResponse().getContentAsString(),
-				PostResponse[].class);
+				PostResponseDto[].class);
 
 		assertThat(posts).hasSize(2);
 		assertThat(posts[0].getSlug()).isEqualTo("second-post"); // newest first
@@ -119,9 +119,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isOk())
 				.andReturn();
 
-		CommentResponse[] comments = objectMapper.readValue(
+		CommentResponseDto[] comments = objectMapper.readValue(
 				commentsResult.getResponse().getContentAsString(),
-				CommentResponse[].class);
+				CommentResponseDto[].class);
 
 		assertThat(comments).hasSize(2);
 		assertThat(comments[0].getAuthor()).isEqualTo("Charlie"); // newest first
@@ -141,9 +141,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse createdPost = objectMapper.readValue(
+		PostResponseDto createdPost = objectMapper.readValue(
 				createResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Verify post exists
 		mockMvc.perform(get("/v1/posts/" + createdPost.getId()))
@@ -172,9 +172,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse createdPost = objectMapper.readValue(
+		PostResponseDto createdPost = objectMapper.readValue(
 				createResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Attempt to delete without authentication
 		mockMvc.perform(delete("/v1/posts/" + createdPost.getId()))
@@ -201,9 +201,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse createdPost = objectMapper.readValue(
+		PostResponseDto createdPost = objectMapper.readValue(
 				postResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Add a comment
 		String commentJson = """
@@ -215,18 +215,18 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		CommentResponse createdComment = objectMapper.readValue(
+		CommentResponseDto createdComment = objectMapper.readValue(
 				commentResult.getResponse().getContentAsString(),
-				CommentResponse.class);
+				CommentResponseDto.class);
 
 		// Verify comment exists
 		MvcResult commentsBeforeDelete = mockMvc.perform(get("/v1/posts/" + createdPost.getId() + "/comments"))
 				.andExpect(status().isOk())
 				.andReturn();
 
-		CommentResponse[] commentsBefore = objectMapper.readValue(
+		CommentResponseDto[] commentsBefore = objectMapper.readValue(
 				commentsBeforeDelete.getResponse().getContentAsString(),
-				CommentResponse[].class);
+				CommentResponseDto[].class);
 		assertThat(commentsBefore).hasSize(1);
 
 		// Delete the comment (requires authentication)
@@ -239,9 +239,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isOk())
 				.andReturn();
 
-		CommentResponse[] commentsAfter = objectMapper.readValue(
+		CommentResponseDto[] commentsAfter = objectMapper.readValue(
 				commentsAfterDelete.getResponse().getContentAsString(),
-				CommentResponse[].class);
+				CommentResponseDto[].class);
 		assertThat(commentsAfter).isEmpty();
 	}
 
@@ -258,9 +258,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse createdPost = objectMapper.readValue(
+		PostResponseDto createdPost = objectMapper.readValue(
 				postResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Add a comment
 		String commentJson = """
@@ -272,9 +272,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		CommentResponse createdComment = objectMapper.readValue(
+		CommentResponseDto createdComment = objectMapper.readValue(
 				commentResult.getResponse().getContentAsString(),
-				CommentResponse.class);
+				CommentResponseDto.class);
 
 		// Attempt to delete without authentication
 		mockMvc.perform(delete("/v1/posts/" + createdPost.getId() + "/comments/" + createdComment.getId()))
@@ -294,9 +294,9 @@ class BlogIntegrationTest {
 				.andExpect(status().isCreated())
 				.andReturn();
 
-		PostResponse createdPost = objectMapper.readValue(
+		PostResponseDto createdPost = objectMapper.readValue(
 				postResult.getResponse().getContentAsString(),
-				PostResponse.class);
+				PostResponseDto.class);
 
 		// Request translation
 		String translationJson = """

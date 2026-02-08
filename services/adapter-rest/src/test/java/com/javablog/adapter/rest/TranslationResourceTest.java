@@ -1,7 +1,7 @@
 package com.javablog.adapter.rest;
 
-import com.javablog.api.v1.model.LanguageCode;
-import com.javablog.api.v1.model.TranslationRequestBody;
+import com.javablog.api.v1.model.LanguageCodeDto;
+import com.javablog.api.v1.model.TranslationRequestBodyDto;
 import com.javablog.application.service.TranslationService;
 import com.javablog.domain.Fixture;
 import com.javablog.domain.blog.PostNotFoundException;
@@ -34,7 +34,7 @@ class TranslationResourceTest {
     @Test
     void requestTranslationDelegatesToService() {
         var postId = Fixture.postId();
-        var body = new TranslationRequestBody().languages(List.of(LanguageCode.DE, LanguageCode.FR));
+        var body = new TranslationRequestBodyDto().languages(List.of(LanguageCodeDto.DE, LanguageCodeDto.FR));
 
         resource.requestTranslation(postId.value(), body);
 
@@ -49,7 +49,7 @@ class TranslationResourceTest {
     @Test
     void requestTranslationThrowsNotFoundWhenPostDoesNotExist() {
         var postId = Fixture.postId();
-        var body = new TranslationRequestBody().languages(List.of(LanguageCode.DE));
+        var body = new TranslationRequestBodyDto().languages(List.of(LanguageCodeDto.DE));
 
         doThrow(new PostNotFoundException(postId)).when(translationService).requestTranslation(any());
 

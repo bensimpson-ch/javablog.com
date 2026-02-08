@@ -75,11 +75,11 @@ public final class Fixture {
     }
 
     public static Post post() {
-        return new Post(postId(), slug(), title(), summary(), content(), createdAt());
+        return new Post(postId(), slug(), title(), summary(), content(), Language.EN, createdAt());
     }
 
     public static Post post(String slugValue, String titleValue) {
-        return new Post(postId(), new Slug(slugValue), new Title(titleValue), summary(), content(), createdAt());
+        return new Post(postId(), new Slug(slugValue), new Title(titleValue), summary(), content(), Language.EN, createdAt());
     }
 
     public static Comment comment() {

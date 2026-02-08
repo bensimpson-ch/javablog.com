@@ -48,7 +48,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@Override
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PostResponse createPost(@RequestBody CreatePostRequest request) {
+	public PostResponseDto createPost(@RequestBody CreatePostRequestDto request) {
 		LOGGER.info("createPost slug={}", request::getSlug);
 		Post post = new Post(
 				PostId.generate(),
@@ -56,6 +56,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 				new Title(request.getTitle()),
 				new Summary(request.getSummary()),
 				new Content(request.getContent()),
+				Language.fromCode(request.getLanguage().toString()),
 				CreatedAt.now()
 		);
 		return toResponse(blogApplicationService.createPost(post));
@@ -63,9 +64,9 @@ public class BlogResource implements PostsApi, CommentsApi {
 
 	@Override
 	@GetMapping
-	public List<PostResponse> listPosts(@RequestParam("language") LanguageCode language) {
+	public List<PostResponseDto> listPosts(@RequestParam("language") LanguageCodeDto language) {
 
-		List<PostResponse> responses =  blogApplicationService.listPosts(Language.fromCode(language.toString())).sorted().stream()
+		List<PostResponseDto> responses =  blogApplicationService.listPosts(Language.fromCode(language.toString())).sorted().stream()
 				.map(this::toResponse)
 				.toList();
 		LOGGER.info("list posts size {} language {}", responses::size, language::name);
@@ -74,7 +75,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 
 	@Override
 	@GetMapping("/{postId}")
-	public PostResponse getPost(@PathVariable("postId") UUID postId) {
+	public PostResponseDto getPost(@PathVariable("postId") UUID postId) {
 		LOGGER.info("getPost postId={}", postId);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(this::toResponse)
@@ -83,7 +84,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 
 	@Override
 	@GetMapping("/by-slug/{slug}")
-	public PostResponse getPostBySlug(@PathVariable("slug") String slug) {
+	public PostResponseDto getPostBySlug(@PathVariable("slug") String slug) {
 		LOGGER.info("getPostBySlug slug={}", slug);
 		return blogApplicationService.findPostBySlug(new Slug(slug))
 				.map(this::toResponse)
@@ -92,9 +93,9 @@ public class BlogResource implements PostsApi, CommentsApi {
 
 	@Override
 	@PutMapping("/{postId}")
-	public PostResponse updatePost(
+	public PostResponseDto updatePost(
 			@PathVariable("postId") UUID postId,
-			@RequestBody UpdatePostRequest request) {
+			@RequestBody UpdatePostRequestDto request) {
 		LOGGER.info("updatePost postId={}", postId);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(existing -> {
@@ -104,6 +105,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 							new Title(request.getTitle()),
 							new Summary(request.getSummary()),
 							new Content(request.getContent()),
+							Language.fromCode(request.getLanguage().toString()),
 							existing.createdAt()
 					);
 					return toResponse(blogApplicationService.updatePost(updated));
@@ -126,9 +128,9 @@ public class BlogResource implements PostsApi, CommentsApi {
 	@Override
 	@PostMapping("/{postId}/comments")
 	@ResponseStatus(HttpStatus.CREATED)
-	public CommentResponse createComment(
+	public CommentResponseDto createComment(
 			@PathVariable("postId") UUID postId,
-			@RequestBody CreateCommentRequest request) {
+			@RequestBody CreateCommentRequestDto request) {
 		LOGGER.info("createComment postId={} author={}", postId::toString, request::getAuthor);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(post -> {
@@ -146,7 +148,7 @@ public class BlogResource implements PostsApi, CommentsApi {
 
 	@Override
 	@GetMapping("/{postId}/comments")
-	public List<CommentResponse> listComments(@PathVariable("postId") UUID postId) {
+	public List<CommentResponseDto> listComments(@PathVariable("postId") UUID postId) {
 		LOGGER.info("listComments postId={}", postId);
 		return blogApplicationService.findPostById(new PostId(postId))
 				.map(post -> blogApplicationService.listComments(post)
@@ -166,18 +168,19 @@ public class BlogResource implements PostsApi, CommentsApi {
 		blogApplicationService.deleteComment(new CommentId(commentId));
 	}
 
-	private PostResponse toResponse(Post post) {
-		return new PostResponse()
+	private PostResponseDto toResponse(Post post) {
+		return new PostResponseDto()
 				.id(post.id().value())
 				.slug(post.slug().value())
 				.title(post.title().value())
 				.summary(post.summary().value())
 				.content(post.content().value())
+				.language(LanguageCodeDto.fromValue(post.language().code()))
 				.createdAt(post.createdAt().value().atOffset(ZoneOffset.UTC));
 	}
 
-	private CommentResponse toResponse(Comment comment) {
-		return new CommentResponse()
+	private CommentResponseDto toResponse(Comment comment) {
+		return new CommentResponseDto()
 				.id(comment.id().value())
 				.postId(comment.postId().value())
 				.author(comment.author().value())

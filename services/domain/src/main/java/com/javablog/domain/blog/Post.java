@@ -8,6 +8,7 @@ public record Post(
         Title title,
         Summary summary,
         Content content,
+        Language language,
         CreatedAt createdAt
 ) {
 
@@ -17,6 +18,7 @@ public record Post(
         Guard.againstNull(title, "Post.title");
         Guard.againstNull(summary, "Post.summary");
         Guard.againstNull(content, "Post.content");
+        Guard.againstNull(language, "Post.language");
         Guard.againstNull(createdAt, "Post.createdAt");
     }
 }
