@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${JAVABLOG_DB_HOST:localhost}:${JAVABLOG_DB_PORT:5432}/${JAVABLOG_DB_NAME:javablog}
+    driver-class-name: org.postgresql.Driver
+    username: ${JAVABLOG_DB_USER:javablog}
+    password: ${JAVABLOG_DB_PASS:javablog}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:translation.simpson.services:9093}
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: OAUTHBEARER
+      sasl.jaas.config: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required;
+      sasl.oauthbearer.client.credentials.client.id: ${KAFKA_OAUTH_CLIENT_ID}
+      sasl.oauthbearer.client.credentials.client.secret: ${KAFKA_OAUTH_CLIENT_SECRET}
+      sasl.oauthbearer.scope: openid
+      sasl.oauthbearer.token.endpoint.url: ${KAFKA_TOKEN_ENDPOINT_URL:https://keycloak.simpson.services/realms/kafka/protocol/openid-connect/token}
+      sasl.login.callback.handler.class: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginCallbackHandler
+    ssl:
+      trust-store-location: file:${KAFKA_TRUSTSTORE_LOCATION}
+      trust-store-password: ${KAFKA_TRUSTSTORE_PASSWORD}

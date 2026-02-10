@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${JAVABLOG_DB_HOST:db}:${JAVABLOG_DB_PORT:5432}/${JAVABLOG_DB_NAME:javablog}
+    driver-class-name: org.postgresql.Driver
+    username: ${JAVABLOG_DB_USER:javablog}
+    password: ${JAVABLOG_DB_PASS:javablog}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate

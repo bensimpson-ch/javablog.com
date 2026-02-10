@@ -1,0 +1,6 @@
+.env
+.env.example
+**/target/
+run-local.sh
+*.truststore.jks
+kafka-ca.pem
