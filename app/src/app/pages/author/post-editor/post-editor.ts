@@ -13,6 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PostsService, TranslationsService, TranslatedPost, CreatePostRequest, UpdatePostRequest, LanguageCode } from '../../../api';
 import { LANGUAGE_LABELS } from '../../../app';
+import { BlogEditor } from '../../../components/blog-editor/blog-editor';
+import { AuthService } from '../../../auth';
 import { debounceTime, Subscription } from 'rxjs';
 
 const DRAFT_STORAGE_KEY = 'javablog-post-draft';
@@ -29,7 +31,8 @@ const DRAFT_STORAGE_KEY = 'javablog-post-draft';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    BlogEditor
   ],
   templateUrl: './post-editor.html',
   styleUrl: './post-editor.scss'
@@ -43,7 +46,15 @@ export class PostEditor implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private location = inject(Location);
   private locale = inject(LOCALE_ID).split('-')[0] as LanguageCode;
+  private authService = inject(AuthService);
   private formSubscription?: Subscription;
+
+  authorDisplay = computed(() => {
+    const name = this.authService.userName;
+    const email = this.authService.email;
+    if (name && email) return `${name} <${email}>`;
+    return name || email || 'Unknown';
+  });
 
   languageLabels = LANGUAGE_LABELS;
   languages = Object.values(LanguageCode);

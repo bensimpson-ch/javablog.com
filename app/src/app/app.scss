@@ -172,6 +172,15 @@ footer {
   transition: border-color var(--transition-normal), color var(--transition-normal);
 }
 
+// Author mode: widen shell for editing
+:host(.author-mode) {
+  header nav,
+  main,
+  footer {
+    max-width: var(--content-width-wide);
+  }
+}
+
 // Responsive adjustments
 @media (max-width: 768px) {
   header {

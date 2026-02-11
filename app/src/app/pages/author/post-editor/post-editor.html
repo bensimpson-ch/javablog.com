@@ -3,7 +3,7 @@
     <div class="header-row">
       <div>
         <mat-card-title>{{ isEditMode ? 'Edit Post' : 'Create New Post' }}</mat-card-title>
-        <mat-card-subtitle>Author: Ben Simpson &lt;ben&#64;javablog.com&gt;</mat-card-subtitle>
+        <mat-card-subtitle>Author: {{ authorDisplay() }}</mat-card-subtitle>
       </div>
       <button mat-raised-button type="button" (click)="cancel()">&larr; Cancel</button>
     </div>
@@ -17,37 +17,39 @@
       </div>
     } @else {
       <form [formGroup]="form" (ngSubmit)="submit()">
-        <mat-form-field appearance="outline">
-          <mat-label>Title</mat-label>
-          <input matInput formControlName="title" (blur)="generateSlug()">
-          @if (form.get('title')?.hasError('required')) {
-            <mat-error>Title is required</mat-error>
-          }
-          @if (form.get('title')?.hasError('maxlength')) {
-            <mat-error>Title must be 200 characters or less</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Language</mat-label>
-          <mat-select formControlName="language">
-            @for (lang of languages; track lang) {
-              <mat-option [value]="lang">{{ languageLabels[lang] }}</mat-option>
+        <div class="metadata-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" (blur)="generateSlug()">
+            @if (form.get('title')?.hasError('required')) {
+              <mat-error>Title is required</mat-error>
             }
-          </mat-select>
-        </mat-form-field>
+            @if (form.get('title')?.hasError('maxlength')) {
+              <mat-error>Title must be 200 characters or less</mat-error>
+            }
+          </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Slug</mat-label>
-          <input matInput formControlName="slug">
-          <mat-hint>URL-friendly identifier{{ isEditMode ? '' : ' (auto-generated from title)' }}</mat-hint>
-          @if (form.get('slug')?.hasError('required')) {
-            <mat-error>Slug is required</mat-error>
-          }
-          @if (form.get('slug')?.hasError('pattern')) {
-            <mat-error>Slug can only contain lowercase letters, numbers, and hyphens</mat-error>
-          }
-        </mat-form-field>
+          <mat-form-field appearance="outline" class="field-language">
+            <mat-label>Language</mat-label>
+            <mat-select formControlName="language">
+              @for (lang of languages; track lang) {
+                <mat-option [value]="lang">{{ languageLabels[lang] }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Slug</mat-label>
+            <input matInput formControlName="slug">
+            <mat-hint>URL-friendly identifier{{ isEditMode ? '' : ' (auto-generated from title)' }}</mat-hint>
+            @if (form.get('slug')?.hasError('required')) {
+              <mat-error>Slug is required</mat-error>
+            }
+            @if (form.get('slug')?.hasError('pattern')) {
+              <mat-error>Slug can only contain lowercase letters, numbers, and hyphens</mat-error>
+            }
+          </mat-form-field>
+        </div>
 
         <mat-form-field appearance="outline">
           <mat-label>Summary</mat-label>
@@ -61,13 +63,13 @@
           }
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Content (HTML)</mat-label>
-          <textarea matInput formControlName="content" rows="20"></textarea>
-          @if (form.get('content')?.hasError('required')) {
+        <div class="editor-field">
+          <label class="editor-label">Content</label>
+          <app-blog-editor formControlName="content"></app-blog-editor>
+          @if (form.get('content')?.hasError('required') && form.get('content')?.touched) {
             <mat-error>Content is required</mat-error>
           }
-        </mat-form-field>
+        </div>
 
         <div class="actions">
           <button mat-raised-button color="primary" type="submit"

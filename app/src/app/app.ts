@@ -90,7 +90,10 @@ const LANGUAGE_MAP = new Map(ALL_LANGUAGES.map(l => [l.code as string, l]));
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  host: {
+    '[class.author-mode]': 'isWideLayout()'
+  }
 })
 export class App implements OnInit {
   protected themeService = inject(ThemeService);
@@ -106,6 +109,8 @@ export class App implements OnInit {
   protected langOpen = signal(false);
   protected allLanguages = ALL_LANGUAGES;
   protected pinnedLanguages = signal<Language[]>([LANGUAGE_MAP.get(LanguageCode.En)!]);
+
+  protected isWideLayout = computed(() => this.currentPath().startsWith('/author'));
 
   protected themeToggleTitle = computed(() =>
     this.themeService.theme() === 'light'

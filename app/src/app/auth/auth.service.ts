@@ -43,4 +43,9 @@ export class AuthService {
     const claims = this.oauthService.getIdentityClaims();
     return claims ? (claims as any)['preferred_username'] || (claims as any)['name'] : null;
   }
+
+  get email(): string | null {
+    const claims = this.oauthService.getIdentityClaims();
+    return claims ? (claims as any)['email'] : null;
+  }
 }

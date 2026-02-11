@@ -1,0 +1,113 @@
+<div class="blog-editor">
+  <div class="editor-toolbar">
+    <div class="toolbar-group">
+      <button mat-icon-button matTooltip="Bold" (click)="toggleBold()"
+              [class.active]="isActive('bold')">
+        <mat-icon>format_bold</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Italic" (click)="toggleItalic()"
+              [class.active]="isActive('italic')">
+        <mat-icon>format_italic</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Strikethrough" (click)="toggleStrike()"
+              [class.active]="isActive('strike')">
+        <mat-icon>strikethrough_s</mat-icon>
+      </button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="toolbar-group">
+      <button mat-icon-button matTooltip="Headings" [matMenuTriggerFor]="headingMenu">
+        <mat-icon>title</mat-icon>
+      </button>
+      <mat-menu #headingMenu="matMenu">
+        <button mat-menu-item (click)="setHeading(1)" [class.active]="isActive('heading', {level: 1})">
+          Heading 1
+        </button>
+        <button mat-menu-item (click)="setHeading(2)" [class.active]="isActive('heading', {level: 2})">
+          Heading 2
+        </button>
+        <button mat-menu-item (click)="setHeading(3)" [class.active]="isActive('heading', {level: 3})">
+          Heading 3
+        </button>
+        <button mat-menu-item (click)="setParagraph()">
+          Paragraph
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="toolbar-group">
+      <button mat-icon-button matTooltip="Bullet List" (click)="toggleBulletList()"
+              [class.active]="isActive('bulletList')">
+        <mat-icon>format_list_bulleted</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Ordered List" (click)="toggleOrderedList()"
+              [class.active]="isActive('orderedList')">
+        <mat-icon>format_list_numbered</mat-icon>
+      </button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="toolbar-group">
+      <button mat-icon-button matTooltip="Blockquote" (click)="toggleBlockquote()"
+              [class.active]="isActive('blockquote')">
+        <mat-icon>format_quote</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Code Block" (click)="toggleCodeBlock()"
+              [class.active]="isActive('codeBlock')">
+        <mat-icon>code</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Horizontal Rule" (click)="setHorizontalRule()">
+        <mat-icon>horizontal_rule</mat-icon>
+      </button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="toolbar-group">
+      <button mat-icon-button matTooltip="Link" (click)="setLink()"
+              [class.active]="isActive('link')">
+        <mat-icon>link</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Insert Image" (click)="insertImage()">
+        <mat-icon>image</mat-icon>
+      </button>
+    </div>
+
+    <div class="toolbar-divider"></div>
+
+    <div class="toolbar-group">
+      <button mat-icon-button matTooltip="Undo" (click)="undo()">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Redo" (click)="redo()">
+        <mat-icon>redo</mat-icon>
+      </button>
+    </div>
+
+    <div class="toolbar-spacer"></div>
+
+    <div class="toolbar-group">
+      <button mat-icon-button
+              [matTooltip]="isRawMode() ? 'Visual Editor' : 'HTML Source'"
+              (click)="toggleRawMode()">
+        <mat-icon>{{ isRawMode() ? 'visibility' : 'code' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  @if (isRawMode()) {
+    <textarea class="raw-editor"
+              [(ngModel)]="rawHtml"
+              (input)="onRawInput()"
+              spellcheck="false"></textarea>
+  } @else {
+    <div class="editor-content">
+      <tiptap-editor [editor]="editor"></tiptap-editor>
+    </div>
+  }
+</div>
