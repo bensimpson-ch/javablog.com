@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Repository
@@ -27,6 +29,41 @@ public class JpaTranslationRepository implements TranslationRepository {
                 LocalDateTime.now()
         );
         entityManager.persist(entity);
+    }
+
+    @Override
+    public Optional<TranslationJob> findTranslationJob(TranslationJobId jobId) {
+        TranslationJobEntity entity = entityManager.find(TranslationJobEntity.class, jobId.value());
+        if (entity == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new TranslationJob(
+                new TranslationJobId(entity.getTranslationJobId()),
+                new PostId(entity.getOriginalPostId()),
+                Language.fromCode(entity.getLanguageCode())
+        ));
+    }
+
+    @Override
+    public void saveTranslatedPost(PostId originalPostId, Language language, Title title, Summary summary, Slug slug, Content content) {
+        PostEntity postEntity = entityManager.getReference(PostEntity.class, originalPostId.value());
+        TranslatedPostEntity entity = new TranslatedPostEntity(
+                UUID.randomUUID(),
+                postEntity,
+                language.code(),
+                title.value(),
+                summary.value(),
+                content.value()
+        );
+        entityManager.persist(entity);
+    }
+
+    @Override
+    public void deleteTranslationJob(TranslationJobId jobId) {
+        TranslationJobEntity entity = entityManager.find(TranslationJobEntity.class, jobId.value());
+        if (entity != null) {
+            entityManager.remove(entity);
+        }
     }
 
     @Override

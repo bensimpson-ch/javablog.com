@@ -3,7 +3,6 @@ package com.javablog.adapter.kafka;
 import com.javablog.domain.blog.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.TranslationJobId;
-import com.javablog.domain.blog.TranslationJobStatus;
 import com.javablog.domain.blog.TranslationPort;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,10 +27,12 @@ public class KafkaTranslationAdapter implements TranslationPort {
 
         TranslationRequestMessage message = new TranslationRequestMessage(
                 jobId.value().toString(),
+                post.title().value(),
+                post.summary().value(),
+                post.slug().value(),
                 post.content().value(),
                 post.language().code(),
-                targetLanguage.code(),
-                post.id().value().toString()
+                targetLanguage.code()
         );
 
         LOGGER.info("Sending translation request: jobId={} postId={} targetLang={}",
@@ -40,12 +41,5 @@ public class KafkaTranslationAdapter implements TranslationPort {
         kafkaTemplate.send(TOPIC_TRANSLATION_REQUESTS, jobId.value().toString(), message);
 
         return jobId;
-    }
-
-    @Override
-    public TranslationJobStatus translationJobStatus(TranslationJobId jobId) {
-        LOGGER.info("Checking translation job status: jobId={}", jobId.value());
-        // TODO: Query status from database or external service
-        return TranslationJobStatus.NOT_STARTED;
     }
 }

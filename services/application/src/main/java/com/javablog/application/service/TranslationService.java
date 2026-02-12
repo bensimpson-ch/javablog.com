@@ -3,6 +3,7 @@ package com.javablog.application.service;
 import com.javablog.domain.blog.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 
@@ -39,5 +40,27 @@ public class TranslationService {
             translationRepository.saveTranslationJob(translationJobId, post.id(), language);
             LOGGER.info("Translation job saved jobId={}", translationJobId.value());
         }
+    }
+
+    @EventListener
+    public void onTranslationCompleted(TranslationCompletedEvent event) {
+        LOGGER.info("Translation completed: jobId={}", event.jobId().value());
+
+        TranslationJob job = translationRepository.findTranslationJob(event.jobId())
+                .orElseThrow(() -> new IllegalStateException("Translation job not found: " + event.jobId().value()));
+
+        translationRepository.saveTranslatedPost(
+                job.originalPostId(),
+                job.language(),
+                event.title(),
+                event.summary(),
+                event.slug(),
+                event.content()
+        );
+
+        translationRepository.deleteTranslationJob(event.jobId());
+
+        LOGGER.info("Translation saved and job removed: jobId={} postId={} language={}",
+                event.jobId().value(), job.originalPostId().value(), job.language().code());
     }
 }

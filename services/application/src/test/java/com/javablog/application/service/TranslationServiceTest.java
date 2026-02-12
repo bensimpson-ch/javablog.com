@@ -1,14 +1,7 @@
 package com.javablog.application.service;
 
 import com.javablog.domain.Fixture;
-import com.javablog.domain.blog.BlogRepository;
-import com.javablog.domain.blog.Language;
-import com.javablog.domain.blog.Post;
-import com.javablog.domain.blog.PostNotFoundException;
-import com.javablog.domain.blog.TranslationJobId;
-import com.javablog.domain.blog.TranslationPort;
-import com.javablog.domain.blog.TranslationRepository;
-import com.javablog.domain.blog.TranslationRequest;
+import com.javablog.domain.blog.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -66,5 +59,49 @@ class TranslationServiceTest {
 
         verify(translationPort, never()).translate(any(Post.class), any());
         verify(translationRepository, never()).saveTranslationJob(any(), any(), any());
+    }
+
+    @Test
+    void onTranslationCompletedSavesTranslatedPostAndDeletesJob() {
+        TranslationJobId jobId = Fixture.translationJobId();
+        PostId postId = Fixture.postId();
+        TranslationJob job = new TranslationJob(jobId, postId, Language.DE);
+
+        Title title = new Title("Translated Title");
+        Summary summary = new Summary("Translated Summary");
+        Slug slug = new Slug("translated-slug");
+        Content content = new Content("Translated content");
+
+        TranslationCompletedEvent event = new TranslationCompletedEvent(
+                jobId, title, summary, slug, content
+        );
+
+        when(translationRepository.findTranslationJob(jobId)).thenReturn(Optional.of(job));
+
+        service.onTranslationCompleted(event);
+
+        verify(translationRepository).saveTranslatedPost(postId, Language.DE, title, summary, slug, content);
+        verify(translationRepository).deleteTranslationJob(jobId);
+    }
+
+    @Test
+    void onTranslationCompletedThrowsWhenJobNotFound() {
+        TranslationJobId jobId = Fixture.translationJobId();
+
+        TranslationCompletedEvent event = new TranslationCompletedEvent(
+                jobId,
+                new Title("Translated Title"),
+                new Summary("Translated Summary"),
+                new Slug("translated-slug"),
+                new Content("Translated content")
+        );
+
+        when(translationRepository.findTranslationJob(jobId)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(() -> service.onTranslationCompleted(event))
+                .isInstanceOf(IllegalStateException.class);
+
+        verify(translationRepository, never()).saveTranslatedPost(any(), any(), any(), any(), any(), any());
+        verify(translationRepository, never()).deleteTranslationJob(any());
     }
 }
