@@ -1,7 +1,7 @@
 package com.javablog.adapter.persistence.blog;
 
 import com.javablog.domain.Fixture;
-import com.javablog.domain.blog.Language;
+import com.javablog.domain.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.TranslationJobId;
 import org.junit.jupiter.api.Test;

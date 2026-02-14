@@ -1,6 +1,6 @@
 package com.javablog.domain.blog;
 
-import com.javablog.domain.Guard;
+import com.javablog.domain.*;
 
 public record TranslationCompletedEvent(
         TranslationJobId jobId,

@@ -1,6 +1,6 @@
 package com.javablog.adapter.persistence.blog;
 
-import com.javablog.domain.Fixture;
+import com.javablog.domain.*;
 import com.javablog.domain.blog.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

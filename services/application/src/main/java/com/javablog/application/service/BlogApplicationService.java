@@ -1,14 +1,14 @@
 package com.javablog.application.service;
 
 import com.javablog.domain.blog.BlogRepository;
-import com.javablog.domain.blog.Comment;
-import com.javablog.domain.blog.CommentId;
-import com.javablog.domain.blog.Comments;
-import com.javablog.domain.blog.Language;
+import com.javablog.domain.Comment;
+import com.javablog.domain.CommentId;
+import com.javablog.domain.Comments;
+import com.javablog.domain.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.Posts;
-import com.javablog.domain.blog.Slug;
+import com.javablog.domain.Slug;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

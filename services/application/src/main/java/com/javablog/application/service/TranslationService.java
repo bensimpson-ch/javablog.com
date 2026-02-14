@@ -1,5 +1,6 @@
 package com.javablog.application.service;
 
+import com.javablog.domain.Language;
 import com.javablog.domain.blog.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,14 +45,18 @@ public class TranslationService {
 
     @EventListener
     public void onTranslationCompleted(TranslationCompletedEvent event) {
-        LOGGER.info("Translation completed: jobId={}", event.jobId().value());
+        LOGGER.info("Post translation check: jobId={}", event.jobId().value());
 
-        TranslationJob job = translationRepository.findTranslationJob(event.jobId())
-                .orElseThrow(() -> new IllegalStateException("Translation job not found: " + event.jobId().value()));
+        var job = translationRepository.findTranslationJob(event.jobId());
+        if (job.isEmpty()) {
+            return;
+        }
+
+        TranslationJob translationJob = job.get();
 
         translationRepository.saveTranslatedPost(
-                job.originalPostId(),
-                job.language(),
+                translationJob.originalPostId(),
+                translationJob.language(),
                 event.title(),
                 event.summary(),
                 event.slug(),
@@ -61,6 +66,6 @@ public class TranslationService {
         translationRepository.deleteTranslationJob(event.jobId());
 
         LOGGER.info("Translation saved and job removed: jobId={} postId={} language={}",
-                event.jobId().value(), job.originalPostId().value(), job.language().code());
+                event.jobId().value(), translationJob.originalPostId().value(), translationJob.language().code());
     }
 }

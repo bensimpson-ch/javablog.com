@@ -1,6 +1,7 @@
 package com.javablog.domain.blog;
 
 import com.javablog.domain.Guard;
+import com.javablog.domain.Language;
 
 public record TranslationJob(
         TranslationJobId id,

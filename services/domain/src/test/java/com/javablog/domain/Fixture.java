@@ -1,19 +1,12 @@
 package com.javablog.domain;
 
-import com.javablog.domain.blog.Author;
-import com.javablog.domain.blog.Comment;
-import com.javablog.domain.blog.CommentId;
-import com.javablog.domain.blog.Content;
-import com.javablog.domain.blog.CreatedAt;
+import com.javablog.domain.article.Article;
+import com.javablog.domain.article.ArticleId;
+import com.javablog.domain.article.ArticleTranslationRequest;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
-import com.javablog.domain.blog.Language;
-import com.javablog.domain.blog.Languages;
-import com.javablog.domain.blog.Slug;
 import com.javablog.domain.blog.TranslationJobId;
 import com.javablog.domain.blog.TranslationRequest;
-import com.javablog.domain.blog.Summary;
-import com.javablog.domain.blog.Title;
 
 import java.util.Set;
 
@@ -92,5 +85,29 @@ public final class Fixture {
 
     public static Comment comment(PostId postId, String authorName) {
         return new Comment(commentId(), postId, new Author(authorName), content(), createdAt());
+    }
+
+    public static ArticleId articleId() {
+        return ArticleId.generate();
+    }
+
+    public static Article article() {
+        return new Article(articleId(), slug(), title(), summary(), content(), Language.EN, createdAt());
+    }
+
+    public static Article article(String slugValue, String titleValue) {
+        return new Article(articleId(), new Slug(slugValue), new Title(titleValue), summary(), content(), Language.EN, createdAt());
+    }
+
+    public static ArticleTranslationRequest articleTranslationRequest() {
+        return new ArticleTranslationRequest(articleId(), author(), languages());
+    }
+
+    public static ArticleTranslationRequest articleTranslationRequest(ArticleId articleId) {
+        return new ArticleTranslationRequest(articleId, author(), languages());
+    }
+
+    public static ArticleTranslationRequest articleTranslationRequest(ArticleId articleId, Set<Language> languages) {
+        return new ArticleTranslationRequest(articleId, author(), new Languages(languages));
     }
 }

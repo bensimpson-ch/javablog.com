@@ -91,7 +91,7 @@
      package com.javablog.adapter.persistence.blog;
 
      import com.javablog.domain.blog.BlogRepository;
-     import com.javablog.domain.blog.Comment;
+     import com.javablog.domain.Comment;
      import com.javablog.domain.blog.Post;
      import jakarta.persistence.EntityManager;
      import jakarta.persistence.PersistenceContext;

@@ -1,5 +1,6 @@
 package com.javablog.adapter.persistence.blog;
 
+import com.javablog.domain.*;
 import com.javablog.domain.blog.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

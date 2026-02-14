@@ -25,6 +25,8 @@ public class SecurityConfig {
 				.requestMatchers("/hello").permitAll()
 				.requestMatchers(HttpMethod.GET, "/v1/posts", "/v1/posts/*", "/v1/posts/by-slug/*").permitAll()
 				.requestMatchers("/v1/posts/*/comments").permitAll()
+				.requestMatchers(HttpMethod.GET, "/v1/articles", "/v1/articles/*", "/v1/articles/by-slug/*").permitAll()
+				.requestMatchers(HttpMethod.GET, "/v1/articles/*/translations").permitAll()
 				.anyRequest().authenticated()
 			)
 			.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))

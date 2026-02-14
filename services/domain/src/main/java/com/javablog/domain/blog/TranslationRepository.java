@@ -1,6 +1,7 @@
 package com.javablog.domain.blog;
 
-import java.util.List;
+import com.javablog.domain.*;
+
 import java.util.Optional;
 
 public interface TranslationRepository {

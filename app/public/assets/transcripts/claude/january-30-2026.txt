@@ -723,12 +723,12 @@ Claude Code v2.1.23
 
 ⏺ Update(adapter-persistence/src/main/java/com/javablog/adapter/persistence/blog/JpaBlogRepository.java)
   ⎿  Added 2 lines
-       8  import com.javablog.domain.blog.CreatedAt;
+       8  import com.javablog.domain.CreatedAt;
        9  import com.javablog.domain.blog.Post;
       10  import com.javablog.domain.blog.PostId;
       11 +import com.javablog.domain.blog.Posts;
-      12  import com.javablog.domain.blog.Slug;
-      13  import com.javablog.domain.blog.Title;
+      12  import com.javablog.domain.Slug;
+      13  import com.javablog.domain.Title;
       14  import jakarta.persistence.EntityManager;
      ...
       15  import org.springframework.stereotype.Repository;
@@ -798,11 +798,11 @@ Claude Code v2.1.23
 ⏺ Update(adapter-persistence/src/main/java/com/javablog/adapter/persistence/blog/JpaBlogRepository.java)
   ⎿  Added 1 line
        4  import com.javablog.domain.blog.BlogRepository;
-       5  import com.javablog.domain.blog.Comment;
-       6  import com.javablog.domain.blog.CommentId;
-       7 +import com.javablog.domain.blog.Comments;
-       8  import com.javablog.domain.blog.Content;
-       9  import com.javablog.domain.blog.CreatedAt;
+       5  import com.javablog.domain.Comment;
+       6  import com.javablog.domain.CommentId;
+       7 +import com.javablog.domain.Comments;
+       8  import com.javablog.domain.Content;
+       9  import com.javablog.domain.CreatedAt;
       10  import com.javablog.domain.blog.Post;
 
 ⏺ Update(adapter-persistence/src/main/java/com/javablog/adapter/persistence/blog/JpaBlogRepository.java)

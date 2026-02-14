@@ -1,0 +1,70 @@
+package com.javablog.adapter.persistence.blog;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
+@Table(name = "article_translation_jobs", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"original_article_id", "language_code"})
+})
+@NamedQuery(
+        name = ArticleTranslationJobEntity.FIND_BY_ORIGINAL_ARTICLE_ID,
+        query = "SELECT t FROM ArticleTranslationJobEntity t WHERE t.originalArticleId = :originalArticleId"
+)
+public class ArticleTranslationJobEntity {
+
+    public static final String FIND_BY_ORIGINAL_ARTICLE_ID = "ArticleTranslationJobEntity.findByOriginalArticleId";
+
+    @Id
+    @Column(name = "article_translation_job_id")
+    private UUID articleTranslationJobId;
+
+    @Column(name = "original_article_id", nullable = false)
+    private UUID originalArticleId;
+
+    @Column(name = "language_code", length = 2, nullable = false)
+    private String languageCode;
+
+    @Column(name = "slug")
+    private String slug;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    protected ArticleTranslationJobEntity() {
+    }
+
+    public ArticleTranslationJobEntity(UUID articleTranslationJobId, UUID originalArticleId, String languageCode, LocalDateTime createdAt) {
+        this.articleTranslationJobId = articleTranslationJobId;
+        this.originalArticleId = originalArticleId;
+        this.languageCode = languageCode;
+        this.createdAt = createdAt;
+    }
+
+    public UUID getArticleTranslationJobId() {
+        return articleTranslationJobId;
+    }
+
+    public UUID getOriginalArticleId() {
+        return originalArticleId;
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+}

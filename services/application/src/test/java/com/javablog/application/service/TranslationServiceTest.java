@@ -1,6 +1,6 @@
 package com.javablog.application.service;
 
-import com.javablog.domain.Fixture;
+import com.javablog.domain.*;
 import com.javablog.domain.blog.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -85,7 +85,7 @@ class TranslationServiceTest {
     }
 
     @Test
-    void onTranslationCompletedThrowsWhenJobNotFound() {
+    void onTranslationCompletedIgnoresUnknownJob() {
         TranslationJobId jobId = Fixture.translationJobId();
 
         TranslationCompletedEvent event = new TranslationCompletedEvent(
@@ -98,8 +98,7 @@ class TranslationServiceTest {
 
         when(translationRepository.findTranslationJob(jobId)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> service.onTranslationCompleted(event))
-                .isInstanceOf(IllegalStateException.class);
+        service.onTranslationCompleted(event);
 
         verify(translationRepository, never()).saveTranslatedPost(any(), any(), any(), any(), any(), any());
         verify(translationRepository, never()).deleteTranslationJob(any());

@@ -1,6 +1,8 @@
 package com.javablog.domain.blog;
 
+import com.javablog.domain.Author;
 import com.javablog.domain.ConstraintViolationException;
+import com.javablog.domain.Languages;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

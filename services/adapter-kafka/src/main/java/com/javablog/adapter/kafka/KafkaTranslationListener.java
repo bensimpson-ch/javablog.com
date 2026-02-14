@@ -1,9 +1,9 @@
 package com.javablog.adapter.kafka;
 
-import com.javablog.domain.blog.Content;
-import com.javablog.domain.blog.Slug;
-import com.javablog.domain.blog.Summary;
-import com.javablog.domain.blog.Title;
+import com.javablog.domain.Content;
+import com.javablog.domain.Slug;
+import com.javablog.domain.Summary;
+import com.javablog.domain.Title;
 import com.javablog.domain.blog.TranslationCompletedEvent;
 import com.javablog.domain.blog.TranslationJobId;
 import org.apache.logging.log4j.LogManager;

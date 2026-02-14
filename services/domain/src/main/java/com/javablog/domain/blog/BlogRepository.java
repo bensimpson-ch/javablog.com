@@ -1,5 +1,7 @@
 package com.javablog.domain.blog;
 
+import com.javablog.domain.*;
+
 import java.util.Optional;
 
 public interface BlogRepository {
