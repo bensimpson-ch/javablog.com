@@ -6,6 +6,8 @@ import java.util.Optional;
 
 public interface TranslationRepository {
 
+    boolean translationJobExists(PostId postId, Language language);
+
     void saveTranslationJob(TranslationJobId jobId, PostId postId, Language language);
 
     Optional<TranslationJob> findTranslationJob(TranslationJobId jobId);

@@ -23,6 +23,16 @@ public class JpaArticleTranslationRepository implements ArticleTranslationReposi
     private EntityManager entityManager;
 
     @Override
+    public boolean translationJobExists(ArticleId articleId, Language language) {
+        Long count = entityManager
+                .createNamedQuery(ArticleTranslationJobEntity.EXISTS_BY_ORIGINAL_ARTICLE_ID_AND_LANGUAGE, Long.class)
+                .setParameter("originalArticleId", articleId.value())
+                .setParameter("languageCode", language.code())
+                .getSingleResult();
+        return count > 0;
+    }
+
+    @Override
     public void saveTranslationJob(TranslationJobId jobId, ArticleId articleId, Language language) {
         ArticleTranslationJobEntity entity = new ArticleTranslationJobEntity(
                 jobId.value(),

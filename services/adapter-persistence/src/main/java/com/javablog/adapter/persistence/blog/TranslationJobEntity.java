@@ -18,9 +18,14 @@ import java.util.UUID;
         name = TranslationJobEntity.FIND_BY_ORIGINAL_POST_ID,
         query = "SELECT t FROM TranslationJobEntity t WHERE t.originalPostId = :originalPostId"
 )
+@NamedQuery(
+        name = TranslationJobEntity.EXISTS_BY_ORIGINAL_POST_ID_AND_LANGUAGE,
+        query = "SELECT COUNT(t) FROM TranslationJobEntity t WHERE t.originalPostId = :originalPostId AND t.languageCode = :languageCode"
+)
 public class TranslationJobEntity {
 
     public static final String FIND_BY_ORIGINAL_POST_ID = "TranslationJobEntity.findByOriginalPostId";
+    public static final String EXISTS_BY_ORIGINAL_POST_ID_AND_LANGUAGE = "TranslationJobEntity.existsByOriginalPostIdAndLanguage";
 
     @Id
     @Column(name = "translation_job_id")

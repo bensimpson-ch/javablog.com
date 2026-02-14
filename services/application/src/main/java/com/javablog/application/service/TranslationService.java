@@ -36,6 +36,10 @@ public class TranslationService {
                 .orElseThrow(() -> new PostNotFoundException(request.postId()));
 
         for (Language language : request.languages().values()) {
+            if (translationRepository.translationJobExists(post.id(), language)) {
+                LOGGER.info("Translation job already exists postId={} language={}, skipping", post.id().value(), language.code());
+                continue;
+            }
             TranslationJobId translationJobId = translationPort.translate(post, language);
             LOGGER.info("Translation sent, saving job jobId={} postId={} language={}", translationJobId.value(), post.id().value(), language.code());
             translationRepository.saveTranslationJob(translationJobId, post.id(), language);

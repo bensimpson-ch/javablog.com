@@ -37,6 +37,10 @@ public class ArticleTranslationService {
                 .orElseThrow(() -> new ArticleNotFoundException(request.articleId()));
 
         for (Language language : request.languages().values()) {
+            if (articleTranslationRepository.translationJobExists(article.id(), language)) {
+                LOGGER.info("Translation job already exists articleId={} language={}, skipping", article.id().value(), language.code());
+                continue;
+            }
             TranslationJobId translationJobId = articleTranslationPort.translate(article, language);
             LOGGER.info("Translation sent, saving job jobId={} articleId={} language={}", translationJobId.value(), article.id().value(), language.code());
             articleTranslationRepository.saveTranslationJob(translationJobId, article.id(), language);

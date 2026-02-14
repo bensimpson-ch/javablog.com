@@ -18,9 +18,14 @@ import java.util.UUID;
         name = ArticleTranslationJobEntity.FIND_BY_ORIGINAL_ARTICLE_ID,
         query = "SELECT t FROM ArticleTranslationJobEntity t WHERE t.originalArticleId = :originalArticleId"
 )
+@NamedQuery(
+        name = ArticleTranslationJobEntity.EXISTS_BY_ORIGINAL_ARTICLE_ID_AND_LANGUAGE,
+        query = "SELECT COUNT(t) FROM ArticleTranslationJobEntity t WHERE t.originalArticleId = :originalArticleId AND t.languageCode = :languageCode"
+)
 public class ArticleTranslationJobEntity {
 
     public static final String FIND_BY_ORIGINAL_ARTICLE_ID = "ArticleTranslationJobEntity.findByOriginalArticleId";
+    public static final String EXISTS_BY_ORIGINAL_ARTICLE_ID_AND_LANGUAGE = "ArticleTranslationJobEntity.existsByOriginalArticleIdAndLanguage";
 
     @Id
     @Column(name = "article_translation_job_id")

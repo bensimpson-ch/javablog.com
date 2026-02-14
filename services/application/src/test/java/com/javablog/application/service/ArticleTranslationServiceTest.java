@@ -11,6 +11,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -39,6 +40,8 @@ class ArticleTranslationServiceTest {
         ArticleTranslationRequest request = Fixture.articleTranslationRequest(article.id(), Set.of(Language.DE, Language.FR));
 
         when(articleRepository.findById(article.id())).thenReturn(Optional.of(article));
+        when(articleTranslationRepository.translationJobExists(article.id(), Language.DE)).thenReturn(false);
+        when(articleTranslationRepository.translationJobExists(article.id(), Language.FR)).thenReturn(false);
         when(articleTranslationPort.translate(article, Language.DE)).thenReturn(jobIdDe);
         when(articleTranslationPort.translate(article, Language.FR)).thenReturn(jobIdFr);
 
@@ -47,6 +50,25 @@ class ArticleTranslationServiceTest {
         verify(articleTranslationPort).translate(article, Language.DE);
         verify(articleTranslationPort).translate(article, Language.FR);
         verify(articleTranslationRepository).saveTranslationJob(jobIdDe, article.id(), Language.DE);
+        verify(articleTranslationRepository).saveTranslationJob(jobIdFr, article.id(), Language.FR);
+    }
+
+    @Test
+    void requestTranslationSkipsLanguagesWithExistingJob() {
+        Article article = Fixture.article();
+        TranslationJobId jobIdFr = Fixture.translationJobId();
+        ArticleTranslationRequest request = Fixture.articleTranslationRequest(article.id(), Set.of(Language.DE, Language.FR));
+
+        when(articleRepository.findById(article.id())).thenReturn(Optional.of(article));
+        when(articleTranslationRepository.translationJobExists(article.id(), Language.DE)).thenReturn(true);
+        when(articleTranslationRepository.translationJobExists(article.id(), Language.FR)).thenReturn(false);
+        when(articleTranslationPort.translate(article, Language.FR)).thenReturn(jobIdFr);
+
+        service.requestTranslation(request);
+
+        verify(articleTranslationPort, never()).translate(article, Language.DE);
+        verify(articleTranslationRepository, never()).saveTranslationJob(any(), any(ArticleId.class), eq(Language.DE));
+        verify(articleTranslationPort).translate(article, Language.FR);
         verify(articleTranslationRepository).saveTranslationJob(jobIdFr, article.id(), Language.FR);
     }
 
