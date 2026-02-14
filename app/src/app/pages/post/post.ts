@@ -1,9 +1,9 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, LOCALE_ID, OnDestroy, OnInit, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { PostsService, CommentsService, PostResponse, CommentResponse, CreateCommentRequest } from '../../api';
+import { LanguageCode, PostsService, CommentsService, PostResponse, CommentResponse, CreateCommentRequest } from '../../api';
 import { AuthService } from '../../auth';
 
 @Component({
@@ -19,6 +19,7 @@ export class Post implements OnInit, OnDestroy {
   private commentsService = inject(CommentsService);
   private document = inject(DOCUMENT);
   protected authService = inject(AuthService);
+  private locale = inject(LOCALE_ID).split('-')[0] as LanguageCode;
 
   post = signal<PostResponse | null>(null);
   comments = signal<CommentResponse[]>([]);
@@ -74,7 +75,8 @@ export class Post implements OnInit, OnDestroy {
   }
 
   private fetchPost(slug: string): void {
-    this.postsService.getPostBySlug(slug).subscribe({
+    const lang = Object.values(LanguageCode).includes(this.locale) ? this.locale : LanguageCode.En;
+    this.postsService.getPostBySlug(slug, lang).subscribe({
       next: (post) => {
         this.post.set(post);
         this.loading.set(false);
