@@ -34,25 +34,32 @@ Use only JPA specification annotations and JPQL. Never use vendor-specific annot
 
 ## JPA Entity Example
 
+UUIDs are generated in the domain layer (e.g., `PostId.generate()`), not by the database. Entities use no `@GeneratedValue`.
+
 ```java
 @Entity
-@Table(name = "blog_posts")
-public class BlogPostEntity {
+@Table(name = "posts")
+@NamedQuery(name = "PostEntity.findAll", query = "SELECT p FROM PostEntity p WHERE p.languageCode = :languageCode")
+@NamedQuery(name = "PostEntity.findBySlug", query = "SELECT p FROM PostEntity p WHERE p.slug = :slug")
+public class PostEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "blog_post_id")
-    private Long blogPostId;
+    @Column(name = "post_id")
+    private UUID postId;
+
+    @Column(name = "slug", nullable = false, unique = true)
+    private String slug;
 
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+    private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    protected PostEntity() {} // JPA requires no-arg constructor
 }
 ```
 

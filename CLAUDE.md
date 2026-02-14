@@ -35,17 +35,29 @@ post = {
 
 ```
 javablog.com/
-├── app/                      # Angular application
+├── app/                          # Angular application
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── pages/        # Route components (blog posts, about, etc.)
-│   │   │   ├── components/   # Shared UI components
-│   │   │   ├── services/     # Data services
-│   │   │   └── models/       # TypeScript interfaces
-│   │   ├── assets/           # Static assets (images, etc.)
-│   │   └── styles.scss       # Global styles
-│   └── dist/app/browser/     # Build output (deployed to Azure)
-└── .github/workflows/        # CI/CD pipeline
+│   │   │   ├── pages/            # Route components (blog posts, about, etc.)
+│   │   │   ├── components/       # Shared UI components
+│   │   │   ├── services/         # Data services
+│   │   │   └── models/           # TypeScript interfaces
+│   │   ├── assets/               # Static assets (images, etc.)
+│   │   └── styles.scss           # Global styles
+│   └── dist/app/browser/         # Build output (deployed to Azure)
+├── services/                     # Java backend (hexagonal architecture)
+│   ├── domain/                   # Pure Java domain layer (no framework deps)
+│   │   └── com.javablog.domain/
+│   │       ├── (root)            # Shared value objects (Title, Slug, Author, etc.)
+│   │       ├── blog/             # Blog post aggregate (Post, Comment, translations)
+│   │       └── article/          # Article aggregate (Article, translations)
+│   ├── application/              # Application services (use cases)
+│   ├── api/                      # OpenAPI spec (generates DTOs)
+│   ├── adapter-rest/             # REST endpoints
+│   ├── adapter-persistence/      # JPA entities and repositories
+│   ├── adapter-kafka/            # Kafka message adapters
+│   └── bootstrap/                # Spring Boot application
+└── .github/workflows/            # CI/CD pipeline
 ```
 
 ## SEO Requirements
@@ -156,12 +168,13 @@ public record Title(String value) {
 
 - `Guard.againstNull(Object, String)` - must not be null
 - `Guard.againstEmpty(String, String)` - must not be null or empty
+- `Guard.againstEmpty(Collection<?>, String)` - collection must not be null or empty
 - `Guard.againstBlank(String, String)` - must not be null, empty, or whitespace
 - `Guard.againstInvalidMaxLength(String, String, int)` - must not exceed max length
 
 ### Everything is an Object
 
-Each domain concept gets its own record (Title, Slug, Content, Author, PostId, etc.). Collections use plural wrapper records (Posts, Comments).
+Each domain concept gets its own record (Title, Slug, Content, Author, Summary, etc.). Identifiers get their own records with `generate()` factory methods (PostId, ArticleId, CommentId, TranslationJobId). Collections use plural wrapper records (Posts, Articles, Comments, Languages, TranslatedPosts, TranslatedArticles).
 
 ## Working Agreement (Java/Maven Services)
 
