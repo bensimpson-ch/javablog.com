@@ -22,19 +22,19 @@ public class ArticleEntity {
 	@Column(name = "article_id")
 	private UUID articleId;
 
-	@Column(name = "slug", length = 255, unique = true)
+	@Column(name = "slug", length = 255, nullable = false, unique = true)
 	private String slug;
 
-	@Column(name = "title", length = 255)
+	@Column(name = "title", length = 255, nullable = false)
 	private String title;
 
 	@Column(name = "summary", length = 500, nullable = false)
 	private String summary;
 
-	@Column(name = "content", columnDefinition = "TEXT")
+	@Column(name = "content", nullable = false, columnDefinition = "TEXT")
 	private String content;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	private LocalDateTime createdAt;
 
 	@Column(name = "language_code", length = 2, nullable = false)

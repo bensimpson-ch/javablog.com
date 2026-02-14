@@ -63,7 +63,7 @@ class ArticleTranslationServiceTest {
     }
 
     @Test
-    void onTranslationCompletedSavesTranslatedArticleAndDeletesJob() {
+    void onTranslationCompletedSavesTranslatedArticleAndCompletesJob() {
         TranslationJobId jobId = Fixture.translationJobId();
         ArticleId articleId = Fixture.articleId();
         ArticleTranslationJob job = new ArticleTranslationJob(jobId, articleId, Language.DE);
@@ -82,7 +82,7 @@ class ArticleTranslationServiceTest {
         service.onTranslationCompleted(event);
 
         verify(articleTranslationRepository).saveTranslatedArticle(articleId, Language.DE, title, summary, slug, content);
-        verify(articleTranslationRepository).deleteTranslationJob(jobId);
+        verify(articleTranslationRepository).completeTranslationJob(jobId);
     }
 
     @Test
@@ -102,6 +102,6 @@ class ArticleTranslationServiceTest {
         service.onTranslationCompleted(event);
 
         verify(articleTranslationRepository, never()).saveTranslatedArticle(any(), any(), any(), any(), any(), any());
-        verify(articleTranslationRepository, never()).deleteTranslationJob(any());
+        verify(articleTranslationRepository, never()).completeTranslationJob(any());
     }
 }

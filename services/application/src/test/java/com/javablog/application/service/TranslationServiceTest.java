@@ -62,7 +62,7 @@ class TranslationServiceTest {
     }
 
     @Test
-    void onTranslationCompletedSavesTranslatedPostAndDeletesJob() {
+    void onTranslationCompletedSavesTranslatedPostAndCompletesJob() {
         TranslationJobId jobId = Fixture.translationJobId();
         PostId postId = Fixture.postId();
         TranslationJob job = new TranslationJob(jobId, postId, Language.DE);
@@ -81,7 +81,7 @@ class TranslationServiceTest {
         service.onTranslationCompleted(event);
 
         verify(translationRepository).saveTranslatedPost(postId, Language.DE, title, summary, slug, content);
-        verify(translationRepository).deleteTranslationJob(jobId);
+        verify(translationRepository).completeTranslationJob(jobId);
     }
 
     @Test
@@ -101,6 +101,6 @@ class TranslationServiceTest {
         service.onTranslationCompleted(event);
 
         verify(translationRepository, never()).saveTranslatedPost(any(), any(), any(), any(), any(), any());
-        verify(translationRepository, never()).deleteTranslationJob(any());
+        verify(translationRepository, never()).completeTranslationJob(any());
     }
 }

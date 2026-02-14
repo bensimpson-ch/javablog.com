@@ -13,7 +13,7 @@ public interface ArticleTranslationRepository {
 
     void saveTranslatedArticle(ArticleId originalArticleId, Language language, Title title, Summary summary, Slug slug, Content content);
 
-    void deleteTranslationJob(TranslationJobId jobId);
+    void completeTranslationJob(TranslationJobId jobId);
 
     TranslatedArticles findTranslations(ArticleId originalArticleId);
 }

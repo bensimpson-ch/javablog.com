@@ -61,10 +61,10 @@ public class JpaArticleTranslationRepository implements ArticleTranslationReposi
     }
 
     @Override
-    public void deleteTranslationJob(TranslationJobId jobId) {
+    public void completeTranslationJob(TranslationJobId jobId) {
         ArticleTranslationJobEntity entity = entityManager.find(ArticleTranslationJobEntity.class, jobId.value());
         if (entity != null) {
-            entityManager.remove(entity);
+            entity.setCompletedAt(LocalDateTime.now());
         }
     }
 

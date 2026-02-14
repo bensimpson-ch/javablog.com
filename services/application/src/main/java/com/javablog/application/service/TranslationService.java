@@ -63,9 +63,9 @@ public class TranslationService {
                 event.content()
         );
 
-        translationRepository.deleteTranslationJob(event.jobId());
+        translationRepository.completeTranslationJob(event.jobId());
 
-        LOGGER.info("Translation saved and job removed: jobId={} postId={} language={}",
+        LOGGER.info("Translation saved and job completed: jobId={} postId={} language={}",
                 event.jobId().value(), translationJob.originalPostId().value(), translationJob.language().code());
     }
 }
