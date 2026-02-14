@@ -18,9 +18,12 @@ import java.util.UUID;
 })
 @NamedQuery(name = TranslatedPostEntity.FIND_BY_LANGUAGE,
 		query = "SELECT t FROM TranslatedPostEntity t WHERE t.languageCode = :languageCode")
+@NamedQuery(name = TranslatedPostEntity.FIND_BY_SLUG_AND_LANGUAGE,
+		query = "SELECT t FROM TranslatedPostEntity t WHERE t.post.slug = :slug AND t.languageCode = :languageCode")
 public class TranslatedPostEntity {
 
 	public static final String FIND_BY_LANGUAGE = "TranslatedPostEntity.findByLanguage";
+	public static final String FIND_BY_SLUG_AND_LANGUAGE = "TranslatedPostEntity.findBySlugAndLanguage";
 
 	@Id
 	@Column(name = "translated_post_id")

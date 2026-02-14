@@ -50,6 +50,10 @@ public class BlogApplicationService {
 		return blogRepository.findPostBySlug(slug);
 	}
 
+	public Optional<Post> findPostBySlug(Slug slug, Language language) {
+		return blogRepository.findPostBySlug(slug, language);
+	}
+
 	public Posts listPosts(Language language) {
 		return blogRepository.listPosts(language);
 	}

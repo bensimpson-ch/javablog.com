@@ -77,6 +77,11 @@ paths:
           required: true
           schema:
             type: string
+        - name: language
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/LanguageCode'
       responses:
         '200':
           description: Post found

@@ -20,6 +20,8 @@ public interface BlogRepository {
 
 	Optional<Post> findPostBySlug(Slug slug);
 
+	Optional<Post> findPostBySlug(Slug slug, Language language);
+
 	Posts listPosts(Language language);
 
 	Comments listComments(Post post);

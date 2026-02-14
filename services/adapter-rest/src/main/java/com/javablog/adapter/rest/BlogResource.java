@@ -84,9 +84,11 @@ public class BlogResource implements PostsApi, CommentsApi {
 
 	@Override
 	@GetMapping("/by-slug/{slug}")
-	public PostResponseDto getPostBySlug(@PathVariable("slug") String slug) {
-		LOGGER.info("getPostBySlug slug={}", slug);
-		return blogApplicationService.findPostBySlug(new Slug(slug))
+	public PostResponseDto getPostBySlug(@PathVariable("slug") String slug,
+										 @RequestParam(value = "language", required = false) LanguageCodeDto language) {
+		LOGGER.info("getPostBySlug slug={} language={}", slug, language);
+		Language lang = language != null ? Language.fromCode(language.toString()) : Language.EN;
+		return blogApplicationService.findPostBySlug(new Slug(slug), lang)
 				.map(this::toResponse)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 	}

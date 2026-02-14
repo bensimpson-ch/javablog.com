@@ -57,6 +57,21 @@ public class JpaBlogRepository implements BlogRepository {
 	}
 
 	@Override
+	public Optional<Post> findPostBySlug(Slug slug, Language language) {
+		if (language == Language.EN) {
+			return findPostBySlug(slug);
+		}
+		return entityManager.createNamedQuery(TranslatedPostEntity.FIND_BY_SLUG_AND_LANGUAGE, TranslatedPostEntity.class)
+				.setParameter("slug", slug.value())
+				.setParameter("languageCode", language.code())
+				.getResultList()
+				.stream()
+				.findFirst()
+				.map(this::toDomain)
+				.or(() -> findPostBySlug(slug));
+	}
+
+	@Override
 	public void delete(PostId id) {
 		PostEntity entity = entityManager.find(PostEntity.class, id.value());
 		if (entity != null) {
