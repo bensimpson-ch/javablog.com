@@ -76,6 +76,11 @@
 				<artifactId>adapter-kafka</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>services.simpson.translation</groupId>
+				<artifactId>messaging-types</artifactId>
+				<version>1.0.0</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

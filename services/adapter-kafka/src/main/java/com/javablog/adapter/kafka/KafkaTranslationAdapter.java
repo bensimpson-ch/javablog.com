@@ -6,6 +6,8 @@ import com.javablog.domain.Language;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.TranslationJobId;
 import com.javablog.domain.blog.TranslationPort;
+import services.simpson.translation.TranslationRequestMessage;
+import services.simpson.translation.TranslationRequestMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.core.KafkaTemplate;

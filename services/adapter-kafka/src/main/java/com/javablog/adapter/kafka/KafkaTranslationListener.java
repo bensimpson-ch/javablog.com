@@ -6,6 +6,7 @@ import com.javablog.domain.Summary;
 import com.javablog.domain.Title;
 import com.javablog.domain.blog.TranslationCompletedEvent;
 import com.javablog.domain.blog.TranslationJobId;
+import services.simpson.translation.TranslationResponseMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationEventPublisher;

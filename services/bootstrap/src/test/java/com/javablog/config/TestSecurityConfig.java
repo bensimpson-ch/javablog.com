@@ -1,10 +1,10 @@
 package com.javablog.config;
 
-import com.javablog.adapter.kafka.TranslationRequestMessage;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import services.simpson.translation.TranslationRequestMessage;
 
 import static org.mockito.Mockito.mock;
 
