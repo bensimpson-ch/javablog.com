@@ -36,7 +36,6 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: services.simpson.translation
-        spring.json.value.default.type: services.simpson.translation.TranslationResponseMessage
 
 server:
   port: 8080
