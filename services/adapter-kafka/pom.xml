@@ -17,7 +17,7 @@
 			<artifactId>domain</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>services.simpson.translation</groupId>
+			<groupId>com.github.bensimpson-ch.translation-simpson-services</groupId>
 			<artifactId>messaging-types</artifactId>
 		</dependency>
 		<dependency>

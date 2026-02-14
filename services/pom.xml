@@ -77,12 +77,19 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>services.simpson.translation</groupId>
+				<groupId>com.github.bensimpson-ch.translation-simpson-services</groupId>
 				<artifactId>messaging-types</artifactId>
-				<version>1.0.0</version>
+				<version>e52dfd4d15</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<pluginManagement>
