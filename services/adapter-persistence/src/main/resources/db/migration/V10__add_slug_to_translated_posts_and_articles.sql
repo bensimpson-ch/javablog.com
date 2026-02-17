@@ -1,0 +1,3 @@
+ALTER TABLE translated_posts ADD COLUMN slug VARCHAR(255) NOT NULL;
+
+ALTER TABLE translated_articles ADD COLUMN slug VARCHAR(255) NOT NULL;

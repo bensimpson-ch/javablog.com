@@ -39,18 +39,22 @@ public class TranslatedArticleEntity {
 	@Column(name = "summary", length = 500, nullable = false)
 	private String summary;
 
+	@Column(name = "slug", length = 255, nullable = false)
+	private String slug;
+
 	@Column(name = "content", columnDefinition = "TEXT", nullable = false)
 	private String content;
 
 	protected TranslatedArticleEntity() {
 	}
 
-	public TranslatedArticleEntity(UUID translatedArticleId, ArticleEntity article, String languageCode, String title, String summary, String content) {
+	public TranslatedArticleEntity(UUID translatedArticleId, ArticleEntity article, String languageCode, String title, String summary, String slug, String content) {
 		this.translatedArticleId = translatedArticleId;
 		this.article = article;
 		this.languageCode = languageCode;
 		this.title = title;
 		this.summary = summary;
+		this.slug = slug;
 		this.content = content;
 	}
 
@@ -74,6 +78,10 @@ public class TranslatedArticleEntity {
 		return summary;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -84,6 +92,10 @@ public class TranslatedArticleEntity {
 
 	public void setSummary(String summary) {
 		this.summary = summary;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	public void setContent(String content) {

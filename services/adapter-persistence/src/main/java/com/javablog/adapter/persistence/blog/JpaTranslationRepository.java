@@ -64,6 +64,7 @@ public class JpaTranslationRepository implements TranslationRepository {
                 language.code(),
                 title.value(),
                 summary.value(),
+                slug.value(),
                 content.value()
         );
         entityManager.persist(entity);
