@@ -5,6 +5,7 @@ import com.javablog.api.v1.model.*;
 import com.javablog.application.service.ArticleApplicationService;
 import com.javablog.domain.article.Article;
 import com.javablog.domain.article.ArticleId;
+import com.javablog.domain.article.ArticleUpdate;
 import com.javablog.domain.Content;
 import com.javablog.domain.CreatedAt;
 import com.javablog.domain.Language;
@@ -91,20 +92,15 @@ public class ArticleResource implements ArticlesApi {
 			@PathVariable("articleId") UUID articleId,
 			@RequestBody UpdateArticleRequestDto request) {
 		LOGGER.info("updateArticle articleId={}", articleId);
-		return articleApplicationService.findArticleById(new ArticleId(articleId))
-				.map(existing -> {
-					Article updated = new Article(
-							existing.id(),
-							new Slug(request.getSlug()),
-							new Title(request.getTitle()),
-							new Summary(request.getSummary()),
-							new Content(request.getContent()),
-							Language.fromCode(request.getLanguage().toString()),
-							existing.createdAt()
-					);
-					return toResponse(articleApplicationService.updateArticle(updated));
-				})
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		ArticleUpdate articleUpdate = new ArticleUpdate(
+				new ArticleId(articleId),
+				new Slug(request.getSlug()),
+				new Title(request.getTitle()),
+				new Summary(request.getSummary()),
+				new Content(request.getContent()),
+				Language.fromCode(request.getLanguage().toString())
+		);
+		return toResponse(articleApplicationService.updateArticle(articleUpdate));
 	}
 
 	private ArticleResponseDto toResponse(Article article) {

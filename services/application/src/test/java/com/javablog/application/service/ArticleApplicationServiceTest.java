@@ -4,6 +4,7 @@ import com.javablog.domain.Fixture;
 import com.javablog.domain.article.Article;
 import com.javablog.domain.article.ArticleId;
 import com.javablog.domain.article.ArticleRepository;
+import com.javablog.domain.article.ArticleUpdate;
 import com.javablog.domain.article.Articles;
 import com.javablog.domain.Language;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,12 +40,13 @@ class ArticleApplicationServiceTest {
 
 	@Test
 	void updateArticleInvokesRepository() {
+		ArticleUpdate update = Fixture.articleUpdate();
 		Article article = Fixture.article();
-		when(articleRepository.update(article)).thenReturn(article);
+		when(articleRepository.update(update)).thenReturn(article);
 
-		service.updateArticle(article);
+		service.updateArticle(update);
 
-		verify(articleRepository).update(article);
+		verify(articleRepository).update(update);
 	}
 
 	@Test

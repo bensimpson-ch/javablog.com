@@ -1,4 +1,4 @@
-package com.javablog.adapter.persistence.blog;
+package com.javablog.adapter.persistence.article;
 
 import com.javablog.domain.*;
 import com.javablog.domain.article.*;

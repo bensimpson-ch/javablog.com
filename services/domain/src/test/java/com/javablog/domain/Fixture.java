@@ -3,6 +3,7 @@ package com.javablog.domain;
 import com.javablog.domain.article.Article;
 import com.javablog.domain.article.ArticleId;
 import com.javablog.domain.article.ArticleTranslationRequest;
+import com.javablog.domain.article.ArticleUpdate;
 import com.javablog.domain.blog.Post;
 import com.javablog.domain.blog.PostId;
 import com.javablog.domain.blog.TranslationJobId;
@@ -97,6 +98,10 @@ public final class Fixture {
 
     public static Article article(String slugValue, String titleValue) {
         return new Article(articleId(), new Slug(slugValue), new Title(titleValue), summary(), content(), Language.EN, createdAt());
+    }
+
+    public static ArticleUpdate articleUpdate() {
+        return new ArticleUpdate(articleId(), slug(), title(), summary(), content(), Language.EN);
     }
 
     public static ArticleTranslationRequest articleTranslationRequest() {

@@ -9,7 +9,7 @@ public interface ArticleRepository {
 
     Article create(Article article);
 
-    Article update(Article article);
+    Article update(ArticleUpdate article);
 
     Optional<Article> findById(ArticleId id);
 

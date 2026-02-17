@@ -1,7 +1,8 @@
-package com.javablog.adapter.persistence.blog;
+package com.javablog.adapter.persistence.article;
 
 import com.javablog.domain.*;
 import com.javablog.domain.article.Article;
+import com.javablog.domain.article.ArticleUpdate;
 import com.javablog.domain.article.Articles;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,16 +44,15 @@ class JpaArticleRepositoryTest {
         assertThat(articles.values()).anyMatch(a -> a.id().equals(article.id()));
 
         // Update
-        Article updated = new Article(
+        ArticleUpdate update = new ArticleUpdate(
                 article.id(),
                 new Slug("updated-article-slug"),
                 new Title("Updated Article Title"),
                 new Summary("Updated summary"),
                 new Content("Updated content"),
-                Language.DE,
-                article.createdAt()
+                Language.DE
         );
-        repository.update(updated);
+        repository.update(update);
 
         Article afterUpdate = repository.findById(article.id()).orElseThrow();
         assertThat(afterUpdate.slug().value()).isEqualTo("updated-article-slug");

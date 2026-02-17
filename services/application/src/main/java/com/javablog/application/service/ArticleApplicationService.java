@@ -1,9 +1,6 @@
 package com.javablog.application.service;
 
-import com.javablog.domain.article.Article;
-import com.javablog.domain.article.ArticleId;
-import com.javablog.domain.article.ArticleRepository;
-import com.javablog.domain.article.Articles;
+import com.javablog.domain.article.*;
 import com.javablog.domain.Language;
 import com.javablog.domain.Slug;
 import org.springframework.stereotype.Service;
@@ -23,8 +20,8 @@ public class ArticleApplicationService {
 		return articleRepository.create(article);
 	}
 
-	public Article updateArticle(Article article) {
-		return articleRepository.update(article);
+	public Article updateArticle(ArticleUpdate articleUpdate) {
+		return articleRepository.update(articleUpdate);
 	}
 
 	public Optional<Article> findArticleById(ArticleId id) {
