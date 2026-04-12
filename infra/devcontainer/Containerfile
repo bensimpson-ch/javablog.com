@@ -1,0 +1,41 @@
+FROM node:22-bookworm
+
+ARG JAVA_VERSION=21
+ARG MAVEN_VERSION=3.9.9
+
+# System deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    openssh-client \
+    ca-certificates \
+    jq \
+    && rm -rf /var/lib/apt/lists/*
+
+# Java (Temurin)
+RUN curl -fsSL https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor -o /etc/apt/keyrings/adoptium.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb bookworm main" > /etc/apt/sources.list.d/adoptium.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends temurin-${JAVA_VERSION}-jdk \
+    && rm -rf /var/lib/apt/lists/*
+
+# Maven
+RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+    | tar -xzC /opt \
+    && ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/local/bin/mvn
+
+# Angular CLI
+RUN npm install -g @angular/cli@20.3.1
+
+# Claude Code CLI
+RUN npm install -g @anthropic-ai/claude-code
+
+# Non-root user
+RUN useradd -m -s /bin/bash dev
+USER dev
+WORKDIR /workspace
+
+# Claude config directory
+RUN mkdir -p /home/dev/.claude
+
+ENTRYPOINT ["/bin/bash"]
