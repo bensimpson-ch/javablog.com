@@ -5,8 +5,25 @@
     <loc>https://www.javablog.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
-    <lastmod>2026-02-04</lastmod>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -14,8 +31,467 @@
     <loc>https://www.javablog.com/de/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
-    <lastmod>2026-02-04</lastmod>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/id/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/it/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/ro/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/sv/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/el/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/ko/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/zh/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/tw/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/tr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/he/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.javablog.com/de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.javablog.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.javablog.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://www.javablog.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://www.javablog.com/it/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.javablog.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://www.javablog.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://www.javablog.com/ro/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://www.javablog.com/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.javablog.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://www.javablog.com/el/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.javablog.com/ar/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.javablog.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.javablog.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.javablog.com/zh/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.javablog.com/tw/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.javablog.com/tr/"/>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.javablog.com/he/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/"/>
+    <lastmod>2026-04-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

@@ -4,6 +4,7 @@ import { Post } from './pages/post/post';
 import { Login } from './pages/login/login';
 import { Logout } from './pages/logout/logout';
 import { PostEditor } from './pages/author/post-editor/post-editor';
+import { Translations } from './pages/author/translations/translations';
 import { authGuard } from './auth';
 
 export const routes: Routes = [
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'posts/:slug', component: Post },
   { path: 'login', component: Login },
   { path: 'logout', component: Logout },
+  { path: 'author/translations', component: Translations, canActivate: [authGuard] },
   { path: 'author/posts/new', component: PostEditor, canActivate: [authGuard] },
   { path: 'author/posts/:postId/edit', component: PostEditor, canActivate: [authGuard] },
 ];

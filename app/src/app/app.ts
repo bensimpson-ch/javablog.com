@@ -86,6 +86,11 @@ const ALL_LANGUAGES: Language[] = DISPLAYED_CODES
 
 const LANGUAGE_MAP = new Map(ALL_LANGUAGES.map(l => [l.code as string, l]));
 
+const HREFLANG_CONFIG = DISPLAYED_CODES.map(code => ({
+  hreflang: code === LanguageCode.Tw ? 'zh-TW' : code as string,
+  subPath: code === LanguageCode.En ? '' : code as string,
+}));
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink],
@@ -103,7 +108,9 @@ export class App implements OnInit {
   private document = inject(DOCUMENT);
   private elementRef = inject(ElementRef);
 
-  readonly currentLocale = inject(LOCALE_ID).split('-')[0];
+  private readonly fullLocaleId = inject(LOCALE_ID);
+  readonly currentLocale = this.fullLocaleId.split('-')[0];
+  private readonly localeSubPath = this.fullLocaleId === 'zh-TW' ? 'tw' : (this.fullLocaleId === 'en' ? '' : this.fullLocaleId.split('-')[0]);
   protected currentPath = signal('/');
   protected menuOpen = signal(false);
   protected langOpen = signal(false);
@@ -199,20 +206,22 @@ export class App implements OnInit {
 
   private injectHreflangTags(): void {
     const path = this.router.url.replace(/^\/[a-z]{2}(?=\/|$)/, '') || '/';
-    const base = 'https://www.javablog.com';
-
-    this.setHreflang('en', `${base}${path}`);
-    this.setHreflang('de', `${base}/de${path}`);
-    this.setHreflang('x-default', `${base}${path}`);
+    this.updateAllHreflangAndCanonical(path);
   }
 
   private updateHreflangTags(): void {
-    const path = this.currentPath();
-    const base = 'https://www.javablog.com';
+    this.updateAllHreflangAndCanonical(this.currentPath());
+  }
 
-    this.setHreflang('en', `${base}${path}`);
-    this.setHreflang('de', `${base}/de${path}`);
+  private updateAllHreflangAndCanonical(path: string): void {
+    const base = 'https://www.javablog.com';
+    for (const { hreflang, subPath } of HREFLANG_CONFIG) {
+      const href = subPath ? `${base}/${subPath}${path}` : `${base}${path}`;
+      this.setHreflang(hreflang, href);
+    }
     this.setHreflang('x-default', `${base}${path}`);
+    const canonicalUrl = this.localeSubPath ? `${base}/${this.localeSubPath}${path}` : `${base}${path}`;
+    this.setCanonical(canonicalUrl);
   }
 
   private setHreflang(lang: string, href: string): void {
@@ -225,5 +234,16 @@ export class App implements OnInit {
       head.appendChild(link);
     }
     link.href = href;
+  }
+
+  private setCanonical(url: string): void {
+    const head = this.document.head;
+    let link = head.querySelector('link[rel="canonical"]') as HTMLLinkElement;
+    if (!link) {
+      link = this.document.createElement('link');
+      link.rel = 'canonical';
+      head.appendChild(link);
+    }
+    link.href = url;
   }
 }

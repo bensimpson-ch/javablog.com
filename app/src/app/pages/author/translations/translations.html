@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Translations</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (loading()) {
+      <div class="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span>Loading posts...</span>
+      </div>
+    } @else {
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-slug">Slug</th>
+              @for (lang of languages; track lang) {
+                <th class="col-lang">{{ lang }}</th>
+              }
+              <th class="col-all">All</th>
+              <th class="col-action"></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of rows(); track row.id) {
+              <tr>
+                <td class="col-slug">{{ row.slug }}</td>
+                @for (lang of languages; track lang) {
+                  <td class="col-lang">
+                    <mat-checkbox
+                      [checked]="row.selectedLanguages.has(lang)"
+                      (change)="toggleLanguage(row, lang)">
+                    </mat-checkbox>
+                  </td>
+                }
+                <td class="col-all">
+                  <mat-checkbox
+                    [checked]="row.translateAll"
+                    (change)="toggleAll(row, $event.checked)">
+                  </mat-checkbox>
+                </td>
+                <td class="col-action">
+                  <button mat-raised-button color="primary"
+                          [disabled]="row.updating || !hasChanges(row)"
+                          (click)="update(row)">
+                    @if (row.updating) {
+                      <mat-spinner diameter="18"></mat-spinner>
+                    } @else {
+                      Update
+                    }
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>

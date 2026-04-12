@@ -19,7 +19,8 @@ export class Post implements OnInit, OnDestroy {
   private commentsService = inject(CommentsService);
   private document = inject(DOCUMENT);
   protected authService = inject(AuthService);
-  private locale = inject(LOCALE_ID).split('-')[0] as LanguageCode;
+  private fullLocaleId = inject(LOCALE_ID);
+  private locale = this.fullLocaleId.split('-')[0] as LanguageCode;
 
   post = signal<PostResponse | null>(null);
   comments = signal<CommentResponse[]>([]);
@@ -104,27 +105,47 @@ export class Post implements OnInit, OnDestroy {
   }
 
   private setMetaTags(post: PostResponse): void {
+    const subPath = this.fullLocaleId === 'zh-TW' ? '/tw' : this.fullLocaleId === 'en' ? '' : `/${this.fullLocaleId.split('-')[0]}`;
+    const ogUrl = `https://www.javablog.com${subPath}/posts/${post.slug}`;
     this.title.setTitle(`${post.title} - JavaBlog.com`);
     this.meta.updateTag({ name: 'description', content: post.summary });
     this.meta.updateTag({ property: 'og:title', content: post.title });
     this.meta.updateTag({ property: 'og:description', content: post.summary });
     this.meta.updateTag({ property: 'og:type', content: 'article' });
-    this.meta.updateTag({ name: 'twitter:card', content: 'summary' });
+    this.meta.updateTag({ property: 'og:url', content: ogUrl });
+    this.meta.updateTag({ property: 'og:image', content: 'https://www.javablog.com/og-image.png' });
+    this.meta.updateTag({ property: 'article:published_time', content: this.getDateOnly(post.createdAt) });
+    this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
   }
 
   private injectJsonLd(post: PostResponse): void {
     const language = $localize`:@@locale.code:en-US`;
-    const jsonLd = {
+    const subPath = this.fullLocaleId === 'zh-TW' ? '/tw' : this.fullLocaleId === 'en' ? '' : `/${this.fullLocaleId.split('-')[0]}`;
+    const postUrl = `https://www.javablog.com${subPath}/posts/${post.slug}`;
+    const blogPosting = {
       '@context': 'https://schema.org',
       '@type': 'BlogPosting',
       'headline': post.title,
+      'description': post.summary,
       'datePublished': this.getDateOnly(post.createdAt),
+      'dateModified': this.getDateOnly(post.createdAt),
       'inLanguage': language,
-      'author': { '@type': 'Person', 'name': 'Ben Simpson' }
+      'url': postUrl,
+      'image': 'https://www.javablog.com/og-image.png',
+      'author': { '@type': 'Person', 'name': 'Ben Simpson', 'url': 'https://www.javablog.com' },
+      'publisher': { '@type': 'Organization', 'name': 'JavaBlog.com', 'url': 'https://www.javablog.com' }
+    };
+    const breadcrumb = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': `https://www.javablog.com${subPath}/` },
+        { '@type': 'ListItem', 'position': 2, 'name': post.title, 'item': postUrl }
+      ]
     };
     this.jsonLdScript = this.document.createElement('script');
     this.jsonLdScript.type = 'application/ld+json';
-    this.jsonLdScript.textContent = JSON.stringify(jsonLd);
+    this.jsonLdScript.textContent = JSON.stringify([blogPosting, breadcrumb]);
     this.document.head.appendChild(this.jsonLdScript);
   }
 

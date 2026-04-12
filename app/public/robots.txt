@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://javablog.com/sitemap.xml
+Sitemap: https://www.javablog.com/sitemap.xml

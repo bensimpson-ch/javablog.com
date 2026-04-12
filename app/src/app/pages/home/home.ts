@@ -13,7 +13,8 @@ import { AuthService } from '../../auth';
 export class Home {
   private postsService = inject(PostsService);
   protected authService = inject(AuthService);
-  private locale = inject(LOCALE_ID).split('-')[0] as LanguageCode;
+  private fullLocaleId = inject(LOCALE_ID);
+  private locale = this.fullLocaleId.split('-')[0] as LanguageCode;
 
   posts = signal<PostResponse[]>([]);
   lightboxImage = signal<string | null>(null);
@@ -45,12 +46,16 @@ export class Home {
     const pageTitle = $localize`:@@home.pageTitle:JavaBlog.com - Coding Adventures with Claude AI`;
     const description = $localize`:@@home.metaDescription:A blog about coding with Claude AI, Angular, and modern web development.`;
     title.setTitle(pageTitle);
+    const subPath = this.fullLocaleId === 'zh-TW' ? '/tw' : this.fullLocaleId === 'en' ? '' : `/${this.fullLocaleId.split('-')[0]}`;
+    const ogUrl = `https://www.javablog.com${subPath}/`;
     meta.addTags([
       { name: 'description', content: description },
       { property: 'og:title', content: 'JavaBlog.com' },
       { property: 'og:description', content: description },
       { property: 'og:type', content: 'website' },
-      { name: 'twitter:card', content: 'summary' }
+      { property: 'og:url', content: ogUrl },
+      { property: 'og:image', content: 'https://www.javablog.com/og-image.png' },
+      { name: 'twitter:card', content: 'summary_large_image' },
     ]);
   }
 

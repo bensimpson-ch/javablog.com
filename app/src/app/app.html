@@ -36,6 +36,10 @@
           <div class="menu-divider"></div>
 
           @if (authService.isAuthenticated) {
+            <a routerLink="/author/translations" class="menu-item" (click)="closeMenu()">
+              <i class="fa-solid fa-language" aria-hidden="true"></i>
+              <span>Translations</span>
+            </a>
             <a routerLink="/logout" class="menu-item" (click)="closeMenu()">
               <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
               <span i18n="@@menu.logout">Logout</span>
