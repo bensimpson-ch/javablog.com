@@ -503,4 +503,68 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.javablog.com/posts/javablogcom-kafka-integration</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/javablogcom-kafka-integration"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/javablogcom-kafka-integration"/>
+    <lastmod>2026-02-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/building-a-blog-with-claude-feature-complete</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/building-a-blog-with-claude-feature-complete"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/building-a-blog-with-claude-feature-complete"/>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/domain-object-validation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/domain-object-validation"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/domain-object-validation"/>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/flyway-spring-boot-4-cutoff</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/flyway-spring-boot-4-cutoff"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/flyway-spring-boot-4-cutoff"/>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/hexagonal-architecture-springboot</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/hexagonal-architecture-springboot"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/hexagonal-architecture-springboot"/>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/springboot-docker-with-claude</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/springboot-docker-with-claude"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/springboot-docker-with-claude"/>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/seo-with-claude</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/seo-with-claude"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/seo-with-claude"/>
+    <lastmod>2026-01-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.javablog.com/posts/building-javablog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.javablog.com/posts/building-javablog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.javablog.com/posts/building-javablog"/>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

@@ -1,4 +1,5 @@
-import { Component, HostListener, inject, LOCALE_ID, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, HostListener, inject, LOCALE_ID, OnDestroy, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { LanguageCode, PostsService, PostResponse } from '../../api';
@@ -10,17 +11,19 @@ import { AuthService } from '../../auth';
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
-export class Home {
+export class Home implements OnDestroy {
   private postsService = inject(PostsService);
   protected authService = inject(AuthService);
   private fullLocaleId = inject(LOCALE_ID);
   private locale = this.fullLocaleId.split('-')[0] as LanguageCode;
+  private document = inject(DOCUMENT);
 
   posts = signal<PostResponse[]>([]);
   lightboxImage = signal<string | null>(null);
   loading = signal<boolean>(true);
   error = signal<string | null>(null);
   deleting = signal<string | null>(null);
+  private jsonLdScript: HTMLScriptElement | null = null;
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -57,6 +60,38 @@ export class Home {
       { property: 'og:image', content: 'https://www.javablog.com/og-image.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ]);
+    this.injectJsonLd(ogUrl, description);
+  }
+
+  ngOnDestroy(): void {
+    if (this.jsonLdScript) {
+      this.jsonLdScript.remove();
+      this.jsonLdScript = null;
+    }
+  }
+
+  private injectJsonLd(url: string, description: string): void {
+    const jsonLd = [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        'name': 'JavaBlog.com',
+        'url': 'https://www.javablog.com/',
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        'name': 'JavaBlog.com',
+        'url': url,
+        'description': description,
+        'author': { '@type': 'Person', 'name': 'Ben Simpson', 'url': 'https://www.javablog.com' },
+        'publisher': { '@type': 'Organization', 'name': 'JavaBlog.com', 'url': 'https://www.javablog.com' },
+      }
+    ];
+    this.jsonLdScript = this.document.createElement('script');
+    this.jsonLdScript.type = 'application/ld+json';
+    this.jsonLdScript.textContent = JSON.stringify(jsonLd);
+    this.document.head.appendChild(this.jsonLdScript);
   }
 
   private fetchPosts(): void {
