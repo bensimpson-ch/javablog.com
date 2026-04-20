@@ -136,8 +136,11 @@ Priority guidelines:
 
 ## Build & Deploy
 
-- Push to `main` triggers GitHub Actions
-- Angular builds and deploys to Azure Static Web Apps
+Frontend is self-hosted on the same Contabo VPS (`161.97.175.172`) that serves the API. nginx serves prerendered static files from `/home/ben/javablog.com/`; `api.javablog.com` remains a separate server block proxying to `localhost:8080`.
+
+- Deploy is **not** triggered by GitHub Actions — run `infra/deploy.sh` locally.
+- The script builds, rsyncs `app/dist/app/browser/` to the server, installs `infra/nginx/javablog.com.conf`, and reloads nginx.
+- API pipeline (`.github/workflows/api-deploy.yml`) is unchanged.
 
 ## Commands
 
